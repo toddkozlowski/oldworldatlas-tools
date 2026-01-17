@@ -9,6 +9,7 @@ Grand Total: 3367 settlements
 
 EMPIRE SETTLEMENTS BY PROVINCE
 --------------------------------------------------------------------------------
+<<<<<<< HEAD
 Averland             - 269 settlements,    299,758 total population
 Hochland             - 107 settlements,     92,017 total population
 Middenland           - 423 settlements,    415,982 total population
@@ -23,6 +24,22 @@ Wissenland           - 497 settlements,    533,844 total population
 
 Empire Total Population: 3,328,053
 Westerland Total Population: 429,015
+=======
+Averland             - 269 settlements,    307,482 total population
+Hochland             - 107 settlements,     86,709 total population
+Middenland           - 423 settlements,    413,381 total population
+Mootland             -  50 settlements,     27,198 total population
+Nordland             - 219 settlements,    241,056 total population
+Ostermark            - 240 settlements,    216,839 total population
+Ostland              - 263 settlements,    291,808 total population
+Reikland             - 563 settlements,    766,152 total population
+Stirland             - 314 settlements,    216,511 total population
+Talabecland          - 305 settlements,    403,696 total population
+Wissenland           - 497 settlements,    536,674 total population
+
+Empire Total Population: 3,507,506
+Westerland Total Population: 448,888
+>>>>>>> e3ff65a6e437baa7c5922e6c795950b152434e66
 
 POINTS OF INTEREST
 --------------------------------------------------------------------------------
