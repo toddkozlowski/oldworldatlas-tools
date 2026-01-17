@@ -177,10 +177,10 @@ class SVGMapProcessor:
             })
             return None
 
-        # Get coordinates
+        # Get coordinates and apply fudge factor (+3 to X, +4 to Y)
         try:
-            svg_x = float(elem.get("x", 0))
-            svg_y = float(elem.get("y", 0))
+            svg_x = float(elem.get("x", 0)) + 3
+            svg_y = float(elem.get("y", 0)) + 4
             return (name, svg_x, svg_y)
         except ValueError:
             self.invalid_settlements.append({
@@ -396,8 +396,8 @@ class SVGMapProcessor:
                 name = self._get_text_element_label(elem)
                 if name:
                     try:
-                        svg_x = float(elem.get("x", 0))
-                        svg_y = float(elem.get("y", 0))
+                        svg_x = float(elem.get("x", 0)) + 3
+                        svg_y = float(elem.get("y", 0)) + 4
                         geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
                         
                         poi = PointOfInterest(
