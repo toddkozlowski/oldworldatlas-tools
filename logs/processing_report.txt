@@ -9,20 +9,20 @@ Grand Total: 3367 settlements
 
 EMPIRE SETTLEMENTS BY PROVINCE
 --------------------------------------------------------------------------------
-Averland             - 269 settlements,    281,095 total population
-Hochland             - 107 settlements,     91,188 total population
-Middenland           - 423 settlements,    390,064 total population
-Mootland             -  50 settlements,     27,709 total population
-Nordland             - 219 settlements,    184,216 total population
-Ostermark            - 240 settlements,    194,973 total population
-Ostland              - 263 settlements,    214,126 total population
-Reikland             - 563 settlements,    750,587 total population
-Stirland             - 314 settlements,    222,712 total population
-Talabecland          - 305 settlements,    363,718 total population
-Wissenland           - 497 settlements,    461,678 total population
+Averland             - 269 settlements,    289,287 total population
+Hochland             - 107 settlements,     88,125 total population
+Middenland           - 423 settlements,    392,665 total population
+Mootland             -  50 settlements,     27,272 total population
+Nordland             - 219 settlements,    177,035 total population
+Ostermark            - 240 settlements,    194,040 total population
+Ostland              - 263 settlements,    208,109 total population
+Reikland             - 563 settlements,    766,210 total population
+Stirland             - 314 settlements,    216,385 total population
+Talabecland          - 305 settlements,    360,710 total population
+Wissenland           - 497 settlements,    472,909 total population
 
-Empire Total Population: 3,182,066
-Westerland Total Population: 443,352
+Empire Total Population: 3,192,747
+Westerland Total Population: 447,326
 
 POINTS OF INTEREST
 --------------------------------------------------------------------------------
@@ -40,6 +40,25 @@ Imperial Highways              -  38 roads
 
 Total Roads: 38
 Total Coordinate Points (all roads): 308,438
+
+PROVINCE LABELS
+--------------------------------------------------------------------------------
+Grand-Province                 -  11 labels
+Nation-State                   -   6 labels
+Province                       -  14 labels
+
+Total Province Labels: 31
+
+WATER LABELS
+--------------------------------------------------------------------------------
+Large Marsh                    -   5 labels
+Large Sea                      -   1 labels
+Major Sea                      -   1 labels
+Medium Sea                     -   4 labels
+Small Marsh                    -  17 labels
+Small Sea                      -   5 labels
+
+Total Water Labels: 33
 
 DATA QUALITY ISSUES
 --------------------------------------------------------------------------------

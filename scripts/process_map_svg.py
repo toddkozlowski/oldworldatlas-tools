@@ -21,8 +21,9 @@ logger = logging.getLogger(__name__)
 
 # Constants
 SVG_PATH = Path(__file__).parent.parent.parent / "oldworldatlas-maps" / "SETTLEMENTS_POI_ROADS.svg"
-DATA_DIR = Path(__file__).parent.parent / "data" / "gazetteers"
-OUTPUT_DIR = Path(__file__).parent.parent / "data"
+INPUT_DIR = Path(__file__).parent.parent / "input" / "gazetteers"
+OUTPUT_DIR = Path(__file__).parent.parent / "output"
+LOGS_DIR = Path(__file__).parent.parent / "logs"
 
 # Calibration points for coordinate conversion
 CALIBRATION_POINTS = [
@@ -81,6 +82,30 @@ class Road:
             self.geo_coordinates = []
 
 
+@dataclass
+class ProvinceLabel:
+    """Represents a political/province label."""
+    name: str
+    province_type: str
+    svg_x: float
+    svg_y: float
+    geo_lon: float = 0.0
+    geo_lat: float = 0.0
+    formal_title: str = ""
+    part_of: str = ""
+
+
+@dataclass
+class WaterLabel:
+    """Represents a water body label."""
+    name: str
+    waterbody_type: str
+    svg_x: float
+    svg_y: float
+    geo_lon: float = 0.0
+    geo_lat: float = 0.0
+
+
 class CoordinateConverter:
     """Converts between SVG and geographic coordinate systems."""
 
@@ -133,6 +158,8 @@ class SVGMapProcessor:
         self.settlements_westerland = []
         self.points_of_interest = []
         self.roads = []
+        self.province_labels = []
+        self.water_labels = []
 
         self.invalid_settlements = []
         self.duplicate_settlements = defaultdict(list)
@@ -309,7 +336,7 @@ class SVGMapProcessor:
         populations = {}
 
         if faction == "Empire" and province:
-            csv_file = DATA_DIR / "The-Empire" / f"{province.lower()}.csv"
+            csv_file = INPUT_DIR / "The-Empire" / f"{province.lower()}.csv"
             if csv_file.exists():
                 with open(csv_file, 'r', encoding='utf-8') as f:
                     reader = csv.reader(f)
@@ -323,7 +350,7 @@ class SVGMapProcessor:
                                 pass
 
         elif faction == "Westerland":
-            csv_file = DATA_DIR / "Westerland" / "westerland.csv"
+            csv_file = INPUT_DIR / "Westerland" / "westerland.csv"
             if csv_file.exists():
                 with open(csv_file, 'r', encoding='utf-8') as f:
                     reader = csv.reader(f)
@@ -696,6 +723,152 @@ class SVGMapProcessor:
 
                     logger.info(f"      Found {count} roads")
 
+    def process_province_labels(self):
+        """Process all political/province labels."""
+        logger.info("Processing Province Labels...")
+
+        # Find the webmap-empire_regions-post2512 layer
+        regions_layer = None
+        for g in self.root.findall(f".//{{{NS['svg']}}}g"):
+            if g.get(f"{{{NS['inkscape']}}}label") == "webmap-empire_regions-post2512":
+                regions_layer = g
+                break
+
+        if regions_layer is None:
+            logger.error("webmap-empire_regions-post2512 layer not found!")
+            return
+
+        # Map layer names to province types
+        province_type_map = {
+            "Nation-States": "Nation-State",
+            "Grand-Provinces": "Grand-Province",
+            "Provinces": "Province"
+        }
+
+        for region_group in regions_layer:
+            layer_name = region_group.get(f"{{{NS['inkscape']}}}label")
+            if not layer_name or layer_name not in province_type_map:
+                continue
+
+            province_type = province_type_map[layer_name]
+            logger.info(f"  Processing province type: {province_type}")
+
+            # Extract labels from this group
+            initial_count = len(self.province_labels)
+            self._process_province_label_elements(region_group, province_type, self.province_labels)
+            count = len(self.province_labels) - initial_count
+
+            logger.info(f"    Found {count} labels")
+
+    def _process_province_label_elements(self, parent_elem, province_type: str, label_list: list):
+        """Recursively process province label elements, handling nested layers."""
+        for elem in parent_elem:
+            # Check if this is a layer/group
+            if elem.tag == f"{{{NS['svg']}}}g":
+                # Recursively process children of this layer
+                self._process_province_label_elements(elem, province_type, label_list)
+            elif elem.tag == f"{{{NS['svg']}}}text":
+                name = self._get_text_element_label(elem)
+                if name:
+                    try:
+                        svg_x = float(elem.get("x", 0)) + 3
+                        svg_y = float(elem.get("y", 0)) + 4
+                        geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
+                        
+                        label = ProvinceLabel(
+                            name=name,
+                            province_type=province_type,
+                            svg_x=svg_x,
+                            svg_y=svg_y,
+                            geo_lon=geo_lon,
+                            geo_lat=geo_lat,
+                            formal_title="",
+                            part_of=""
+                        )
+                        label_list.append(label)
+                    except (ValueError, TypeError):
+                        pass
+
+    def process_water_labels(self):
+        """Process all water body labels."""
+        logger.info("Processing Water Labels...")
+
+        # Find the webmap-waterlabels layer
+        water_layer = None
+        for g in self.root.findall(f".//{{{NS['svg']}}}g"):
+            if g.get(f"{{{NS['inkscape']}}}label") == "webmap-waterlabels":
+                water_layer = g
+                break
+
+        if water_layer is None:
+            logger.error("webmap-waterlabels layer not found!")
+            return
+
+        # Map layer names to waterbody types
+        waterbody_type_map = {
+            "ocean": "Ocean",
+            "major-sea": "Major Sea",
+            "large-sea": "Large Sea",
+            "medium-sea": "Medium Sea",
+            "small-sea": "Small Sea",
+            "small-marsh": "Small Marsh",
+            "large-marsh": "Large Marsh"
+        }
+
+        for water_group in water_layer:
+            layer_name = water_group.get(f"{{{NS['inkscape']}}}label")
+            if not layer_name:
+                continue
+
+            # Handle marshes which has sub-layers
+            if layer_name == "marshes":
+                logger.info(f"  Processing marshes...")
+                for marsh_group in water_group:
+                    marsh_layer_name = marsh_group.get(f"{{{NS['inkscape']}}}label")
+                    if marsh_layer_name and marsh_layer_name in waterbody_type_map:
+                        waterbody_type = waterbody_type_map[marsh_layer_name]
+                        initial_count = len(self.water_labels)
+                        self._process_water_label_elements(marsh_group, waterbody_type, self.water_labels)
+                        count = len(self.water_labels) - initial_count
+                        logger.info(f"    Found {count} {waterbody_type} labels")
+            elif layer_name in waterbody_type_map:
+                waterbody_type = waterbody_type_map[layer_name]
+                logger.info(f"  Processing {waterbody_type}...")
+                
+                # Extract labels from this group
+                initial_count = len(self.water_labels)
+                self._process_water_label_elements(water_group, waterbody_type, self.water_labels)
+                count = len(self.water_labels) - initial_count
+
+                logger.info(f"    Found {count} labels")
+
+    def _process_water_label_elements(self, parent_elem, waterbody_type: str, label_list: list):
+        """Recursively process water label elements, handling nested layers."""
+        for elem in parent_elem:
+            # Check if this is a layer/group
+            if elem.tag == f"{{{NS['svg']}}}g":
+                # Recursively process children of this layer
+                self._process_water_label_elements(elem, waterbody_type, label_list)
+            elif elem.tag == f"{{{NS['svg']}}}text":
+                name = self._get_text_element_label(elem)
+                if name:
+                    try:
+                        svg_x = float(elem.get("x", 0)) + 3
+                        svg_y = float(elem.get("y", 0)) + 4
+                        geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
+                        
+                        label = WaterLabel(
+                            name=name,
+                            waterbody_type=waterbody_type,
+                            svg_x=svg_x,
+                            svg_y=svg_y,
+                            geo_lon=geo_lon,
+                            geo_lat=geo_lat
+                        )
+                        label_list.append(label)
+                    except (ValueError, TypeError):
+                        pass
+
     def generate_empire_geojson(self):
         """Generate GeoJSON for Empire settlements."""
         features = []
@@ -840,12 +1013,72 @@ class SVGMapProcessor:
 
         logger.info(f"Generated {output_file}: {len(features)} roads")
 
+    def generate_province_labels_geojson(self):
+        """Generate GeoJSON for province labels."""
+        features = []
+        for label in self.province_labels:
+            feature = {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [label.geo_lon, label.geo_lat]
+                },
+                "properties": {
+                    "name": label.name,
+                    "province_type": label.province_type,
+                    "formal_title": label.formal_title,
+                    "part_of": label.part_of,
+                    "inkscape_coordinates": [label.svg_x, label.svg_y]
+                }
+            }
+            features.append(feature)
+
+        geojson = {
+            "type": "FeatureCollection",
+            "features": features
+        }
+
+        output_file = OUTPUT_DIR / "province_labels.geojson"
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(geojson, f, indent=2, ensure_ascii=False)
+
+        logger.info(f"Generated {output_file}: {len(features)} province labels")
+
+    def generate_water_labels_geojson(self):
+        """Generate GeoJSON for water labels."""
+        features = []
+        for label in self.water_labels:
+            feature = {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [label.geo_lon, label.geo_lat]
+                },
+                "properties": {
+                    "name": label.name,
+                    "waterbody_type": label.waterbody_type,
+                    "inkscape_coordinates": [label.svg_x, label.svg_y]
+                }
+            }
+            features.append(feature)
+
+        geojson = {
+            "type": "FeatureCollection",
+            "features": features
+        }
+
+        output_file = OUTPUT_DIR / "water_labels.geojson"
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(geojson, f, indent=2, ensure_ascii=False)
+
+        logger.info(f"Generated {output_file}: {len(features)} water labels")
+
     def write_invalid_settlements_log(self):
         """Write log of invalid settlement elements."""
         if not self.invalid_settlements:
             return
 
-        output_file = OUTPUT_DIR / "invalid_settlement_elements.log"
+        output_file = LOGS_DIR / "invalid_settlement_elements.log"
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write("Invalid Settlement Elements Log\n")
             f.write("=" * 80 + "\n\n")
@@ -866,7 +1099,7 @@ class SVGMapProcessor:
         if not self.duplicate_settlements:
             return
 
-        output_file = OUTPUT_DIR / "duplicate_settlements.log"
+        output_file = LOGS_DIR / "duplicate_settlements.log"
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write("Duplicate Settlements Log\n")
             f.write("=" * 80 + "\n\n")
@@ -885,7 +1118,7 @@ class SVGMapProcessor:
 
     def generate_report(self):
         """Generate the processing report."""
-        output_file = OUTPUT_DIR / "processing_report.txt"
+        output_file = LOGS_DIR / "processing_report.txt"
 
         # Calculate statistics
         empire_pop_by_province = defaultdict(int)
@@ -941,6 +1174,26 @@ class SVGMapProcessor:
             f.write(f"\nTotal Roads: {len(self.roads)}\n")
             f.write(f"Total Coordinate Points (all roads): {total_road_points:,d}\n\n")
 
+            f.write("PROVINCE LABELS\n")
+            f.write("-" * 80 + "\n")
+            labels_by_type = defaultdict(int)
+            for label in self.province_labels:
+                labels_by_type[label.province_type] += 1
+            for label_type in sorted(labels_by_type.keys()):
+                count = labels_by_type[label_type]
+                f.write(f"{label_type:30s} - {count:3d} labels\n")
+            f.write(f"\nTotal Province Labels: {len(self.province_labels)}\n\n")
+
+            f.write("WATER LABELS\n")
+            f.write("-" * 80 + "\n")
+            water_by_type = defaultdict(int)
+            for label in self.water_labels:
+                water_by_type[label.waterbody_type] += 1
+            for water_type in sorted(water_by_type.keys()):
+                count = water_by_type[water_type]
+                f.write(f"{water_type:30s} - {count:3d} labels\n")
+            f.write(f"\nTotal Water Labels: {len(self.water_labels)}\n\n")
+
             f.write("DATA QUALITY ISSUES\n")
             f.write("-" * 80 + "\n")
             f.write(f"Invalid Settlement Elements: {len(self.invalid_settlements)}\n")
@@ -967,12 +1220,16 @@ def main():
     processor.populate_settlement_data()
     processor.process_points_of_interest()
     processor.process_roads()
+    processor.process_province_labels()
+    processor.process_water_labels()
 
     # Generate output files
     processor.generate_empire_geojson()
     processor.generate_westerland_geojson()
     processor.generate_poi_geojson()
     processor.generate_roads_geojson()
+    processor.generate_province_labels_geojson()
+    processor.generate_water_labels_geojson()
 
     # Write logs
     processor.write_invalid_settlements_log()
