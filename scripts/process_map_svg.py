@@ -389,8 +389,8 @@ class SVGMapProcessor:
             if settlement.name in populations:
                 settlement.population = populations[settlement.name]
             else:
-                # Generate random population bounded between 100 and 800
-                settlement.population = np.random.randint(100, 801)
+                # Generate random population bounded between 100 and 400
+                settlement.population = np.random.randint(100, 401)
                 self.missing_population_data[settlement.province].append(settlement.name)
             
             settlement.size_category = self.assign_population_category(settlement.population)
@@ -401,7 +401,7 @@ class SVGMapProcessor:
             if settlement.name in populations:
                 settlement.population = populations[settlement.name]
             else:
-                settlement.population = np.random.randint(100, 801)
+                settlement.population = np.random.randint(100, 501)
                 self.missing_population_data["Westerland"].append(settlement.name)
             
             settlement.size_category = self.assign_population_category(settlement.population)
@@ -423,8 +423,8 @@ class SVGMapProcessor:
                 name = self._get_text_element_label(elem)
                 if name:
                     try:
-                        svg_x = float(elem.get("x", 0)) + 3
-                        svg_y = float(elem.get("y", 0)) + 4
+                        svg_x = float(elem.get("x", 0))
+                        svg_y = float(elem.get("y", 0))
                         geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
                         
                         poi = PointOfInterest(
