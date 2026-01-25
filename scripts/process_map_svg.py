@@ -1,6 +1,6 @@
 """
 Comprehensive SVG map processing tool for the Old World Atlas.
-Extracts settlements, points of interest, and roads from the SETTLEMENTS_POI_ROADS.svg file.
+Extracts settlements, points of interest, and labels from the FULL_MAP_CLEANED.svg file.
 """
 
 import json
@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
 
 # Constants
-SVG_PATH = Path(__file__).parent.parent.parent / "oldworldatlas-maps" / "SETTLEMENTS_POI_ROADS.svg"
+SVG_PATH = Path(__file__).parent.parent.parent / "oldworldatlas-maps" / "FULL_MAP_CLEANED.svg"
 INPUT_DIR = Path(__file__).parent.parent / "input" / "gazetteers"
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
 LOGS_DIR = Path(__file__).parent.parent / "logs"
@@ -389,8 +389,8 @@ class SVGMapProcessor:
             if settlement.name in populations:
                 settlement.population = populations[settlement.name]
             else:
-                # Generate random population bounded between 100 and 800
-                settlement.population = np.random.randint(100, 801)
+                # Generate random population bounded between 100 and 400
+                settlement.population = np.random.randint(100, 401)
                 self.missing_population_data[settlement.province].append(settlement.name)
             
             settlement.size_category = self.assign_population_category(settlement.population)
@@ -401,7 +401,7 @@ class SVGMapProcessor:
             if settlement.name in populations:
                 settlement.population = populations[settlement.name]
             else:
-                settlement.population = np.random.randint(100, 801)
+                settlement.population = np.random.randint(100, 501)
                 self.missing_population_data["Westerland"].append(settlement.name)
             
             settlement.size_category = self.assign_population_category(settlement.population)
@@ -423,8 +423,8 @@ class SVGMapProcessor:
                 name = self._get_text_element_label(elem)
                 if name:
                     try:
-                        svg_x = float(elem.get("x", 0)) + 3
-                        svg_y = float(elem.get("y", 0)) + 4
+                        svg_x = float(elem.get("x", 0))
+                        svg_y = float(elem.get("y", 0))
                         geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
                         
                         poi = PointOfInterest(
@@ -648,94 +648,95 @@ class SVGMapProcessor:
                     except Exception as e:
                         logger.warning(f"    Error processing road: {e}")
 
-    def process_roads(self):
-        """Process all roads."""
-        logger.info("Processing Roads...")
-
-        # Find ALL Roads layers
-        roads_layers = []
-        for g in self.root.findall(f".//{{{NS['svg']}}}g"):
-            if g.get(f"{{{NS['inkscape']}}}label") == "Roads":
-                roads_layers.append(g)
-
-        if not roads_layers:
-            logger.error("Roads layers not found!")
-            return
-
-        road_type_map = {
-            "Imperial Highways": "Imperial Highways",
-            "Roads": "Roads",
-            "Paths": "Paths"
-        }
-
-        road_id_ref = [0]  # Use list to allow modification in nested function
-
-        # Process each Roads layer
-        for roads_idx, roads_layer in enumerate(roads_layers):
-            logger.info(f"  Processing Roads layer {roads_idx + 1}...")
-            
-            # Check if this layer has direct path elements (unlabeled roads)
-            direct_paths = [child for child in roads_layer if child.tag == f"{{{NS['svg']}}}path"]
-            
-            if direct_paths:
-                # This layer contains direct paths - process them as unlabeled roads
-                logger.info(f"    Found {len(direct_paths)} unlabeled road paths")
-                successful = 0
-                for path_idx, path_elem in enumerate(direct_paths):
-                    path_d = path_elem.get("d", "")
-                    if path_d:
-                        try:
-                            svg_points = self.parse_svg_path(path_d)
-                            
-                            if svg_points:
-                                # Convert to geographic coordinates
-                                geo_points = [
-                                    self.converter.svg_to_geo(pt[0], pt[1])
-                                    for pt in svg_points
-                                ]
-
-                                road = Road(
-                                    road_id=f"road_{road_id_ref[0]:03d}",
-                                    road_type="Road",
-                                    svg_path=path_d,
-                                    geo_coordinates=geo_points
-                                )
-                                self.roads.append(road)
-                                road_id_ref[0] += 1
-                                successful += 1
-                        except Exception as e:
-                            if path_idx < 3:  # Log first 3 errors only
-                                logger.debug(f"    Error processing road {path_idx}: {str(e)[:100]}")
-            else:
-                # This layer contains labeled road type groups
-                for road_group in roads_layer:
-                    road_type = road_group.get(f"{{{NS['inkscape']}}}label")
-                    if not road_type or road_type not in road_type_map:
-                        continue
-
-                    road_type = road_type_map.get(road_type, road_type)
-                    logger.info(f"    Processing road type: {road_type}")
-
-                    # Extract roads from this group (may be nested in sub-layers)
-                    initial_count = len(self.roads)
-                    self._process_road_elements(road_group, road_type, self.roads, road_id_ref)
-                    count = len(self.roads) - initial_count
-
-                    logger.info(f"      Found {count} roads")
+    # Road processing functionality maintained for potential future implementation
+    # def process_roads(self):
+    #     """Process all roads."""
+    #     logger.info("Processing Roads...")
+    #
+    #     # Find ALL Roads layers
+    #     roads_layers = []
+    #     for g in self.root.findall(f".//{{{NS['svg']}}}g"):
+    #         if g.get(f"{{{NS['inkscape']}}}label") == "Roads":
+    #             roads_layers.append(g)
+    #
+    #     if not roads_layers:
+    #         logger.error("Roads layers not found!")
+    #         return
+    #
+    #     road_type_map = {
+    #         "Imperial Highways": "Imperial Highways",
+    #         "Roads": "Roads",
+    #         "Paths": "Paths"
+    #     }
+    #
+    #     road_id_ref = [0]  # Use list to allow modification in nested function
+    #
+    #     # Process each Roads layer
+    #     for roads_idx, roads_layer in enumerate(roads_layers):
+    #         logger.info(f"  Processing Roads layer {roads_idx + 1}...")
+    #         
+    #         # Check if this layer has direct path elements (unlabeled roads)
+    #         direct_paths = [child for child in roads_layer if child.tag == f"{{{NS['svg']}}}path"]
+    #         
+    #         if direct_paths:
+    #             # This layer contains direct paths - process them as unlabeled roads
+    #             logger.info(f"    Found {len(direct_paths)} unlabeled road paths")
+    #             successful = 0
+    #             for path_idx, path_elem in enumerate(direct_paths):
+    #                 path_d = path_elem.get("d", "")
+    #                 if path_d:
+    #                     try:
+    #                         svg_points = self.parse_svg_path(path_d)
+    #                         
+    #                         if svg_points:
+    #                             # Convert to geographic coordinates
+    #                             geo_points = [
+    #                                 self.converter.svg_to_geo(pt[0], pt[1])
+    #                                 for pt in svg_points
+    #                             ]
+    #
+    #                             road = Road(
+    #                                 road_id=f"road_{road_id_ref[0]:03d}",
+    #                                 road_type="Road",
+    #                                 svg_path=path_d,
+    #                                 geo_coordinates=geo_points
+    #                             )
+    #                             self.roads.append(road)
+    #                             road_id_ref[0] += 1
+    #                             successful += 1
+    #                     except Exception as e:
+    #                         if path_idx < 3:  # Log first 3 errors only
+    #                             logger.debug(f"    Error processing road {path_idx}: {str(e)[:100]}")
+    #         else:
+    #             # This layer contains labeled road type groups
+    #             for road_group in roads_layer:
+    #                 road_type = road_group.get(f"{{{NS['inkscape']}}}label}")
+    #                 if not road_type or road_type not in road_type_map:
+    #                     continue
+    #
+    #                 road_type = road_type_map.get(road_type, road_type)
+    #                 logger.info(f"    Processing road type: {road_type}")
+    #
+    #                 # Extract roads from this group (may be nested in sub-layers)
+    #                 initial_count = len(self.roads)
+    #                 self._process_road_elements(road_group, road_type, self.roads, road_id_ref)
+    #                 count = len(self.roads) - initial_count
+    #
+    #                 logger.info(f"      Found {count} roads")
 
     def process_province_labels(self):
         """Process all political/province labels."""
         logger.info("Processing Province Labels...")
 
-        # Find the webmap-empire_regions-post2512 layer
+        # Find the Region-Labels-post2512 layer
         regions_layer = None
         for g in self.root.findall(f".//{{{NS['svg']}}}g"):
-            if g.get(f"{{{NS['inkscape']}}}label") == "webmap-empire_regions-post2512":
+            if g.get(f"{{{NS['inkscape']}}}label") == "Region-Labels-post2512":
                 regions_layer = g
                 break
 
         if regions_layer is None:
-            logger.error("webmap-empire_regions-post2512 layer not found!")
+            logger.error("Region-Labels-post2512 layer not found!")
             return
 
         # Map layer names to province types
@@ -771,8 +772,8 @@ class SVGMapProcessor:
                 name = self._get_text_element_label(elem)
                 if name:
                     try:
-                        svg_x = float(elem.get("x", 0)) + 3
-                        svg_y = float(elem.get("y", 0)) + 4
+                        svg_x = float(elem.get("x", 0))
+                        svg_y = float(elem.get("y", 0))
                         geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
                         
                         label = ProvinceLabel(
@@ -793,15 +794,15 @@ class SVGMapProcessor:
         """Process all water body labels."""
         logger.info("Processing Water Labels...")
 
-        # Find the webmap-waterlabels layer
+        # Find the Water Labels layer
         water_layer = None
         for g in self.root.findall(f".//{{{NS['svg']}}}g"):
-            if g.get(f"{{{NS['inkscape']}}}label") == "webmap-waterlabels":
+            if g.get(f"{{{NS['inkscape']}}}label") == "Water Labels":
                 water_layer = g
                 break
 
         if water_layer is None:
-            logger.error("webmap-waterlabels layer not found!")
+            logger.error("Water Labels layer not found!")
             return
 
         # Map layer names to waterbody types
@@ -812,7 +813,8 @@ class SVGMapProcessor:
             "medium-sea": "Medium Sea",
             "small-sea": "Small Sea",
             "small-marsh": "Small Marsh",
-            "large-marsh": "Large Marsh"
+            "large-marsh": "Large Marsh",
+            "lakes": "Lake"
         }
 
         for water_group in water_layer:
@@ -831,6 +833,14 @@ class SVGMapProcessor:
                         self._process_water_label_elements(marsh_group, waterbody_type, self.water_labels)
                         count = len(self.water_labels) - initial_count
                         logger.info(f"    Found {count} {waterbody_type} labels")
+            # Handle lakes which is a new tier
+            elif layer_name == "lakes":
+                logger.info(f"  Processing lakes...")
+                waterbody_type = waterbody_type_map[layer_name]
+                initial_count = len(self.water_labels)
+                self._process_water_label_elements(water_group, waterbody_type, self.water_labels)
+                count = len(self.water_labels) - initial_count
+                logger.info(f"    Found {count} {waterbody_type} labels")
             elif layer_name in waterbody_type_map:
                 waterbody_type = waterbody_type_map[layer_name]
                 logger.info(f"  Processing {waterbody_type}...")
@@ -853,8 +863,8 @@ class SVGMapProcessor:
                 name = self._get_text_element_label(elem)
                 if name:
                     try:
-                        svg_x = float(elem.get("x", 0)) + 3
-                        svg_y = float(elem.get("y", 0)) + 4
+                        svg_x = float(elem.get("x", 0))
+                        svg_y = float(elem.get("y", 0))
                         geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
                         
                         label = WaterLabel(
@@ -1219,7 +1229,7 @@ def main():
     processor.process_settlements_westerland()
     processor.populate_settlement_data()
     processor.process_points_of_interest()
-    processor.process_roads()
+    # processor.process_roads()  # Disabled: road extraction not needed currently
     processor.process_province_labels()
     processor.process_water_labels()
 
@@ -1227,7 +1237,7 @@ def main():
     processor.generate_empire_geojson()
     processor.generate_westerland_geojson()
     processor.generate_poi_geojson()
-    processor.generate_roads_geojson()
+    # processor.generate_roads_geojson()  # Disabled: road extraction not needed currently
     processor.generate_province_labels_geojson()
     processor.generate_water_labels_geojson()
 
