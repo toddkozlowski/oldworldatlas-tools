@@ -621,7 +621,10 @@ class SVGMapProcessor:
         """Assign random population using log-normal distribution between 100 and 800."""
         # Use log-normal distribution for realistic settlement populations
         # Shape and scale chosen to give reasonable distribution in 100-800 range
-        return int(np.random.lognormal(mean=5.0, sigma=0.8)) + 50
+        _random_population = int(np.random.lognormal(mean=5.0, sigma=0.8))
+        if _random_population > 800:
+            return 782
+        return _random_population
 
     def _process_poi_elements(self, parent_elem, poi_type: str, poi_list: list):
         """Recursively process POI elements, handling nested layers."""
