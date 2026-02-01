@@ -25,7 +25,7 @@ Gernsbach,996,,,,,,Averland,,,,,,,,,
 Gerzen,247,,,"""source:2eSH""",,,Averland,,,,,,,,,
 Gollbach,1010,,,,,,Averland,,,,,,,,,
 Gottesdorf,1492,,,,,,Averland,,,,,,,,,
-Grenzstadt,15937,,,"""source:2eSH""",,,Averland,,,,,,https://warhammerfantasy.fandom.com/wiki/Grenzstadt,Grenzstadt,"Grenzstadt is an Imperial fortress-town that is located at the northwestern end of Black Fire Pass, and commands lucrative trade traffic from traders moving through the Old Dwarf Road. Ruled by a representative of the Elector Count, Grenzstadt is a centre of the fur, gem, and metal trade, with a large guild market and warehouses within its walls. At any given time, foreign merchants, trade caravans, and pilgrims can all be seen in the town.",https://static.wikia.nocookie.net/warhammerfb/images/7/71/Greizstadt.PNG/revision/latest?cb=20150919200918
+Grenzstadt,11937,,,"""source:2eSH""",,,Averland,,,,,,https://warhammerfantasy.fandom.com/wiki/Grenzstadt,Grenzstadt,"Grenzstadt is an Imperial fortress-town that is located at the northwestern end of Black Fire Pass, and commands lucrative trade traffic from traders moving through the Old Dwarf Road. Ruled by a representative of the Elector Count, Grenzstadt is a centre of the fur, gem, and metal trade, with a large guild market and warehouses within its walls. At any given time, foreign merchants, trade caravans, and pilgrims can all be seen in the town.",https://static.wikia.nocookie.net/warhammerfb/images/7/71/Greizstadt.PNG/revision/latest?cb=20150919200918
 Grunburg an der Sar,996,,,,,,Averland,,,,,,,,,
 Gryfenheim,1017,,,,,,Averland,,,,,,,,,
 Heideck,3939,,,"""source:2eSH""",,,Averland,,,,,,https://warhammerfantasy.fandom.com/wiki/Heideck,Heideck,"Heideck is an Imperial town located at the crossroads of the Old Dwarf Road just before reaching the capital of Averheim. Built as a way station at the height of the Dwarf Empire, Heideck was in ruins when humans first occupied the area in the first millenium. It has since become an important crossroad for traffic from the Upper Reik via Agbeiten and from Black Fire Pass to Averheim and vice versa.",https://static.wikia.nocookie.net/warhammerfb/images/3/36/Heideck.PNG/revision/latest?cb=20150919200507
@@ -73,10 +73,10 @@ Zartbitterhof,989,,,,,,Averland,,,,,,,,,
 Zell,814,,,"""source:2eSH""",,,Averland,,,,,,,,,
 Zorje,2562,,,"""source:4eAotE1""",,,Averland,,,,,,,,,
 Zummarkt,1005,,,,,,Averland,,,,,,,,,
-Ackerstein,19422,,,,,,Hochland,,,,,,,,,
-Barwedel,12732,,,"""source:2eSH""",,,Hochland,,,,,,,,,
+Ackerstein,1422,,,,,,Hochland,,,,,,,,,
+Barwedel,8732,,,"""source:2eSH""",,,Hochland,,,,,,,,,
 Ahresdorf,3908,,,"""source:2eSH""",,,Hochland,,,,,,,,,
-Bergsburg,3249,,,"""source:4eAotE1""",,,Hochland,,,,,,,,,
+Bergsburg,8249,,,"""source:4eAotE1""",,,Hochland,,,,,,,,,
 Bergendorf,2285,,,"""source:2eSH""",,,Hochland,,,,,,https://warhammerfantasy.fandom.com/wiki/Bergendorf,Bergendorf,"Bergendorf was a village sacked in 2522 IC, its population of 93 still missing.",https://static.wikia.nocookie.net/warhammerfb/images/b/b1/Bergendorf_map.png/revision/latest?cb=20170519133802
 Estelberg,1536,,,,,,Hochland,,,,,,,,,
 Babinov,1457,,,,,,Hochland,,,,,,,,,
@@ -363,7 +363,7 @@ Ristedt,274,,,"""source:2eSH""",,,Ostland,,,,,,,,,
 Roezfels,239,,,,,,Ostland,,,,,,,,,
 Rzodne,2184,,,,,,Ostland,,,,,,,,,
 Salkalten,10633,,,"""source:2eSH""",,,Ostland,,,,,,https://warhammerfantasy.fandom.com/wiki/Salkalten,Salkalten,"Salkalten is an Imperial port town in Ostland that was one of two towns founded as part of a failed attempt to draw trade away from Marienburg (the other being Neues Emskrank in Nordland ). Anyone walking through the town will spy crumbling architectural façades, corroded statues, and other signs of faded glory which, in truth, never really existed.",https://static.wikia.nocookie.net/warhammerfb/images/2/21/Salkalten.png/revision/latest?cb=20160207213329
-Schönfeld,2340,,,,,,Ostland,,,,,,https://warhammerfantasy.fandom.com/wiki/Sch%C3%B6nfeld,Schönfeld,"Schönfeld is a small, coastal Imperial village located in Ostland. The Skeer, a collection of jagged rocks cutting through the waves west of Salkalten, has claimed many ships. Treacherous currents mean even sailors familiar with the waters spit overboard for Manann 's blessing as they approach.",https://static.wikia.nocookie.net/warhammerfb/images/4/4c/Sch%C3%B6nfeld.png/revision/latest?cb=20241231085903
+Schönfeld,6340,,,,,,Ostland,,,,,,https://warhammerfantasy.fandom.com/wiki/Sch%C3%B6nfeld,Schönfeld,"Schönfeld is a small, coastal Imperial village located in Ostland. The Skeer, a collection of jagged rocks cutting through the waves west of Salkalten, has claimed many ships. Treacherous currents mean even sailors familiar with the waters spit overboard for Manann 's blessing as they approach.",https://static.wikia.nocookie.net/warhammerfb/images/4/4c/Sch%C3%B6nfeld.png/revision/latest?cb=20241231085903
 Sieverhof,1861,,,,,,Ostland,,,,,,,,,
 Skaplow,1026,,,,,,Ostland,,,,,,,,,
 Smallhof,2366,,,"""source:2eSH""",,,Ostland,,,,,,,,,
@@ -657,7 +657,7 @@ Krugenheim,18781,,,"""source:2eSH""",,,Talabecland,,,,,,,,,
 Küsel,21313,,,"""source:2eSH""",,,Talabecland,,,,,,https://warhammerfantasy.fandom.com/wiki/K%C3%BCsel,Küsel,"A day's journey upriver from the city-state of Talabheim is the town of Küsel, the provincial capital of Talabecland during the final years of the period of Imperial history known as the Anarchy in 2276 IC. It is a bustling port, with great amounts of lumber and fish regularly passing its docks.",https://static.wikia.nocookie.net/warhammerfb/images/5/5a/Kusel.png/revision/latest?cb=20251013053206
 Kutzleben,506,,,"""source:2eSH""",,,Talabecland,,,,,,,,,
 Liebstedt,492,,,"""source:2eSH""",,,Talabecland,,,,,,,,,
-Lieske,2778,,,"""source:2eSH""",,,Talabecland,,,,,,https://warhammerfantasy.fandom.com/wiki/Lieske,Lieske,"Site of the largest fortified coaching inn in Talabecland outside of Talabheim itself, Lieske is also the unofficial southern headquarters for a large contingent of roadwardens, who patrol from Talabheim to the Stir to keep the Old Forest Road safe. The inn, the ""Taal's Bowers,"" has a half-dozen jail cells in its barn and a gallows in the yard, allowing justice to be effected on the spot. The roadwarden captain, Jörg Schmidt, will hold trials in the common room, drafting inn guests as jurors, if need be.",https://static.wikia.nocookie.net/warhammerfb/images/9/9a/Lieske.png/revision/latest?cb=20180831181248
+Lieske,6778,,,"""source:2eSH""",,,Talabecland,,,,,,https://warhammerfantasy.fandom.com/wiki/Lieske,Lieske,"Site of the largest fortified coaching inn in Talabecland outside of Talabheim itself, Lieske is also the unofficial southern headquarters for a large contingent of roadwardens, who patrol from Talabheim to the Stir to keep the Old Forest Road safe. The inn, the ""Taal's Bowers,"" has a half-dozen jail cells in its barn and a gallows in the yard, allowing justice to be effected on the spot. The roadwarden captain, Jörg Schmidt, will hold trials in the common room, drafting inn guests as jurors, if need be.",https://static.wikia.nocookie.net/warhammerfb/images/9/9a/Lieske.png/revision/latest?cb=20180831181248
 Lochrafurt,1013,,,"""source:2eSH""",,,Talabecland,,,,,,,,,
 Missen,265,,,"""source:2eSH""",,,Talabecland,,,,,,,,,
 Nadjagard,985,,,"""source:NCC""",,,Talabecland,,,,,,,,,
