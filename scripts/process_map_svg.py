@@ -51,11 +51,22 @@ class Settlement:
     geo_lat: float = 0.0
     population: int = 0
     size_category: int = 1
+    tags: List[str] = None
     notes: List[str] = None
+    wiki: Dict = None
 
     def __post_init__(self):
+        if self.tags is None:
+            self.tags = []
         if self.notes is None:
             self.notes = []
+        if self.wiki is None:
+            self.wiki = {
+                "title": None,
+                "url": None,
+                "description": None,
+                "image": None
+            }
 
 
 @dataclass
@@ -164,6 +175,15 @@ class SVGMapProcessor:
         self.invalid_settlements = []
         self.duplicate_settlements = defaultdict(list)
         self.missing_population_data = defaultdict(list)
+        
+        # Track CSV data
+        self.csv_data_empire = {}  # {province: {name: row_data}}
+        self.csv_data_westerland = {}  # {name: row_data}
+        
+        # Track validation issues
+        self.csv_settlements_not_in_svg = defaultdict(list)  # {province: [names]}
+        self.province_mismatches = []  # List of {settlement, province_svg, province_csv}
+        self.invalid_tags = []  # List of {settlement, tags, issues}
 
     def _get_text_element_label(self, elem) -> Optional[str]:
         """Extract text from text/tspan elements."""
@@ -340,6 +360,7 @@ class SVGMapProcessor:
             if csv_file.exists():
                 with open(csv_file, 'r', encoding='utf-8') as f:
                     reader = csv.reader(f)
+                    next(reader)  # Skip header
                     for row in reader:
                         if len(row) >= 2:
                             settlement_name = row[0].strip()
@@ -350,10 +371,11 @@ class SVGMapProcessor:
                                 pass
 
         elif faction == "Westerland":
-            csv_file = INPUT_DIR / "Westerland" / "westerland.csv"
+            csv_file = INPUT_DIR / "westerland.csv"
             if csv_file.exists():
                 with open(csv_file, 'r', encoding='utf-8') as f:
                     reader = csv.reader(f)
+                    next(reader)  # Skip header
                     for row in reader:
                         if len(row) >= 2:
                             settlement_name = row[0].strip()
@@ -365,52 +387,241 @@ class SVGMapProcessor:
 
         return populations
 
-    def assign_population_category(self, population: int) -> int:
-        """Assign size category based on population."""
+    def load_csv_data(self, faction: str, province: Optional[str] = None) -> Dict[str, List]:
+        """Load full CSV data for a faction/province."""
+        csv_data = {}
+        csv_file = None
+
+        if faction == "Empire":
+            # Use the main empire.csv file which contains all provinces
+            csv_file = INPUT_DIR / "empire.csv"
+        elif faction == "Westerland":
+            csv_file = INPUT_DIR / "westerland.csv"
+
+        if csv_file and csv_file.exists():
+            try:
+                with open(csv_file, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        settlement_name = row['Settlement'].strip()
+                        # If province specified, only include matching settlements
+                        if province and row.get('Province_2515', '').strip() == province:
+                            csv_data[settlement_name] = row
+                        elif not province:
+                            csv_data[settlement_name] = row
+            except Exception as e:
+                logger.warning(f"Error loading CSV from {csv_file}: {e}")
+
+        return csv_data
+
+    def parse_tags(self, tags_str: str, trade_str: str) -> List[str]:
+        """Parse tags from CSV, including trade goods."""
+        tags = []
+        
+        # Parse tags column
+        if tags_str and tags_str.strip():
+            # Remove quotes and split on semicolon
+            tags_str = tags_str.strip().strip('"')
+            if tags_str:
+                for tag in tags_str.split(';'):
+                    tag = tag.strip()
+                    if tag:
+                        tags.append(tag)
+        
+        # Parse trade column and add as tags with prefix
+        if trade_str and trade_str.strip():
+            trade_str = trade_str.strip().strip('"')
+            if trade_str:
+                for trade in trade_str.split(';'):
+                    trade = trade.strip()
+                    if trade:
+                        tags.append(f"trade:{trade}")
+        
+        return tags
+
+    def validate_tags(self, tags: List[str], settlement_name: str) -> List[str]:
+        """Validate tags and log any issues."""
+        valid_sources = {"AndyLaw", "2eSH", "4eAotE1", "4eEiS", "4ePBtTC", "4eSCoSaS",
+                        "4eCRB", "4eDotRC", "NCC", "WFB8e", "AmbChron", "G&FT", "TOW", "1eMSDtR"}
+        issues = []
+        
+        for tag in tags:
+            if ':' not in tag:
+                issues.append(f"Tag '{tag}' missing format 'type:value'")
+            else:
+                tag_type, tag_value = tag.split(':', 1)
+                
+                # Validate source tags
+                if tag_type == "source":
+                    if tag_value not in valid_sources:
+                        issues.append(f"Invalid source '{tag_value}' not in {valid_sources}")
+        
+        if issues:
+            self.invalid_tags.append({
+                "settlement": settlement_name,
+                "tags": tags,
+                "issues": issues
+            })
+        
+        return tags
+
+    def parse_notes(self, notes_str: str) -> List[str]:
+        """Parse notes from CSV."""
+        notes = []
+        
+        if notes_str and notes_str.strip():
+            notes_str = notes_str.strip().strip('"')
+            if notes_str:
+                for note in notes_str.split(';'):
+                    note = note.strip()
+                    if note:
+                        notes.append(note)
+        
+        return notes
+
+    def calculate_size_category(self, population: int) -> int:
+        """Calculate size category based on population."""
         if population <= 300:
-            return 1  # Hamlet
+            return 1  # Village
         elif population <= 900:
-            return 2  # Village
+            return 2  # Small Town
         elif population <= 3000:
             return 3  # Town
-        elif population <=15000:
-            return 4  # City
+        elif population <= 15000:
+            return 4  # Large Town
+        elif population <= 49999:
+            return 5  # City
         else:
-            return 5  # Large City
+            return 6  # Metropolis
 
     def populate_settlement_data(self):
-        """Load population data from CSVs and assign to settlements."""
-        logger.info("Loading population data...")
+        """Load population and additional data from CSVs and assign to settlements."""
+        logger.info("Loading and processing CSV data...")
 
         # Process Empire settlements
         for settlement in self.settlements_empire:
-            populations = self.load_population_data("Empire", settlement.province)
+            csv_data = self.load_csv_data("Empire", settlement.province)
             
-            if settlement.name in populations:
-                settlement.population = populations[settlement.name]
+            if settlement.name in csv_data:
+                row = csv_data[settlement.name]
+                
+                # Population
+                try:
+                    settlement.population = int(row['Population'].strip())
+                except (ValueError, KeyError):
+                    settlement.population = self._assign_random_population()
+                    self.missing_population_data[settlement.province].append(settlement.name)
+                
+                # Province validation
+                if row.get('Province_2515'):
+                    csv_province = row['Province_2515'].strip()
+                    if csv_province and csv_province != settlement.province:
+                        self.province_mismatches.append({
+                            "settlement": settlement.name,
+                            "province_svg": settlement.province,
+                            "province_csv": csv_province
+                        })
+                        # Log warning but continue with SVG province
+                        logger.warning(f"Province mismatch for {settlement.name}: SVG={settlement.province}, CSV={csv_province}")
+                
+                # Tags
+                tags_str = row.get('Tags', '')
+                trade_str = row.get('Trade', '')
+                settlement.tags = self.parse_tags(tags_str, trade_str)
+                settlement.tags = self.validate_tags(settlement.tags, settlement.name)
+                
+                # Notes
+                settlement.notes = self.parse_notes(row.get('Notes', ''))
+                
+                # Wiki data
+                settlement.wiki = {
+                    "title": row.get('wiki_title') or None,
+                    "url": row.get('wiki_url') or None,
+                    "description": row.get('wiki_description') or None,
+                    "image": row.get('wiki_image') or None
+                }
             else:
-                # Generate random population bounded between 100 and 400
-                settlement.population = np.random.randint(100, 401)
+                # Settlement in SVG but not in CSV - assign random population
+                settlement.population = self._assign_random_population()
                 self.missing_population_data[settlement.province].append(settlement.name)
+                settlement.tags = []
+                settlement.notes = []
             
-            settlement.size_category = self.assign_population_category(settlement.population)
+            settlement.size_category = self.calculate_size_category(settlement.population)
 
         # Process Westerland settlements
-        populations = self.load_population_data("Westerland")
+        csv_data = self.load_csv_data("Westerland")
+        svg_settlement_names = {s.name for s in self.settlements_westerland}
+        
         for settlement in self.settlements_westerland:
-            if settlement.name in populations:
-                settlement.population = populations[settlement.name]
+            if settlement.name in csv_data:
+                row = csv_data[settlement.name]
+                
+                # Population
+                try:
+                    settlement.population = int(row['Population'].strip())
+                except (ValueError, KeyError):
+                    settlement.population = self._assign_random_population()
+                    self.missing_population_data["Westerland"].append(settlement.name)
+                
+                # Tags
+                tags_str = row.get('Tags', '')
+                trade_str = row.get('Trade', '')
+                settlement.tags = self.parse_tags(tags_str, trade_str)
+                settlement.tags = self.validate_tags(settlement.tags, settlement.name)
+                
+                # Notes
+                settlement.notes = self.parse_notes(row.get('Notes', ''))
+                
+                # Wiki data
+                settlement.wiki = {
+                    "title": row.get('wiki_title') or None,
+                    "url": row.get('wiki_url') or None,
+                    "description": row.get('wiki_description') or None,
+                    "image": row.get('wiki_image') or None
+                }
             else:
-                settlement.population = np.random.randint(100, 501)
+                settlement.population = self._assign_random_population()
                 self.missing_population_data["Westerland"].append(settlement.name)
+                settlement.tags = []
+                settlement.notes = []
             
-            settlement.size_category = self.assign_population_category(settlement.population)
+            settlement.size_category = self.calculate_size_category(settlement.population)
+        
+        # Track CSV settlements not in SVG
+        # Load all Empire CSV data and check against SVG by province
+        empire_csv_file = INPUT_DIR / "empire.csv"
+        if empire_csv_file.exists():
+            try:
+                with open(empire_csv_file, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        csv_name = row['Settlement'].strip()
+                        csv_province = row.get('Province_2515', '').strip()
+                        if csv_province:
+                            svg_names = {s.name for s in self.settlements_empire if s.province == csv_province}
+                            if csv_name not in svg_names:
+                                self.csv_settlements_not_in_svg[csv_province].append(csv_name)
+            except Exception as e:
+                logger.warning(f"Error tracking CSV settlements: {e}")
+        
+        westerland_csv = self.load_csv_data("Westerland")
+        westerland_svg_names = {s.name for s in self.settlements_westerland}
+        for csv_name in westerland_csv.keys():
+            if csv_name not in westerland_svg_names:
+                self.csv_settlements_not_in_svg["Westerland"].append(csv_name)
 
-        # Log missing population data
+        # Log summary
         if self.missing_population_data:
             logger.warning("Settlements with randomly assigned populations:")
             for province, settlements in self.missing_population_data.items():
                 logger.warning(f"  {province}: {len(settlements)} settlements")
+
+    def _assign_random_population(self) -> int:
+        """Assign random population using log-normal distribution between 100 and 800."""
+        # Use log-normal distribution for realistic settlement populations
+        # Shape and scale chosen to give reasonable distribution in 100-800 range
+        return int(np.random.lognormal(mean=5.0, sigma=0.8)) + 50
 
     def _process_poi_elements(self, parent_elem, poi_type: str, poi_list: list):
         """Recursively process POI elements, handling nested layers."""
@@ -893,9 +1104,11 @@ class SVGMapProcessor:
                     "name": settlement.name,
                     "province": settlement.province,
                     "population": settlement.population,
+                    "tags": settlement.tags,
                     "notes": settlement.notes,
                     "size_category": settlement.size_category,
-                    "inkscape_coordinates": [settlement.svg_x, settlement.svg_y]
+                    "inkscape_coordinates": [settlement.svg_x, settlement.svg_y],
+                    "wiki": settlement.wiki
                 }
             }
             features.append(feature)
@@ -923,11 +1136,13 @@ class SVGMapProcessor:
                 },
                 "properties": {
                     "name": settlement.name,
-                    "province": "",
+                    "province": "Westerland",
                     "population": settlement.population,
+                    "tags": settlement.tags,
                     "notes": settlement.notes,
                     "size_category": settlement.size_category,
-                    "inkscape_coordinates": [settlement.svg_x, settlement.svg_y]
+                    "inkscape_coordinates": [settlement.svg_x, settlement.svg_y],
+                    "wiki": settlement.wiki
                 }
             }
             features.append(feature)
@@ -1208,12 +1423,39 @@ class SVGMapProcessor:
             f.write("-" * 80 + "\n")
             f.write(f"Invalid Settlement Elements: {len(self.invalid_settlements)}\n")
             f.write(f"Provinces with Duplicate Names: {len(self.duplicate_settlements)}\n")
-            f.write(f"Settlements with Assigned Population Data: {sum(len(v) for v in self.missing_population_data.values())}\n\n")
+            f.write(f"Settlements with Assigned Population Data: {sum(len(v) for v in self.missing_population_data.values())}\n")
+            f.write(f"CSV Settlements Not in SVG: {sum(len(v) for v in self.csv_settlements_not_in_svg.values())}\n")
+            f.write(f"Province Mismatches: {len(self.province_mismatches)}\n")
+            f.write(f"Invalid Tags: {len(self.invalid_tags)}\n\n")
 
             if self.missing_population_data:
                 f.write("Settlements with Randomly Assigned Populations:\n")
                 for province, settlements in sorted(self.missing_population_data.items()):
                     f.write(f"  {province}: {len(settlements)} settlements\n")
+                f.write("\n")
+
+            if self.csv_settlements_not_in_svg:
+                f.write("CSV Settlements Not Found in SVG (should be added to map):\n")
+                for province, settlements in sorted(self.csv_settlements_not_in_svg.items()):
+                    f.write(f"  {province}:\n")
+                    for settlement in sorted(settlements):
+                        f.write(f"    - {settlement}\n")
+                f.write("\n")
+
+            if self.province_mismatches:
+                f.write("Province Name Mismatches (SVG vs CSV):\n")
+                for item in self.province_mismatches:
+                    f.write(f"  {item['settlement']}: SVG='{item['province_svg']}', CSV='{item['province_csv']}'\n")
+                f.write("\n")
+
+            if self.invalid_tags:
+                f.write("Settlements with Invalid Tag Format:\n")
+                for item in self.invalid_tags:
+                    f.write(f"  {item['settlement']}:\n")
+                    f.write(f"    Tags: {item['tags']}\n")
+                    for issue in item['issues']:
+                        f.write(f"    - {issue}\n")
+                f.write("\n")
 
         logger.info(f"Generated {output_file}")
 

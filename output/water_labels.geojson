@@ -6,7 +6,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-<<<<<<< HEAD
           -2.849059316438211,
           59.15956040789926
         ]
@@ -441,23 +440,14 @@
         "coordinates": [
           -0.4242255972970552,
           54.9550309548041
-=======
-          -0.3716981129109955,
-          54.88502197178747
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       },
       "properties": {
         "name": "SCHADENSUMPF",
         "waterbody_type": "Large Marsh",
         "inkscape_coordinates": [
-<<<<<<< HEAD
           404.40677,
           208.69669
-=======
-          407.40677,
-          212.69669
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       }
     },
@@ -484,26 +474,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-<<<<<<< HEAD
           -1.2592203310538457,
           51.98701798155774
-=======
-          -1.206692846667785,
-          51.917008998541114
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       },
       "properties": {
         "name": "MIDDEN MARSHES",
         "waterbody_type": "Large Marsh",
         "inkscape_coordinates": [
-<<<<<<< HEAD
           356.65878,
           378.25299
-=======
-          359.65878,
-          382.25299
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       }
     },
@@ -512,26 +492,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-<<<<<<< HEAD
           6.31088232205163,
           48.201577216575814
-=======
-          6.36340980643769,
-          48.131568233559186
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       },
       "properties": {
         "name": "BYLORHOF MARSH",
         "waterbody_type": "Large Marsh",
         "inkscape_coordinates": [
-<<<<<<< HEAD
           789.10083,
           594.57117
-=======
-          792.10083,
-          598.57117
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       }
     },
@@ -576,26 +546,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-<<<<<<< HEAD
           7.3272815335090735,
           49.27553106489223
-=======
-          7.379809017895133,
-          49.2055220818756
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       },
       "properties": {
         "name": "GRIMMOOR",
         "waterbody_type": "Small Marsh",
         "inkscape_coordinates": [
-<<<<<<< HEAD
           847.18549,
           533.22375
-=======
-          850.18549,
-          537.22375
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       }
     },
@@ -622,26 +582,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-<<<<<<< HEAD
           6.3031459084345185,
           49.737751250456085
-=======
-          6.35567339282058,
-          49.66774226743946
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       },
       "properties": {
         "name": "MORRSFENN",
         "waterbody_type": "Small Marsh",
         "inkscape_coordinates": [
-<<<<<<< HEAD
           788.68103,
           506.80954
-=======
-          791.68103,
-          510.80954
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       }
     },
@@ -650,26 +600,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-<<<<<<< HEAD
           6.651373446755133,
           50.43520393675336
-=======
-          6.703900931141194,
-          50.365194953736726
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       },
       "properties": {
         "name": "TOTENSÜMPFE",
         "waterbody_type": "Small Marsh",
         "inkscape_coordinates": [
-<<<<<<< HEAD
           808.58612,
           466.96667
-=======
-          811.58612,
-          470.96667
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       }
     },
@@ -678,26 +618,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-<<<<<<< HEAD
           7.689000500149542,
           50.29095102322884
-=======
-          7.741527984535602,
-          50.22094204021221
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       },
       "properties": {
         "name": "HEL FENN",
         "waterbody_type": "Small Marsh",
         "inkscape_coordinates": [
-<<<<<<< HEAD
           867.86597,
           475.21552
-=======
-          870.86597,
-          479.21552
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       }
     },
@@ -706,26 +636,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-<<<<<<< HEAD
           6.390050620894129,
           47.399495654677025
-=======
-          6.44257810528019,
-          47.3294866716604
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       },
       "properties": {
         "name": "ALBENMOOR",
         "waterbody_type": "Small Marsh",
         "inkscape_coordinates": [
-<<<<<<< HEAD
           793.6123,
           640.39465
-=======
-          796.6123,
-          644.39465
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       }
     },
@@ -770,26 +690,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-<<<<<<< HEAD
           -0.615499370368263,
           51.65236135976689
-=======
-          -0.5629718859822024,
-          51.58235237675026
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       },
       "properties": {
         "name": "THE FURDIENST",
         "waterbody_type": "Small Marsh",
         "inkscape_coordinates": [
-<<<<<<< HEAD
           393.43115,
           397.37668
-=======
-          396.43115,
-          401.37668
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       }
     },
@@ -798,26 +708,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-<<<<<<< HEAD
           -0.07758078127849188,
           51.50898607050353
-=======
-          -0.02505329689243041,
-          51.438977087486904
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       },
       "properties": {
         "name": "ALTDORF FLATS",
         "waterbody_type": "Small Marsh",
         "inkscape_coordinates": [
-<<<<<<< HEAD
           424.16156,
           405.57169
-=======
-          427.16156,
-          409.57169
->>>>>>> d8777d5b3c32d629127b7432579a6ab21b353378
         ]
       }
     },
