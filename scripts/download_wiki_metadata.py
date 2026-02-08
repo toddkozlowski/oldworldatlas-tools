@@ -44,6 +44,42 @@ def normalize_name_to_latin(name: str) -> str:
     return latin_name
 
 
+def extract_name_variants(name: str) -> list:
+    """
+    Extract name variants from a settlement name that may contain parentheses.
+    
+    For names like "Karak Ungor (Red-Eye Mountain)", returns:
+    - The original name: "Karak Ungor (Red-Eye Mountain)"
+    - Name without parentheses: "Karak Ungor"
+    - Content inside parentheses: "Red-Eye Mountain"
+    
+    Args:
+        name: Settlement name that may contain parentheses
+        
+    Returns:
+        List of name variants to try
+    """
+    variants = [name]  # Always try original name first
+    
+    # Check if name contains parentheses
+    paren_match = re.search(r'(.+?)\s*\((.+?)\)', name)
+    if paren_match:
+        # Extract name without parentheses (strip whitespace)
+        name_without_paren = paren_match.group(1).strip()
+        # Extract content inside parentheses
+        paren_content = paren_match.group(2).strip()
+        
+        # Add name without parentheses
+        if name_without_paren and name_without_paren != name:
+            variants.append(name_without_paren)
+        
+        # Add parentheses content
+        if paren_content:
+            variants.append(paren_content)
+    
+    return variants
+
+
 def get_article_description(page_title: str) -> str:
     """
     Extract opening sentences from a Fandom wiki article.
@@ -144,13 +180,18 @@ def fetch_wiki_metadata(settlement_name: str) -> Optional[Dict[str, str]]:
     """
     api_url = "https://warhammerfantasy.fandom.com/api.php"
     
-    # Try original name first
-    names_to_try = [settlement_name]
+    # Extract name variants (handles parentheses)
+    names_to_try = extract_name_variants(settlement_name)
     
-    # If the name contains non-latin characters, also try latin equivalent
-    latin_name = normalize_name_to_latin(settlement_name)
-    if latin_name != settlement_name:
-        names_to_try.append(latin_name)
+    # For each base variant, also try latin equivalent if needed
+    expanded_names = []
+    for name_variant in names_to_try:
+        expanded_names.append(name_variant)
+        latin_name = normalize_name_to_latin(name_variant)
+        if latin_name != name_variant:
+            expanded_names.append(latin_name)
+    
+    names_to_try = expanded_names
     
     for name_variant in names_to_try:
         try:
