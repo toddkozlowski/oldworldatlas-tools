@@ -3,36 +3,48 @@ Old World Atlas Map Processing Report
 
 SETTLEMENTS SUMMARY
 --------------------------------------------------------------------------------
-Empire Total: 3286 settlements
-Westerland Total: 117 settlements
-Grand Total: 3403 settlements
+Empire Total: 3303 settlements
+Westerland Total: 118 settlements
+Karaz Ankor Total: 87 holds
+Grand Total: 3508 settlements/holds
 
 EMPIRE SETTLEMENTS BY PROVINCE
 --------------------------------------------------------------------------------
-Averland             - 268 settlements,    239,631 total population
-Hochland             - 109 settlements,     80,096 total population
-Middenland           - 425 settlements,    297,695 total population
-Mootland             -  50 settlements,     18,490 total population
-Nordland             - 220 settlements,    145,285 total population
-Ostermark            - 251 settlements,    177,577 total population
-Ostland              - 267 settlements,    177,055 total population
-Reikland             - 573 settlements,    650,362 total population
-Stirland             - 313 settlements,    170,946 total population
-Talabecland          - 310 settlements,    320,458 total population
-Wissenland           - 500 settlements,    377,172 total population
+Averland             - 268 settlements,    239,782 total population
+Hochland             - 110 settlements,     80,263 total population
+Middenland           - 424 settlements,    299,503 total population
+Mootland             -  50 settlements,     20,682 total population
+Nordland             - 221 settlements,    145,589 total population
+Ostermark            - 251 settlements,    176,482 total population
+Ostland              - 267 settlements,    180,696 total population
+Reikland             - 589 settlements,    656,849 total population
+Stirland             - 313 settlements,    173,842 total population
+Talabecland          - 311 settlements,    316,394 total population
+Wissenland           - 499 settlements,    378,675 total population
 
-Empire Total Population: 2,654,767
-Westerland Total Population: 433,018
+Empire Total Population: 2,668,757
+Westerland Total Population: 426,862
+
+KARAZ ANKOR (DWARF HOLDS) BY TYPE
+--------------------------------------------------------------------------------
+Grung (Mining Settlement)                -  13 holds
+Karak (Great Hold)                       -  31 holds
+Kazad (Fortress)                         -   9 holds
+Khazid (Town)                            -  16 holds
+Umgalkhazid (Human Town)                 -   3 holds
+(No type assigned)                       -  15 holds
+
+Total Karaz Ankor Holds: 87
 
 POINTS OF INTEREST
 --------------------------------------------------------------------------------
 City Districts                 -  16 POI
-Forts and Castles              -  87 POI
-Monasteries and Temples        -  29 POI
-Other                          -   6 POI
-Taverns and Inns               -  45 POI
+Forts and Castles              -  94 POI
+Monasteries and Temples        -  41 POI
+Other                          -  21 POI
+Taverns and Inns               -  49 POI
 
-Total Points of Interest: 183
+Total Points of Interest: 221
 
 ROADS
 --------------------------------------------------------------------------------
@@ -64,23 +76,45 @@ Total Water Labels: 99
 DATA QUALITY ISSUES
 --------------------------------------------------------------------------------
 Invalid Settlement Elements: 0
-Provinces with Duplicate Names: 0
-Settlements with Assigned Population Data: 2601
+Provinces with Duplicate Names: 1
+Settlements with Assigned Population Data: 2619
 CSV Settlements Not in SVG: 0
+SVG Settlements Not in CSV: 15
 Province Mismatches: 0
 Invalid Tags: 0
 
 Settlements with Randomly Assigned Populations:
   Averland: 194 settlements
-  Hochland: 81 settlements
-  Middenland: 368 settlements
+  Hochland: 82 settlements
+  Middenland: 367 settlements
   Mootland: 37 settlements
-  Nordland: 148 settlements
+  Nordland: 149 settlements
   Ostermark: 181 settlements
   Ostland: 198 settlements
-  Reikland: 429 settlements
+  Reikland: 445 settlements
   Stirland: 223 settlements
-  Talabecland: 224 settlements
-  Westerland: 104 settlements
-  Wissenland: 414 settlements
+  Talabecland: 225 settlements
+  Westerland: 105 settlements
+  Wissenland: 413 settlements
+
+CSV Settlements Not Found in SVG (should be added to map):
+  Karaz Ankor:
+
+SVG Settlements Not Found in CSV (should be added to gazetteer):
+  Karaz Ankor:
+    - Dok Karaz
+    - Grung Agrilebaz
+    - Grung Ikree
+    - Grung Trakekarag
+    - Karak Raziak
+    - Kazad Almon
+    - Kazad Skom
+    - Kazad Thurgaraz
+    - Khazid Ank
+    - Khazid Grimaz
+    - Khazid Irkulaz
+    - Khazid Rhek
+    - Khazid Wyrwarn
+    - Kolaz Ungor
+    - Skraklaz Ungor
 

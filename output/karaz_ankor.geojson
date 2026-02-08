@@ -1,0 +1,2433 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.8257524986625056,
+          44.65572668802939
+        ]
+      },
+      "properties": {
+        "name": "Khazid Ank",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          475.6719605,
+          797.1048671000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.9195080859384843,
+          44.74952237321315
+        ]
+      },
+      "properties": {
+        "name": "Khazid Thran",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          481.0297805,
+          791.7470171000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.6844972649329764,
+          44.685811489272645
+        ]
+      },
+      "properties": {
+        "name": "Khazid Rhek",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          467.6021705,
+          795.3850771000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.0176534624877744,
+          45.10085982059351
+        ]
+      },
+      "properties": {
+        "name": "Khazid Grimaz",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          486.6421205,
+          771.6758471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.917736307046337,
+          47.09428575802131
+        ]
+      },
+      "properties": {
+        "name": "Kolaz Ungor",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          880.8879605,
+          657.8425971
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.9861332884683796,
+          47.528788658790496
+        ]
+      },
+      "properties": {
+        "name": "Skraklaz Ungor",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          884.8019105,
+          633.0199671
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.9307731135839541,
+          45.28957262647266
+        ]
+      },
+      "properties": {
+        "name": "Kazad Skom",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          481.6811805,
+          760.8940471000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.0153641376016092,
+          44.99665624385248
+        ]
+      },
+      "properties": {
+        "name": "Kazad Almon",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          486.5098205,
+          777.6289771
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.985958866921,
+          44.1370189498424
+        ]
+      },
+      "properties": {
+        "name": "Kazad Thurgaraz",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          484.81741,
+          826.73981
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.941147993343745,
+          42.001110349452006
+        ]
+      },
+      "properties": {
+        "name": "Karak Skivark (Grimhold)",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          482.2264005,
+          948.7638671000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.394614611603248,
+          43.57105184964577
+        ]
+      },
+      "properties": {
+        "name": "Grung Tepskaf",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          736.6855105,
+          859.1061471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.496041556971432,
+          43.9214686647277
+        ]
+      },
+      "properties": {
+        "name": "Kazad Nardak",
+        "hold_type": "Kazad (Fortress)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          742.4853205,
+          839.0875971
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.276972902983833,
+          44.21630069605013
+        ]
+      },
+      "properties": {
+        "name": "Migdhal Vongalbavak",
+        "hold_type": "Kazad (Fortress)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          787.1059205,
+          822.2496371000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.726689044048862,
+          43.155067063285586
+        ]
+      },
+      "properties": {
+        "name": "Khazid Hafak",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          698.5194305,
+          882.8663971000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.7283926733370025,
+          42.89472160851277
+        ]
+      },
+      "properties": {
+        "name": "Kazad Zhum",
+        "hold_type": "Kazad (Fortress)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          698.6130005,
+          897.7399371
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.664500793935686,
+          43.03553013855449
+        ]
+      },
+      "properties": {
+        "name": "Grung Trag",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          694.9647505,
+          889.6950771
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.2477768402610065,
+          41.87578357185851
+        ]
+      },
+      "properties": {
+        "name": "Khazid Grentaz",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          614.0074105,
+          955.9408671000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.6174456036725173,
+          42.01514192421127
+        ]
+      },
+      "properties": {
+        "name": "Khazid Svarkungor",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          635.1294205,
+          947.9820671000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5743433773659,
+          41.83354039867997
+        ]
+      },
+      "properties": {
+        "name": "Grung Rakadem",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          632.6642705,
+          958.3566371000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.068226194301654,
+          39.17026848930941
+        ]
+      },
+      "properties": {
+        "name": "Dok Karaz",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          775.1068405,
+          1110.5277471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.251917456491015,
+          39.393849232579186
+        ]
+      },
+      "properties": {
+        "name": "Khazid Varrwyndak",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          785.6047605,
+          1097.7559471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.6910453047929197,
+          48.86887480254463
+        ]
+      },
+      "properties": {
+        "name": "Grimbringrungaz",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          389.0748205,
+          556.3966171000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.7740134062269703,
+          49.986945653001975
+        ]
+      },
+      "properties": {
+        "name": "Kazad Elgazund",
+        "hold_type": "Kazad (Fortress)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          270.0863905,
+          492.5058371
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.9557898073150124,
+          50.11627608840931
+        ]
+      },
+      "properties": {
+        "name": "Grung Ardzufak",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          259.7029705,
+          485.1158471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.6143176959705956,
+          55.338522025933024
+        ]
+      },
+      "properties": {
+        "name": "Karak Skygg",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eTHRC"
+        ],
+        "notes": [
+          "fallen"
+        ],
+        "inkscape_coordinates": [
+          520.8788105,
+          186.8029571
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.7977184023308075,
+          55.25831365643892
+        ]
+      },
+      "properties": {
+        "name": "Karak Kazarak",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eMCotWW"
+        ],
+        "notes": [
+          "fallen"
+        ],
+        "inkscape_coordinates": [
+          531.3557405,
+          191.3866171
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.452748611951374,
+          46.776520932353556
+        ]
+      },
+      "properties": {
+        "name": "Karak Varn (Cragmere)",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:1eDSaS"
+        ],
+        "notes": [
+          "fallen"
+        ],
+        "inkscape_coordinates": [
+          854.3175904999999,
+          675.9930471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.785843552276294,
+          51.38500417939664
+        ]
+      },
+      "properties": {
+        "name": "Khazid Rhyn",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          1044.8112905,
+          412.7352371
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.590773553354932,
+          53.88070421688052
+        ]
+      },
+      "properties": {
+        "name": "Karak Ungor (Red-Eye Mountain)",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:1eDSaS"
+        ],
+        "notes": [
+          "fallen"
+        ],
+        "inkscape_coordinates": [
+          1090.8347905,
+          270.1619371
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.298377699471676,
+          53.06453818770709
+        ]
+      },
+      "properties": {
+        "name": "Karak Raziak",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          1131.2499905000002,
+          316.7947171
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.36767127316546,
+          53.74302558979011
+        ]
+      },
+      "properties": {
+        "name": "Khazid Irkulaz",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          1135.2186905,
+          278.0332671
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.219572402162942,
+          47.82537221762405
+        ]
+      },
+      "properties": {
+        "name": "Oakenhammer",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:TWW3"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          898.1430905,
+          616.0778871
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.520354173860934,
+          41.6775768304011
+        ]
+      },
+      "properties": {
+        "name": "Kazad Frukund",
+        "hold_type": "Kazad (Fortress)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          284.4584305,
+          967.2216871
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.5072952048596866,
+          41.37894448422901
+        ]
+      },
+      "properties": {
+        "name": "Grung Mizpal",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          342.3324205,
+          984.2900471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.2636454519080669,
+          41.49542306268268
+        ]
+      },
+      "properties": {
+        "name": "Karak Kaferkammaz",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          443.5118705,
+          977.6487471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.566201803544815,
+          41.029794341482074
+        ]
+      },
+      "properties": {
+        "name": "Karak Eksfilaz",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          338.9619105,
+          1004.2365471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.5337584910532174,
+          41.737322513300285
+        ]
+      },
+      "properties": {
+        "name": "Grung Byrn",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          516.0797405,
+          963.8384471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.7138010534789396,
+          41.4589018501788
+        ]
+      },
+      "properties": {
+        "name": "Khazid Algikarag",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          469.2297305,
+          979.7385371
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.593726610073186,
+          41.343972861469425
+        ]
+      },
+      "properties": {
+        "name": "Grung Ikree",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          462.3679505,
+          986.3035371000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.4709123872780001,
+          41.448390920295466
+        ]
+      },
+      "properties": {
+        "name": "Grung Wyruvalk",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          455.3528105,
+          980.3372271000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1565638692928255,
+          40.42143483652495
+        ]
+      },
+      "properties": {
+        "name": "Khazid Wyrwarn",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          419.4888605,
+          1039.0025471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.1172704181862434,
+          40.85618802113204
+        ]
+      },
+      "properties": {
+        "name": "Khazid Nekewukaz",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          492.27212049999997,
+          1014.1745471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.8656919779670558,
+          41.10767926415919
+        ]
+      },
+      "properties": {
+        "name": "Grung Agrilebaz",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          477.9025205,
+          999.8049971
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.41051927590972337,
+          39.90626421206207
+        ]
+      },
+      "properties": {
+        "name": "Khazid Urbaz",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          404.9723805,
+          1068.4323471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.8088610174377955,
+          39.78149518391692
+        ]
+      },
+      "properties": {
+        "name": "Kazad Sedazund",
+        "hold_type": "Kazad (Fortress)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          382.2124305,
+          1075.5574471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.762105970609142,
+          36.24352362105958
+        ]
+      },
+      "properties": {
+        "name": "Karak Eight Peaks",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          986.1040905,
+          1277.7599470999999
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.303523871189228,
+          37.03673260083842
+        ]
+      },
+      "properties": {
+        "name": "Karak Drazh (Black Crag)",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:1eDSaS"
+        ],
+        "notes": [
+          "fallen"
+        ],
+        "inkscape_coordinates": [
+          959.9157405,
+          1232.4405471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.640131313916867,
+          55.607941192297524
+        ]
+      },
+      "properties": {
+        "name": "Kazad Drengi (Keep of the First Slayer)",
+        "hold_type": "Kazad (Fortress)",
+        "tags": [
+          "source:4eTHRC"
+        ],
+        "notes": [
+          "fallen"
+        ],
+        "inkscape_coordinates": [
+          579.4897105,
+          171.4186471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.859110853592022,
+          50.04132953968113
+        ]
+      },
+      "properties": {
+        "name": "Karak Ziflin",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          265.2253705,
+          489.3982571
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.6786837575972022,
+          48.77181211064845
+        ]
+      },
+      "properties": {
+        "name": "Karak Azgaraz",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          389.7796605,
+          561.9418971
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.785230141554849,
+          44.78735690196398
+        ]
+      },
+      "properties": {
+        "name": "Karak Norn",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          473.3587305,
+          789.5845371
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.8370747659423161,
+          44.88916951038493
+        ]
+      },
+      "properties": {
+        "name": "Bergheim",
+        "hold_type": "Umgalkhazid (Human Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          476.3222001,
+          783.7683701000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.28731561131105376,
+          40.50454337013355
+        ]
+      },
+      "properties": {
+        "name": "Karak Izor",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          444.8498805,
+          1034.2578471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.5080682293187815,
+          41.9059375883864
+        ]
+      },
+      "properties": {
+        "name": "Karak Hirn",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          628.8788705,
+          954.2200971000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.800467998088716,
+          42.99415548023062
+        ]
+      },
+      "properties": {
+        "name": "Karak Gantuk",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          702.7322604999999,
+          892.0598171
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.516611549527139,
+          43.740901125813764
+        ]
+      },
+      "properties": {
+        "name": "Karak Angazbar",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          743.6579205,
+          849.4035671
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.300708923015137,
+          47.69393316133764
+        ]
+      },
+      "properties": {
+        "name": "Zhufbar",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          902.7767005,
+          623.5875971
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.6877655619769,
+          44.19584087107923
+        ]
+      },
+      "properties": {
+        "name": "Karaz-a-Karak",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          1039.1039905,
+          823.4511771000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.410379104785271,
+          51.469187299591844
+        ]
+      },
+      "properties": {
+        "name": "Karak Kadrin",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          1023.3613905000001,
+          407.9230771
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.137484114410195,
+          39.2160415416634
+        ]
+      },
+      "properties": {
+        "name": "Barak Varr",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          779.0643605,
+          1107.9132471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.9385877740820971,
+          33.52880203598668
+        ]
+      },
+      "properties": {
+        "name": "Ekrund",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:1eDSaS"
+        ],
+        "notes": [
+          "fallen"
+        ],
+        "inkscape_coordinates": [
+          481.9577005,
+          1432.7865471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.497820944873993,
+          35.32812575216846
+        ]
+      },
+      "properties": {
+        "name": "Karak Azul",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          1028.1238905,
+          1330.0620471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.857682273908075,
+          34.9019668976846
+        ]
+      },
+      "properties": {
+        "name": "Karak Azgal",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:2eKAAotDC"
+        ],
+        "notes": [
+          "fallen"
+        ],
+        "inkscape_coordinates": [
+          991.5451905,
+          1354.4037471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.6881881876787634,
+          41.03429991854185
+        ]
+      },
+      "properties": {
+        "name": "Karak Bhufdar",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          389.1248405,
+          1003.9856471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.160124196263403,
+          43.562725858086196
+        ]
+      },
+      "properties": {
+        "name": "Karag Agilwutraz (Mount Silverspear)",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:1eDSaS"
+        ],
+        "notes": [
+          "fallen"
+        ],
+        "inkscape_coordinates": [
+          1237.4783905000002,
+          859.6467371000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.260839689302397,
+          63.45172077093046
+        ]
+      },
+      "properties": {
+        "name": "Kraka Drak",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          900.7265905,
+          -276.6545929
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2967077367091155,
+          61.90066175299549
+        ]
+      },
+      "properties": {
+        "name": "Kraka Ravnsvake",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          845.6211805,
+          -188.0497829
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.927285730646666,
+          62.701559070184686
+        ]
+      },
+      "properties": {
+        "name": "Sjoktraken",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          938.7912905,
+          -233.7929429
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.44366174118992,
+          64.26973898759982
+        ]
+      },
+      "properties": {
+        "name": "Kraka Dorden",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          911.1834405,
+          -323.3865929
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.078793136457787,
+          64.57301550171746
+        ]
+      },
+      "properties": {
+        "name": "Kraka Ornsmotek",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          890.3420705,
+          -340.7154729
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.36487971652938533,
+          40.13606721420051
+        ]
+      },
+      "properties": {
+        "name": "Karak Grom",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          407.5831905,
+          1055.3040471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.03150488791688577,
+          40.28336707088954
+        ]
+      },
+      "properties": {
+        "name": "Domatburg",
+        "hold_type": "Umgalkhazid (Human Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          430.2316505,
+          1046.8917471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.846208734181205,
+          64.44033237436591
+        ]
+      },
+      "properties": {
+        "name": "Grung Diratduraz",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          877.0520905,
+          -333.1370129
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.887112163611991,
+          64.55495633188684
+        ]
+      },
+      "properties": {
+        "name": "Kazad Dumund",
+        "hold_type": "Kazad (Fortress)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          879.3906505,
+          -339.6851729
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.380054375873659,
+          64.14239599311928
+        ]
+      },
+      "properties": {
+        "name": "Grung Trakekarag",
+        "hold_type": "",
+        "tags": [],
+        "notes": [],
+        "inkscape_coordinates": [
+          907.5475705,
+          -316.1119629
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.048100874315061,
+          64.08026202186521
+        ]
+      },
+      "properties": {
+        "name": "Khazid Fneldurk",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          945.7136505,
+          -312.5573029
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.830344549444238,
+          64.04093602495408
+        ]
+      },
+      "properties": {
+        "name": "Grung Dobekzhuf",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          933.2721805,
+          -310.3122229
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.642577160660498,
+          61.96469485242555
+        ]
+      },
+      "properties": {
+        "name": "Grung Stekbrud",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          922.5146105,
+          -191.6980229
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.865296732501633,
+          61.797709105361065
+        ]
+      },
+      "properties": {
+        "name": "Khazid Bordkarag",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          935.2366605,
+          -182.15648290000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.714265951144313,
+          63.36467711113216
+        ]
+      },
+      "properties": {
+        "name": "Khazid Ravik",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          926.6305805,
+          -271.6784329
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.455590873257218,
+          63.27131129555656
+        ]
+      },
+      "properties": {
+        "name": "Grung Kuldungor",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          911.8505504999999,
+          -266.34636290000003
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.850703307151562,
+          35.0316404932631
+        ]
+      },
+      "properties": {
+        "name": "Kazad Migdhal",
+        "hold_type": "Kazad (Fortress)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          991.1483405,
+          1346.9954470999999
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.5691079647450925,
+          41.71889444063615
+        ]
+      },
+      "properties": {
+        "name": "Mont Grace",
+        "hold_type": "Umgalkhazid (Human Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          460.9668505,
+          964.8840971000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.4548273102490805,
+          40.407327154633144
+        ]
+      },
+      "properties": {
+        "name": "Hochstadt",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:4eLoSaS"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          454.4187905,
+          1039.8130471
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.773390651530807,
+          46.46211424380048
+        ]
+      },
+      "properties": {
+        "name": "Karag Gunbad",
+        "hold_type": "Khazid (Town)",
+        "tags": [
+          "source:1eDSaS"
+        ],
+        "notes": [
+          "fallen"
+        ],
+        "inkscape_coordinates": [
+          1044.0286905,
+          693.9796871000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.598755150335363,
+          45.8722393311689
+        ]
+      },
+      "properties": {
+        "name": "Karag Dromar",
+        "hold_type": "Grung (Mining Settlement)",
+        "tags": [
+          "source:TWW3"
+        ],
+        "notes": [],
+        "inkscape_coordinates": [
+          862.6462005,
+          727.6557071000001
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.528644106709688,
+          57.816594249785766
+        ]
+      },
+      "properties": {
+        "name": "Karak Vlag",
+        "hold_type": "Karak (Great Hold)",
+        "tags": [
+          "source:1eDSaS"
+        ],
+        "notes": [
+          "fallen"
+        ],
+        "inkscape_coordinates": [
+          1144.4742905,
+          45.3116141
+        ],
+        "wiki": {
+          "title": null,
+          "url": null,
+          "description": null,
+          "image": null
+        }
+      }
+    }
+  ]
+}

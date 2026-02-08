@@ -118,6 +118,33 @@ class WaterLabel:
     geo_lat: float = 0.0
 
 
+@dataclass
+class DwarfHold:
+    """Represents a Dwarf Hold (Karaz Ankor settlement)."""
+    name: str
+    svg_x: float
+    svg_y: float
+    geo_lon: float = 0.0
+    geo_lat: float = 0.0
+    hold_type: str = ""
+    tags: List[str] = None
+    notes: List[str] = None
+    wiki: Dict = None
+
+    def __post_init__(self):
+        if self.tags is None:
+            self.tags = []
+        if self.notes is None:
+            self.notes = []
+        if self.wiki is None:
+            self.wiki = {
+                "title": None,
+                "url": None,
+                "description": None,
+                "image": None
+            }
+
+
 class CoordinateConverter:
     """Converts between SVG and geographic coordinate systems."""
 
@@ -168,6 +195,7 @@ class SVGMapProcessor:
 
         self.settlements_empire = []
         self.settlements_westerland = []
+        self.settlements_karaz_ankor = []
         self.points_of_interest = []
         self.roads = []
         self.province_labels = []
@@ -180,9 +208,11 @@ class SVGMapProcessor:
         # Track CSV data
         self.csv_data_empire = {}  # {province: {name: row_data}}
         self.csv_data_westerland = {}  # {name: row_data}
+        self.csv_data_karaz_ankor = {}  # {name: row_data}
         
         # Track validation issues
         self.csv_settlements_not_in_svg = defaultdict(list)  # {province: [names]}
+        self.svg_settlements_not_in_csv = defaultdict(list)  # {province: [names]}
         self.province_mismatches = []  # List of {settlement, province_svg, province_csv}
         self.invalid_tags = []  # List of {settlement, tags, issues}
 
@@ -216,8 +246,17 @@ class SVGMapProcessor:
         
         return (x, y)
 
-    def _validate_settlement_element(self, elem, province: str) -> Optional[Tuple[str, float, float]]:
-        """Validate that element is a textbox with valid coordinates and return (name, x, y)."""
+    def _validate_settlement_element(self, elem, province: str, parent_transform: str = "") -> Optional[Tuple[str, float, float]]:
+        """Validate that element is a textbox with valid coordinates and return (name, x, y).
+        
+        Args:
+            elem: The XML element to validate
+            province: The province name for logging
+            parent_transform: Accumulated transform from parent groups
+            
+        Returns:
+            Tuple of (name, x, y) or None if invalid
+        """
         # Check if it's a text element
         if elem.tag != f"{{{NS['svg']}}}text":
             self.invalid_settlements.append({
@@ -243,6 +282,16 @@ class SVGMapProcessor:
         try:
             svg_x = float(elem.get("x", 0)) + 3
             svg_y = float(elem.get("y", 0)) + 4
+            
+            # Apply element-level transform if present
+            elem_transform = elem.get("transform", "")
+            if elem_transform:
+                svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, elem_transform)
+            
+            # Apply accumulated parent transforms
+            if parent_transform:
+                svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, parent_transform)
+            
             return (name, svg_x, svg_y)
         except ValueError:
             self.invalid_settlements.append({
@@ -254,16 +303,20 @@ class SVGMapProcessor:
             })
             return None
 
-    def _process_settlement_elements(self, parent_elem, province_name: str, settlements_dict: dict, settlements_list: list):
-        """Recursively process settlement elements, handling nested layers (like Reikland estates)."""
+    def _process_settlement_elements(self, parent_elem, province_name: str, settlements_dict: dict, settlements_list: list, parent_transform: str = ""):
+        """Recursively process settlement elements, handling nested layers (like Reikland estates) and transforms."""
         for elem in parent_elem:
             # Check if this is a layer/group
             if elem.tag == f"{{{NS['svg']}}}g":
-                # Recursively process children of this layer
-                self._process_settlement_elements(elem, province_name, settlements_dict, settlements_list)
+                # Get group transform and accumulate with parent
+                group_transform = elem.get("transform", "")
+                # Combine transforms: if both exist, concatenate them
+                combined_transform = (parent_transform + " " + group_transform).strip() if group_transform else parent_transform
+                # Recursively process children of this layer with accumulated transform
+                self._process_settlement_elements(elem, province_name, settlements_dict, settlements_list, combined_transform)
             else:
                 # Process as settlement element
-                result = self._validate_settlement_element(elem, province_name)
+                result = self._validate_settlement_element(elem, province_name, parent_transform)
                 if result:
                     name, svg_x, svg_y = result
                     
@@ -366,6 +419,137 @@ class SVGMapProcessor:
 
         logger.info(f"  Found {len(self.settlements_westerland)} valid Westerland settlements")
 
+    def process_settlements_karaz_ankor(self):
+        """Process all Karaz Ankor (Dwarf Holds) settlements."""
+        logger.info("Processing Karaz Ankor settlements...")
+
+        # Find Settlements layer
+        settlements_layer = None
+        for g in self.root.findall(f".//{{{NS['svg']}}}g"):
+            if g.get(f"{{{NS['inkscape']}}}label") == "Settlements":
+                settlements_layer = g
+                break
+
+        if settlements_layer is None:
+            logger.error("Settlements layer not found!")
+            return
+
+        # Find Dwarf Holds faction
+        dwarf_holds_faction = None
+        for child in settlements_layer:
+            if child.get(f"{{{NS['inkscape']}}}label") == "Dwarf Holds":
+                dwarf_holds_faction = child
+                break
+
+        if dwarf_holds_faction is None:
+            logger.error("Dwarf Holds faction layer not found!")
+            return
+
+        settlements_in_faction = {}
+
+        # Extract settlements from Dwarf Holds, accumulating any transforms
+        faction_transform = dwarf_holds_faction.get("transform", "")
+        
+        for elem in dwarf_holds_faction:
+            # Check if this is a layer/group
+            if elem.tag == f"{{{NS['svg']}}}g":
+                # Get group transform and combine with faction transform
+                group_transform = elem.get("transform", "")
+                combined_transform = (faction_transform + " " + group_transform).strip() if group_transform else faction_transform
+                # Process nested elements
+                self._process_dwarf_hold_elements(elem, settlements_in_faction, combined_transform)
+            elif elem.tag == f"{{{NS['svg']}}}text":
+                # Direct text element
+                result = self._validate_dwarf_hold_element(elem, faction_transform)
+                if result:
+                    name, svg_x, svg_y = result
+                    if name not in settlements_in_faction:
+                        settlements_in_faction[name] = (svg_x, svg_y)
+                        
+                        # Convert coordinates
+                        geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
+                        
+                        hold = DwarfHold(
+                            name=name,
+                            svg_x=svg_x,
+                            svg_y=svg_y,
+                            geo_lon=geo_lon,
+                            geo_lat=geo_lat
+                        )
+                        self.settlements_karaz_ankor.append(hold)
+
+        logger.info(f"  Found {len(self.settlements_karaz_ankor)} valid Karaz Ankor settlements")
+
+    def _process_dwarf_hold_elements(self, parent_elem, settlements_dict: dict, parent_transform: str = ""):
+        """Recursively process dwarf hold elements, handling nested layers and transforms."""
+        for elem in parent_elem:
+            # Check if this is a layer/group
+            if elem.tag == f"{{{NS['svg']}}}g":
+                # Get group transform and accumulate with parent
+                group_transform = elem.get("transform", "")
+                combined_transform = (parent_transform + " " + group_transform).strip() if group_transform else parent_transform
+                # Recursively process children with accumulated transform
+                self._process_dwarf_hold_elements(elem, settlements_dict, combined_transform)
+            elif elem.tag == f"{{{NS['svg']}}}text":
+                # Process text element
+                result = self._validate_dwarf_hold_element(elem, parent_transform)
+                if result:
+                    name, svg_x, svg_y = result
+                    
+                    # Check for duplicates
+                    if name in settlements_dict:
+                        self.duplicate_settlements["Karaz Ankor"].append({
+                            "name": name,
+                            "occurrences": 2,
+                            "coordinates": [settlements_dict[name], (svg_x, svg_y)]
+                        })
+                    else:
+                        settlements_dict[name] = (svg_x, svg_y)
+
+                        # Convert coordinates
+                        geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
+
+                        hold = DwarfHold(
+                            name=name,
+                            svg_x=svg_x,
+                            svg_y=svg_y,
+                            geo_lon=geo_lon,
+                            geo_lat=geo_lat
+                        )
+                        self.settlements_karaz_ankor.append(hold)
+
+    def _validate_dwarf_hold_element(self, elem, parent_transform: str = "") -> Optional[Tuple[str, float, float]]:
+        """Validate that element is a textbox with valid coordinates and return (name, x, y).
+        
+        Similar to _validate_settlement_element but for Dwarf Holds (no province parameter).
+        """
+        # Check if it's a text element
+        if elem.tag != f"{{{NS['svg']}}}text":
+            return None
+
+        # Get text content
+        name = self._get_text_element_label(elem)
+        if not name:
+            return None
+
+        # Get coordinates and apply fudge factor (+3 to X, +4 to Y)
+        try:
+            svg_x = float(elem.get("x", 0)) + 3
+            svg_y = float(elem.get("y", 0)) + 4
+            
+            # Apply element-level transform if present
+            elem_transform = elem.get("transform", "")
+            if elem_transform:
+                svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, elem_transform)
+            
+            # Apply accumulated parent transforms
+            if parent_transform:
+                svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, parent_transform)
+            
+            return (name, svg_x, svg_y)
+        except ValueError:
+            return None
+
     def load_population_data(self, faction: str, province: Optional[str] = None) -> Dict[str, int]:
         """Load population data from CSV files."""
         populations = {}
@@ -457,7 +641,8 @@ class SVGMapProcessor:
     def validate_tags(self, tags: List[str], settlement_name: str) -> List[str]:
         """Validate tags and log any issues."""
         valid_sources = {"AndyLaw", "2eSH", "4eAotE1", "4eEiS", "4ePBtTC", "4eSCoSaS",
-                        "4eCRB", "4eDotRC", "NCC", "WFB8e", "AmbChron", "G&FT", "TOW", "1eMSDtR"}
+                        "4eCRB", "4eDotRC", "NCC", "WFB8e", "AmbChron", "G&FT", "TOW", "1eMSDtR",
+                        "4eLoSaS","4eTHRC","4eMCotWW","1eDSaS","TWW3","2eKAAotDC"}
         issues = []
         
         for tag in tags:
@@ -631,6 +816,71 @@ class SVGMapProcessor:
             logger.warning("Settlements with randomly assigned populations:")
             for province, settlements in self.missing_population_data.items():
                 logger.warning(f"  {province}: {len(settlements)} settlements")
+
+    def populate_karaz_ankor_data(self):
+        """Load data from Karaz Ankor CSV and assign to dwarf holds."""
+        logger.info("Loading and processing Karaz Ankor CSV data...")
+
+        # Load CSV data
+        csv_file = INPUT_DIR / "karaz_ankor.csv"
+        csv_data = {}
+        
+        if csv_file.exists():
+            try:
+                with open(csv_file, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        settlement_name = row['Settlement'].strip()
+                        csv_data[settlement_name] = row
+            except Exception as e:
+                logger.warning(f"Error loading CSV from {csv_file}: {e}")
+                return
+
+        # Get set of SVG settlement names
+        svg_settlement_names = {hold.name for hold in self.settlements_karaz_ankor}
+        
+        # Process each dwarf hold
+        for hold in self.settlements_karaz_ankor:
+            if hold.name in csv_data:
+                row = csv_data[hold.name]
+                
+                # Hold Type (instead of population)
+                hold.hold_type = row.get('Type', '').strip()
+                
+                # Tags
+                tags_str = row.get('Tags', '')
+                trade_str = row.get('Trade', '')
+                hold.tags = self.parse_tags(tags_str, trade_str)
+                hold.tags = self.validate_tags(hold.tags, hold.name)
+                
+                # Notes
+                hold.notes = self.parse_notes(row.get('Notes', ''))
+                
+                # Wiki data
+                hold.wiki = {
+                    "title": row.get('wiki_title') or None,
+                    "url": row.get('wiki_url') or None,
+                    "description": row.get('wiki_description') or None,
+                    "image": row.get('wiki_image') or None
+                }
+            else:
+                # Settlement in SVG but not in CSV
+                self.svg_settlements_not_in_csv["Karaz Ankor"].append(hold.name)
+                hold.hold_type = ""
+                hold.tags = []
+                hold.notes = []
+
+        # Track CSV settlements not in SVG
+        for csv_name in csv_data.keys():
+            if csv_name not in svg_settlement_names:
+                self.csv_settlements_not_in_svg["Karaz Ankor"].append(csv_name)
+        
+        # Log summaries
+        if self.svg_settlements_not_in_csv["Karaz Ankor"]:
+            logger.warning(f"Karaz Ankor settlements in SVG but not in CSV: {len(self.svg_settlements_not_in_csv['Karaz Ankor'])}")
+        if self.csv_settlements_not_in_svg["Karaz Ankor"]:
+            logger.warning(f"Karaz Ankor settlements in CSV but not in SVG: {len(self.csv_settlements_not_in_svg['Karaz Ankor'])}")
+
 
     def _assign_random_population(self) -> int:
         """Assign random population using log-normal distribution between 100 and 800."""
@@ -1192,6 +1442,39 @@ class SVGMapProcessor:
 
         logger.info(f"Generated {output_file}: {len(features)} settlements")
 
+    def generate_karaz_ankor_geojson(self):
+        """Generate GeoJSON for Karaz Ankor (Dwarf Holds) settlements."""
+        features = []
+        for hold in self.settlements_karaz_ankor:
+            feature = {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [hold.geo_lon, hold.geo_lat]
+                },
+                "properties": {
+                    "name": hold.name,
+                    "hold_type": hold.hold_type,
+                    "tags": hold.tags,
+                    "notes": hold.notes,
+                    "inkscape_coordinates": [hold.svg_x, hold.svg_y],
+                    "wiki": hold.wiki
+                }
+            }
+            features.append(feature)
+
+        geojson = {
+            "type": "FeatureCollection",
+            "features": features
+        }
+
+        output_file = OUTPUT_DIR / "karaz_ankor.geojson"
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(geojson, f, indent=2, ensure_ascii=False)
+
+        logger.info(f"Generated {output_file}: {len(features)} holds")
+
+
     def generate_poi_geojson(self):
         """Generate GeoJSON for points of interest."""
         features = []
@@ -1389,6 +1672,12 @@ class SVGMapProcessor:
 
         westerland_total_pop = sum(s.population for s in self.settlements_westerland)
         westerland_total_count = len(self.settlements_westerland)
+        
+        karaz_ankor_total_count = len(self.settlements_karaz_ankor)
+        karaz_ankor_by_type = defaultdict(int)
+        for hold in self.settlements_karaz_ankor:
+            if hold.hold_type:
+                karaz_ankor_by_type[hold.hold_type] += 1
 
         total_road_points = sum(len(road.geo_coordinates) for road in self.roads)
 
@@ -1400,7 +1689,8 @@ class SVGMapProcessor:
             f.write("-" * 80 + "\n")
             f.write(f"Empire Total: {len(self.settlements_empire)} settlements\n")
             f.write(f"Westerland Total: {westerland_total_count} settlements\n")
-            f.write(f"Grand Total: {len(self.settlements_empire) + westerland_total_count} settlements\n\n")
+            f.write(f"Karaz Ankor Total: {karaz_ankor_total_count} holds\n")
+            f.write(f"Grand Total: {len(self.settlements_empire) + westerland_total_count + karaz_ankor_total_count} settlements/holds\n\n")
 
             f.write("EMPIRE SETTLEMENTS BY PROVINCE\n")
             f.write("-" * 80 + "\n")
@@ -1411,6 +1701,18 @@ class SVGMapProcessor:
 
             f.write(f"\nEmpire Total Population: {sum(empire_pop_by_province.values()):,d}\n")
             f.write(f"Westerland Total Population: {westerland_total_pop:,d}\n\n")
+
+            f.write("KARAZ ANKOR (DWARF HOLDS) BY TYPE\n")
+            f.write("-" * 80 + "\n")
+            for hold_type in sorted(karaz_ankor_by_type.keys()):
+                count = karaz_ankor_by_type[hold_type]
+                f.write(f"{hold_type:40s} - {count:3d} holds\n")
+            # Count holds without type
+            holds_without_type = karaz_ankor_total_count - sum(karaz_ankor_by_type.values())
+            if holds_without_type > 0:
+                f.write(f"{'(No type assigned)':40s} - {holds_without_type:3d} holds\n")
+            f.write(f"\nTotal Karaz Ankor Holds: {karaz_ankor_total_count}\n\n")
+
 
             f.write("POINTS OF INTEREST\n")
             f.write("-" * 80 + "\n")
@@ -1459,6 +1761,7 @@ class SVGMapProcessor:
             f.write(f"Provinces with Duplicate Names: {len(self.duplicate_settlements)}\n")
             f.write(f"Settlements with Assigned Population Data: {sum(len(v) for v in self.missing_population_data.values())}\n")
             f.write(f"CSV Settlements Not in SVG: {sum(len(v) for v in self.csv_settlements_not_in_svg.values())}\n")
+            f.write(f"SVG Settlements Not in CSV: {sum(len(v) for v in self.svg_settlements_not_in_csv.values())}\n")
             f.write(f"Province Mismatches: {len(self.province_mismatches)}\n")
             f.write(f"Invalid Tags: {len(self.invalid_tags)}\n\n")
 
@@ -1475,6 +1778,15 @@ class SVGMapProcessor:
                     for settlement in sorted(settlements):
                         f.write(f"    - {settlement}\n")
                 f.write("\n")
+
+            if self.svg_settlements_not_in_csv:
+                f.write("SVG Settlements Not Found in CSV (should be added to gazetteer):\n")
+                for province, settlements in sorted(self.svg_settlements_not_in_csv.items()):
+                    f.write(f"  {province}:\n")
+                    for settlement in sorted(settlements):
+                        f.write(f"    - {settlement}\n")
+                f.write("\n")
+
 
             if self.province_mismatches:
                 f.write("Province Name Mismatches (SVG vs CSV):\n")
@@ -1503,7 +1815,9 @@ def main():
     # Process all data
     processor.process_settlements_empire()
     processor.process_settlements_westerland()
+    processor.process_settlements_karaz_ankor()
     processor.populate_settlement_data()
+    processor.populate_karaz_ankor_data()
     processor.process_points_of_interest()
     # processor.process_roads()  # Disabled: road extraction not needed currently
     processor.process_province_labels()
@@ -1512,6 +1826,7 @@ def main():
     # Generate output files
     processor.generate_empire_geojson()
     processor.generate_westerland_geojson()
+    processor.generate_karaz_ankor_geojson()
     processor.generate_poi_geojson()
     # processor.generate_roads_geojson()  # Disabled: road extraction not needed currently
     processor.generate_province_labels_geojson()
