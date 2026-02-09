@@ -10,20 +10,20 @@ Grand Total: 3508 settlements/holds
 
 EMPIRE SETTLEMENTS BY PROVINCE
 --------------------------------------------------------------------------------
-Averland             - 268 settlements,    245,612 total population
-Hochland             - 110 settlements,     78,634 total population
-Middenland           - 424 settlements,    297,614 total population
-Mootland             -  50 settlements,     19,143 total population
-Nordland             - 221 settlements,    144,947 total population
-Ostermark            - 251 settlements,    173,933 total population
-Ostland              - 267 settlements,    179,445 total population
-Reikland             - 589 settlements,    661,509 total population
-Stirland             - 313 settlements,    177,803 total population
-Talabecland          - 311 settlements,    319,828 total population
-Wissenland           - 499 settlements,    371,293 total population
+Averland             - 268 settlements,    236,184 total population
+Hochland             - 110 settlements,     82,878 total population
+Middenland           - 424 settlements,    304,852 total population
+Mootland             -  50 settlements,     19,603 total population
+Nordland             - 221 settlements,    147,833 total population
+Ostermark            - 251 settlements,    175,420 total population
+Ostland              - 267 settlements,    178,769 total population
+Reikland             - 589 settlements,    658,631 total population
+Stirland             - 313 settlements,    173,865 total population
+Talabecland          - 311 settlements,    320,251 total population
+Wissenland           - 499 settlements,    374,297 total population
 
-Empire Total Population: 2,669,761
-Westerland Total Population: 429,514
+Empire Total Population: 2,672,583
+Westerland Total Population: 430,957
 
 KARAZ ANKOR (DWARF HOLDS) BY TYPE
 --------------------------------------------------------------------------------
@@ -54,11 +54,11 @@ Total Coordinate Points (all roads): 0
 
 PROVINCE LABELS
 --------------------------------------------------------------------------------
-Grand-Province                 -  30 labels
-Nation-State                   -   9 labels
-Province                       -  14 labels
+Grand-Province                 -  32 labels
+Nation-State                   -  13 labels
+Province                       -  23 labels
 
-Total Province Labels: 53
+Total Province Labels: 68
 
 WATER LABELS
 --------------------------------------------------------------------------------
@@ -81,6 +81,8 @@ Settlements with Assigned Population Data: 2619
 CSV Settlements Not in SVG: 0
 SVG Settlements Not in CSV: 15
 Province Mismatches: 0
+CSV Province Labels Not in SVG: 5
+SVG Province Labels Not in CSV: 5
 Invalid Tags: 0
 
 Settlements with Randomly Assigned Populations:
@@ -117,4 +119,23 @@ SVG Settlements Not Found in CSV (should be added to gazetteer):
     - Khazid Wyrwarn
     - Kolaz Ungor
     - Skraklaz Ungor
+
+CSV Province Labels Not Found in SVG (should be added to map):
+  - KAMENNAYA ZIMA
+(Troll Country)
+  - POLYANYA OBLAST
+(Southern Oblast)
+  - PRIMORYE OBLAST
+(Western Oblast)
+  - SEVERYNA OBLAST
+(Northern Oblast)
+  - UNGOLSK OBLAST
+(Eastern Oblast)
+
+SVG Province Labels Not Found in CSV (should be added to gazetteer):
+  - KAMENNAYA ZIMA (Troll Country)
+  - POLYANYA OBLAST (
+  - PRIMORYE OBLAST (
+  - SEVERYNA OBLAST (Northern Oblast)
+  - UNGOLSK OBLAST (
 

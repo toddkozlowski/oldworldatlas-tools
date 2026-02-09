@@ -105,6 +105,16 @@ class ProvinceLabel:
     geo_lat: float = 0.0
     formal_title: str = ""
     part_of: str = ""
+    population: int = 0
+    info: Dict = None
+
+    def __post_init__(self):
+        if self.info is None:
+            self.info = {
+                "wiki_url": None,
+                "image": None,
+                "description": None
+            }
 
 
 @dataclass
@@ -209,12 +219,17 @@ class SVGMapProcessor:
         self.csv_data_empire = {}  # {province: {name: row_data}}
         self.csv_data_westerland = {}  # {name: row_data}
         self.csv_data_karaz_ankor = {}  # {name: row_data}
+        self.csv_data_provinces = {}  # {name: row_data}
         
         # Track validation issues
         self.csv_settlements_not_in_svg = defaultdict(list)  # {province: [names]}
         self.svg_settlements_not_in_csv = defaultdict(list)  # {province: [names]}
         self.province_mismatches = []  # List of {settlement, province_svg, province_csv}
         self.invalid_tags = []  # List of {settlement, tags, issues}
+        
+        # Track province label validation issues
+        self.csv_provinces_not_in_svg = []  # List of province names
+        self.svg_provinces_not_in_csv = []  # List of province names
 
     def _get_text_element_label(self, elem) -> Optional[str]:
         """Extract text from text/tspan elements."""
@@ -881,6 +896,83 @@ class SVGMapProcessor:
         if self.csv_settlements_not_in_svg["Karaz Ankor"]:
             logger.warning(f"Karaz Ankor settlements in CSV but not in SVG: {len(self.csv_settlements_not_in_svg['Karaz Ankor'])}")
 
+    def populate_province_data(self):
+        """Load data from provinces.csv and assign to province labels."""
+        logger.info("Loading and processing Province CSV data...")
+
+        # Load CSV data
+        csv_file = INPUT_DIR / "provinces.csv"
+        
+        if csv_file.exists():
+            try:
+                with open(csv_file, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        province_name = row['name'].strip()
+                        self.csv_data_provinces[province_name] = row
+            except Exception as e:
+                logger.warning(f"Error loading CSV from {csv_file}: {e}")
+                return
+
+        # Get set of SVG province label names
+        svg_province_names = {label.name for label in self.province_labels}
+        
+        # Process each province label
+        for label in self.province_labels:
+            if label.name in self.csv_data_provinces:
+                row = self.csv_data_provinces[label.name]
+                
+                # Formal title
+                label.formal_title = row.get('formal_title', '').strip()
+                
+                # Part of (parent region)
+                label.part_of = row.get('part_of', '').strip()
+                
+                # Population
+                try:
+                    pop_str = row.get('population', '').strip()
+                    if pop_str:
+                        label.population = int(pop_str)
+                    else:
+                        label.population = 0
+                except (ValueError, TypeError):
+                    label.population = 0
+                
+                # Province type from CSV (this may differ from SVG layer classification)
+                csv_province_type = row.get('province_type', '').strip()
+                if csv_province_type:
+                    # Keep the SVG-derived province_type but could add validation here if needed
+                    pass
+                
+                # Info dictionary
+                label.info = {
+                    "wiki_url": row.get('info_wiki_url', '').strip() or None,
+                    "image": row.get('info_image', '').strip() or None,
+                    "description": row.get('info_description', '').strip() or None
+                }
+            else:
+                # Province label in SVG but not in CSV
+                self.svg_provinces_not_in_csv.append(label.name)
+                label.formal_title = ""
+                label.part_of = ""
+                label.population = 0
+                label.info = {
+                    "wiki_url": None,
+                    "image": None,
+                    "description": None
+                }
+
+        # Track CSV provinces not in SVG
+        for csv_name in self.csv_data_provinces.keys():
+            if csv_name not in svg_province_names:
+                self.csv_provinces_not_in_svg.append(csv_name)
+        
+        # Log summaries
+        if self.svg_provinces_not_in_csv:
+            logger.warning(f"Province labels in SVG but not in CSV: {len(self.svg_provinces_not_in_csv)}")
+        if self.csv_provinces_not_in_svg:
+            logger.warning(f"Province labels in CSV but not in SVG: {len(self.csv_provinces_not_in_svg)}")
+
 
     def _assign_random_population(self) -> int:
         """Assign random population using log-normal distribution between 100 and 800."""
@@ -891,19 +983,33 @@ class SVGMapProcessor:
             return 782
         return _random_population
 
-    def _process_poi_elements(self, parent_elem, poi_type: str, poi_list: list):
-        """Recursively process POI elements, handling nested layers."""
+    def _process_poi_elements(self, parent_elem, poi_type: str, poi_list: list, parent_transform: str = ""):
+        """Recursively process POI elements, handling nested layers and transforms."""
         for elem in parent_elem:
             # Check if this is a layer/group
             if elem.tag == f"{{{NS['svg']}}}g":
-                # Recursively process children of this layer
-                self._process_poi_elements(elem, poi_type, poi_list)
+                # Get group transform and accumulate with parent
+                group_transform = elem.get("transform", "")
+                combined_transform = (parent_transform + " " + group_transform).strip() if group_transform else parent_transform
+                # Recursively process children of this layer with accumulated transform
+                self._process_poi_elements(elem, poi_type, poi_list, combined_transform)
             elif elem.tag == f"{{{NS['svg']}}}text":
                 name = self._get_text_element_label(elem)
                 if name:
                     try:
+                        # Get base coordinates (no fudge factor needed for POI)
                         svg_x = float(elem.get("x", 0))
                         svg_y = float(elem.get("y", 0))
+                        
+                        # Apply element-level transform if present
+                        elem_transform = elem.get("transform", "")
+                        if elem_transform:
+                            svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, elem_transform)
+                        
+                        # Apply accumulated parent transforms
+                        if parent_transform:
+                            svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, parent_transform)
+                        
                         geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
                         
                         poi = PointOfInterest(
@@ -951,7 +1057,8 @@ class SVGMapProcessor:
 
             # Extract POI from this group (may be nested in sub-layers)
             initial_count = len(self.points_of_interest)
-            self._process_poi_elements(poi_group, poi_type, self.points_of_interest)
+            group_transform = poi_group.get("transform", "")
+            self._process_poi_elements(poi_group, poi_type, self.points_of_interest, group_transform)
             count = len(self.points_of_interest) - initial_count
 
             logger.info(f"    Found {count} POI")
@@ -1570,7 +1677,9 @@ class SVGMapProcessor:
                     "province_type": label.province_type,
                     "formal_title": label.formal_title,
                     "part_of": label.part_of,
-                    "inkscape_coordinates": [label.svg_x, label.svg_y]
+                    "inkscape_coordinates": [label.svg_x, label.svg_y],
+                    "info": label.info,
+                    "population": label.population
                 }
             }
             features.append(feature)
@@ -1763,6 +1872,8 @@ class SVGMapProcessor:
             f.write(f"CSV Settlements Not in SVG: {sum(len(v) for v in self.csv_settlements_not_in_svg.values())}\n")
             f.write(f"SVG Settlements Not in CSV: {sum(len(v) for v in self.svg_settlements_not_in_csv.values())}\n")
             f.write(f"Province Mismatches: {len(self.province_mismatches)}\n")
+            f.write(f"CSV Province Labels Not in SVG: {len(self.csv_provinces_not_in_svg)}\n")
+            f.write(f"SVG Province Labels Not in CSV: {len(self.svg_provinces_not_in_csv)}\n")
             f.write(f"Invalid Tags: {len(self.invalid_tags)}\n\n")
 
             if self.missing_population_data:
@@ -1785,6 +1896,18 @@ class SVGMapProcessor:
                     f.write(f"  {province}:\n")
                     for settlement in sorted(settlements):
                         f.write(f"    - {settlement}\n")
+                f.write("\n")
+
+            if self.csv_provinces_not_in_svg:
+                f.write("CSV Province Labels Not Found in SVG (should be added to map):\n")
+                for province_name in sorted(self.csv_provinces_not_in_svg):
+                    f.write(f"  - {province_name}\n")
+                f.write("\n")
+
+            if self.svg_provinces_not_in_csv:
+                f.write("SVG Province Labels Not Found in CSV (should be added to gazetteer):\n")
+                for province_name in sorted(self.svg_provinces_not_in_csv):
+                    f.write(f"  - {province_name}\n")
                 f.write("\n")
 
 
@@ -1813,31 +1936,32 @@ def main():
     processor = SVGMapProcessor()
 
     # Process all data
-    processor.process_settlements_empire()
-    processor.process_settlements_westerland()
-    processor.process_settlements_karaz_ankor()
-    processor.populate_settlement_data()
-    processor.populate_karaz_ankor_data()
+    # processor.process_settlements_empire()
+    # processor.process_settlements_westerland()
+    # processor.process_settlements_karaz_ankor()
+    # processor.populate_settlement_data()
+    # processor.populate_karaz_ankor_data()
     processor.process_points_of_interest()
     # processor.process_roads()  # Disabled: road extraction not needed currently
-    processor.process_province_labels()
-    processor.process_water_labels()
+    # processor.process_province_labels()
+    # processor.populate_province_data()
+    # processor.process_water_labels()
 
     # Generate output files
-    processor.generate_empire_geojson()
-    processor.generate_westerland_geojson()
-    processor.generate_karaz_ankor_geojson()
+    # processor.generate_empire_geojson()
+    # processor.generate_westerland_geojson()
+    # processor.generate_karaz_ankor_geojson()
     processor.generate_poi_geojson()
     # processor.generate_roads_geojson()  # Disabled: road extraction not needed currently
-    processor.generate_province_labels_geojson()
-    processor.generate_water_labels_geojson()
+    # processor.generate_province_labels_geojson()
+    # processor.generate_water_labels_geojson()
 
     # Write logs
-    processor.write_invalid_settlements_log()
-    processor.write_duplicate_settlements_log()
+    # processor.write_invalid_settlements_log()
+    # processor.write_duplicate_settlements_log()
 
     # Generate report
-    processor.generate_report()
+    # processor.generate_report()
 
     logger.info("Processing complete!")
 
