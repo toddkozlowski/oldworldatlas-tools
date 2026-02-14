@@ -1,0 +1,745 @@
+GAZETTEER OF WISSENLAND 
+(2515 I.C.) 
+ 
+LEGEND: 
+ 
+Settlement Size: 
+CS= City State (any size) 
+C= City (10,000+) 
+T= Town (1,000 - 10,000) 
+ST= Small Town (100 - 1,000) 
+V= Village (1-100) 
+F= Fort (any size) 
+M= Mine (any size) 
+Wealth (1= Improvished, 5= Very Rich) 
+Garrison/Militia (Quality rated as Excellent (a), Average (b), or Poor (c)) 
+ 
+GAZETTEER OF THE GRAND COUNTY OF WISSENLAND 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+WISSENBURG T Grand Countess 
+Emmanuelle 
+von Liebewitz 
+9,000 4 Government, 
+Trade, Ore 
+150a/ 
+1000b 
+Provincial capital 
+Dotternbach V Grand Countess  
+von Liebewitz 
+95 3 Wool, 
+Livestock -/10c  
+Dottrahof V Grand Countess  
+von Liebewitz 
+68 3 Tile, pottery -/8c  
+Grätz V Grand Countess  
+von Liebewitz 
+32 2 Goats -/5c  
+Haigerbach V Grand Countess  
+von Liebewitz 
+48 2 Agriculture -/4c Nearby monastery of the Sigmarite 
+Templar Order of Black Hammers 
+(Grandmaster Marius von Plauten). 
+Höslwang V Grand Countess  
+von Liebewitz 
+24 1 Subsistence -  
+Maselhof V Grand Countess  
+von Liebewitz 
+32 1 Subsistence -/4c  
+Rohrhausen V Grand Countess  
+von Liebewitz 
+90 2 Agriculture, 
+Wine -/9c  
+Steinheim V Grand Countess  
+von Liebewitz 
+86 3 Stonecutting -/12c Wissenland limestone quarry 
+        
+Stonecarver Town ST Grand Countess  
+von Liebewitz 
+210 2 Ale, Stonework 10b/60c Dwarf settlement north of 
+Wissenburg 
+Waltershofen V Grand Countess  
+von Liebewitz 
+44 1 Subsistence -/5c  
+Weningen V Grand Countess  
+von Liebewitz 
+43 2 Agriculture -/5c  
+Windisch V Grand Countess  
+von Liebewitz 
+35 2 Goats -/5c  
+        
+BALLENHOF V Baron Anton 
+Domagk 
+98 2 Agriculture, 
+Fishing 
+6b/14c Ferry across Upper Reik 
+Arget V Baron Domagk 26 2 Timber -/4c Ferry across Upper Reik 
+Gestratz V Baron Domagk 21 1 Subsistence -/4c  
+        
+ 
+ 
+GAZETTEER OF THE GRAND COUNTY OF WISSENLAND (cont.) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+BEDERNAU V Baroness 
+Theresa 
+Delbrück 
+86 3 Agriculture, 
+Fishing, Wine 
+8b/10c Ferry across River Söll 
+Hofstetten V Baroness 
+Delbrück 
+34 2 Agriculture, 
+Livestock -/8c  
+Sontheim V Baroness 
+Delbrück 
+38 2 Agriculture -/8c  
+        
+DEUTZEN V Village 
+Assembly 
+45 1 Subsistence -/10c Isolated village in Ell Valley 
+        
+ELLENWANGEN V Baron Werner 
+Fröbel 
+88 2 Agriculture 6b/10c  
+Dessau V Baron Fröbel 29 2 Timber 4b/6c Ferry across Upper Reik 
+Herfatz V Baron Fröbel 22 1 Subsistence -/4c  
+        
+EPPISWALD ST Lector Raphael 
+von Mauchen 
+155 2 Fishing, Wine 14b/40c Sigmarite Abbey of St. Ewald 
+nearby.   
+Gutach V Lector von 
+Mauchen 
+54 1 Subsistence -/8c  
+Kluftern V Lector von 
+Mauchen 
+68 2 Agriculture -/10c  
+Lenzfeld V Lector von 
+Mauchen 
+42 1 Subsistence -/6c  
+Todtmoos V Lector von 
+Mauchen 
+87 2 Timber -/10c  
+        
+ERBSHAUSEN V Abbess Käthe 
+Erzberger 
+74 2 Agriculture, 
+Wine 
+6b/4c Sigmarite Abbey of St. Helena, 
+known for its ruby coloured wine 
+Madau V Abbess 
+Erzberger 
+43 2 Timber -/6c Edge of Marschwald 
+Rusch V Abbess 
+Erzberger 
+28 2 Agriculture -/4c Crossroads where Pedlars' Path 
+meets Ballenhof-Steingart Road 
+        
+GESCHBURG ST Baroness Etelka 
+Toppenheimer 
+600 3 Agriculture, 
+Trade, 
+Livestock 
+20b/ 60c Ferry across Söll 
+Althausen V Baroness 
+Toppenheimer 
+83 3 Wool, Wine -/8c  
+Fluorn V Baroness 
+Toppenheimer 
+78 2 Agriculture -/7c  
+Puchheim V Baroness 
+Toppenheimer 
+26 1 Subsistence -/4c  
+Zöblen V Baroness 
+Toppenheimer 
+28 1 Subsistence -/4c  
+        
+GRISSENWALD T Count Bruno 
+Pfeifraucher 
+4,500 3 Boatbuilding 50a/250b Ferry, Dwarf shantytown of Khazid 
+Slumbol at the south wall. 
+Bad Deining V Count 
+Pfeifraucher 
+42 2 Agriculture -/5c Holy springs 
+Dirnaich  Count 
+Pfeifraucher 
+41 2 Fishing, Timber -/6c At edge of Lenka's Woods 
+Kröning V Count 
+Pfeifraucher 
+23 1 Subsistence -/4c  
+        
+ 
+ 
+GAZETTEER OF THE GRAND COUNTY OF WISSENLAND (cont.) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+HINKEND V Baron 
+Immanuel 
+Grillparzer 
+72 2 Agriculture 4b/8c  
+Allach V Baron 
+Grillparzer 
+52 2 Stonecutting -/6c Grillparzer Quarry 
+Aying V Baron 
+Grillparzer 
+45 2 Mining -/5c  
+Malfurt V Baron 
+Grillparzer 
+42 2 Agriculture -/5c Malfurter cheese 
+Moosen V Baron 
+Grillparzer 
+34 2 Agriculture -/4c  
+Walnussbach V Baron 
+Grillparzer 
+52 2 Agriculture -/4c  
+        
+HORNFURT V Baron Mayer 
+Heidegger 
+82 2 Agriculture 6b/12c Confluence of Rivers Söll and 
+Hornberg 
+Affing V Baron 
+Heidegger 
+21 1 Subsistence -/3c  
+        
+HURLACH V Baroness Astrid 
+Toller 
+64 2 Sheep, Wool 6b/6c Famous for its black wool 
+Eresried V Baroness Toller 23 1 Subsistence -/4c  
+Kislegg V Baroness Toller 28 2 Sheep -/5c  
+        
+JENGEN V Baron Ottmar 
+Raeder 
+61 1 Subsistence 5b/7c Ford across River Staffel 
+Mathon V Baron Raeder 42 2 Tin, Lead, Iron 
+Ore, Quarry -/8c Mining village 
+Tarrenz V Baron Raeder 54 2 Timber, 
+Agriculture -/7c Near Dämulwald 
+        
+KAYNA V Village 
+Assembly 
+44 1 Subsistence -/10c Isolated village in Ell Valley 
+        
+KELGARD V Count 
+Pfeifraucher 
+78 1 Subsistence -/10c  
+Lauben V Count 
+Pfeifraucher 
+61 1 Agriculture -/10c  
+Simbach V Count 
+Pfeifraucher 
+48 2 Pottery -/9c  
+        
+KOLBHÜGEL V Baron Wolfram 
+Mommsen 
+65 1 Subsistence 5b/9c Barrows and Stone Circle south of 
+the village 
+Mandling V Baron 
+Mommsen 
+23 1 Subsistence -/3c  
+Volders V Baron 
+Mommsen 
+26 1 Subsistence -/3c  
+        
+KROPPENLEBEN V Baron Johann 
+von Kalb 
+85 3 Trade, Furs 6b/10c On trade route to Karak Hirn 
+Ottakring V Baron von Kalb 42 2 Agriculture, 
+Timber -/6c  
+        
+ 
+ 
+GAZETTEER OF THE GRAND COUNTY OF WISSENLAND (cont.) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+KREUTZHOFEN ST Count 
+Pfeifraucher 
+515 4 Trade, 
+Agriculture 
+20b/40c Crossroads of the Montdidier and 
+Winters Teeth Passes with River 
+Soll 
+Camfurt V Count 
+Pfeifraucher 
+82 2 Timber -/12c In Brenzwald Forest, ford across 
+River Cam 
+Daiting V Count 
+Pfeifraucher 
+67 2 Agriculture, 
+Livestock -/8c  
+Monheim V Count 
+Pfeifraucher 
+58 2 Horsebreeding -/8c Ferry across Söll 
+Serrig V Count 
+Pfeifraucher 
+54 1 Subsistence -/6c  
+Weilerberg V Count 
+Pfeifraucher 
+63 2 Agriculture -/6c  
+        
+MAUCHEN V Baron Rudolf 
+Brecht 
+86 3 Wool, Sheep 6b/10c Ferry across Upper Reik 
+Hörbranz V Baron Brecht 42 2 Timber -/4c Ferry across Upper Reik 
+Wilhams V Baron Brecht 33 1 Subsistence -/4c  
+Wolfurt V Baron Brecht 22 1 Subsistence -/3c  
+        
+MENDELHOF V Baron Gorim 
+Axehand 
+95 2 Metalcraft, 
+Agriculture 
+8b/12c Road to Dwarf village of Khazid 
+Hafak 
+Hochsölden V Baron Axehand 85 2 Mining -/12c  
+Schmirn V Baron Axehand 76 2 Timber -/10c  
+        
+MOOSACH V Baron Hals 
+Uhland 
+62 1 Subsistence 4b/6c  
+Aitrang V Baron Uhland 24 1 Subsistence -  
+        
+NEHREN ST Baroness 
+Theresa von 
+Mecklenburg 
+125 2 Agriculture, 
+Brewing 
+15b/30c Known for its amber ales.  Road to 
+Karak Ziflin 
+Aich V Baroness von 
+Mecklenburg 
+56 2 Agriculture, 
+Brewing -/8c Aich cheese, schnapps 
+Fraunburg V Baroness von 
+Mecklenburg 
+64 2 Agriculture -/10c Monastery of St. Joachim the 
+Steadfast. Western terminus of 
+Pilgrim Road 
+        
+NOBITZ V Village 
+Assembly 
+32 1 Subsistence -/10c Isolated village in Ell Valley 
+        
+OSHAUSEN V Baron Malmek 
+Axeblade 
+96 2 Agriculture 8b/15c  
+Blaukopf V Baron Axeblade 32 1 Subsistence -/4c  
+Legau V Baron Axeblade 33 1 Subsistence -/4c  
+        
+OSTERZELL V Baroness Rosa 
+Freytag 
+88 2 Fishing, 
+Agriculture 
+5b/12c Ferry across River Staffel near 
+Upper Reik 
+Kauns  Baroness 
+Freytag 
+74 2 Mining, 
+Agriculture -/8c  
+Wenns  Baroness 
+Freytag 
+57 2 Fishing, 
+Agriculture -/6c  
+        
+ 
+ 
+GAZETTEER OF THE GRAND COUNTY OF WISSENLAND (cont.) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+PÄHL V Baroness Elise 
+Ostwald 
+58 1 Subsistence -/10c Long barrow and several rounds 
+barrows east of village 
+Ranalt V Baroness 
+Ostwald 
+22 1 Subsistence -/3c  
+Torrach V Baroness 
+Ostwald 
+25 1 Subsistence -/4c Crossroads where Middle Way 
+meets Old Stone Road 
+        
+PFORZEN V Baroness 
+Toppenheimer 
+67 2 Timber, 
+Woodcraft -/12c Known for its fine flutes 
+Haverz V Baroness 
+Toppenheimer 
+20 1 Subsistence -/3c Crossroads where Pedlars' Path and 
+Finning Road meet 
+        
+ROHRHOF V Countess 
+Bergida von 
+Äms 
+98 2 Wine, Wool 15b/12c Toll station in middle of River Söll. 
+Hürm V Countess von 
+Äms 
+53 2 Sheep, 
+Agriculture -/6c  
+        
+RUHFURT V Count Matthias 
+von Schliestein 
+64 2 Agriculture -/8c Part of the Reikland County of 
+Schliestein, toll-booth on ford, 
+Ruhfurter cheese 
+        
+SALMFÄHRE V Baron Gabriel 
+Kiesinger 
+94 2 Agriculture, 
+Wine 
+6b/12c Ferry over the River Salm 
+Hofkirchen V Baron 
+Kiesinger 
+63 2 Fishing, Timber -/10c Near haunted Salmwald Forest 
+Martinsbuch V Baron 
+Kiesinger 
+43 1 Agriculture -/7c  
+        
+SCHARMBECK V Baron Vicentus 
+Preiss  
+90 3 Livestock, Ore 5a/8c  
+Hardtenau V Baron Preiss  28 1 Subsistence -/4c  
+Lederfeld V Baron Preiss  45 2 Agriculture -/5c  
+Tierhügel M Baron Preiss  300 3 Ore, Coal 15b/ 40c  
+        
+SEXAU V Baroness 
+Toppenheimer 
+56 2 Wine, Wool 4b/10c  
+Diepolz V Baroness 
+Toppenheimer 
+33 2 Agriculture -/4c  
+Leupolz V Baroness 
+Toppenheimer 
+24 1 Subsistence -/3c  
+        
+SÖCHTENAU V Count Bruno 
+Pfeifraucher 
+78 2 Wool 6b/12c  
+Leogang V Count 
+Pfeifraucher 
+26 1 Subsistence -/4c  
+Trun V Count 
+Pfeifraucher 
+18 1 Subsistence -/3c  
+        
+ 
+ 
+GAZETTEER OF THE GRAND COUNTY OF WISSENLAND (cont.) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+SONNEFURT ST Baroness 
+Katarina von 
+Heisenberg 
+114 2 Agriculture, 
+Wool 
+8b/10c Ford across the River Sonne. Road 
+to Khazid Grentaz 
+Ertingen V Baroness von 
+Heisenberg 
+28 2 Agriculture, 
+Horses -/4c  
+Michelfurt V Baroness von 
+Heisenberg 
+58 2 Fishing, 
+Agriculture -/7c Ford across River Michel. 
+Ostrach V` Baroness von 
+Heisenberg 
+38 1 Subsistence -/5c  
+Thalfang V Baroness von 
+Heisenberg 
+86 2 Agriculture, 
+Wine -/8c  
+Wurmbaum V Baroness von 
+Heisenberg 
+42 1 Subsistence -/5c  
+        
+SOSA V Village 
+Assembly 
+52 1 Subsistence -/12c Isolated village in Ell Valley 
+        
+STAIG V Abbot Artur 
+Kepler 
+42 1 Subsistence -/6c Sigmarite Abbey of Ælaric the 
+Wanderer nearby 
+Doren V Abbot Kepler 21 1 Subsistence -/3c  
+Rottum V Abbot Kepler 38 1 Subsistence -/4c  
+        
+STEINGART V Baron 
+Frederich 
+Herbart 
+82 2 Agriculture, 
+Wool, Sheep 
+5b/8c Ferry across River Oggel.  Ancient 
+site called Taal’s Teeth nearby. 
+Krossbach V Baron Herbart 71 2 Sheep -/8c  
+Ollersbach V Baron Herbart 56 2 Sheep -/6c  
+Vals V Baron Herbart 63 2 Agriculture, 
+Fishing -/7c  
+        
+TRULBEN V Countess von 
+Äms 
+89 2 Agriculture, 
+Metalworking 
+5b/14c  
+Asenham V Countess von 
+Äms 
+56 1 Subsistence -/6c  
+Rabenden V Countess von 
+Äms 
+68 1 Subsistence  -/7c  
+        
+UMMENBACH V Abbot Heinz 
+Werfel 
+88 1 Subsistence 4b/14c Taalite monastery nearby.  Ford 
+across River Oggel 
+Tosens V Abbot Werfel 64 2 Agriculture -/8c  
+        
+WALDBACH V Abbess Dagmar 
+Brüning 
+78 1 Subsistence -/8c Shallyan Abbey of the Healing 
+Spring. 
+Navis V Abbess Brüning 23 1 Subsistence -/3c  
+        
+WITTENHAUSEN V Countess von 
+Äms 
+98 2 Wine, 
+Agriculture 
+6b/14c  
+Soyen V Countess von 
+Äms 
+28 1 Sheep -/4c  
+        
+WURMGRUBE V Baroness von 
+Mecklenburg 
+78 2 Agriculture 6b/10c  
+Saulgrub V Baroness von 
+Mecklenburg 
+34 1 Subsistence -/5c Across from Black Willow Marsh 
+        
+ 
+ 
+GAZETTEER OF THE GRAND COUNTY OF WISSENLAND (cont.) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+WUSTERBURG ST Baron Manfred 
+von Eigenhof 
+800 3 Agriculture, 
+Trade 
+10b/80c Ferry, Site of Bugman’s Brewery 
+nearby 
+Eigenhof V Baron von 
+Eigenhof 
+98 2 Agriculture -/10c  
+Galenhausen V Baron von 
+Eigenhof 
+45 2 Agriculture -/5c  
+Hitisau V Baron von 
+Eigenhof 
+39 1 Subsistence -/4c  
+Kell V Baron von 
+Eigenhof 
+68 2 Agriculture -/6c Peat from nearby bogs 
+Rötenbach V Baron von 
+Eigenhof 
+65 2 Agriculture -/6c  
+Turbenthal V Baron von 
+Eigenhof 
+41 1 Subsistence -/4c  
+        
+ 
+ 
+GAZETTEER OF THE FREISTADT OF MEISSEN 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+MEISSEN ST Grand Countess  
+von Liebewitz 
+700 4 Silverware, 
+Ore, Trade, 
+Agriculture 
+15a/70c Freistadt.  Famous for its silver 
+products 
+Auggen V Grand Countess  
+von Liebewitz 
+65 1 Subsistence -/6c  
+Betzigau V Grand Countess  
+von Liebewitz 
+56 1 Subsistence -/5c  
+Heisenberg V Grand Countess  
+von Liebewitz 
+95 3 Agriculture, 
+Wine -/8c Known for its deep red wines.  Road 
+to Granite Pass and Karak Norn 
+Owingen V Grand Countess  
+von Liebewitz 
+32 1 Subsistence -/4c Ford to road leading to Khazid 
+Grimaz 
+Penzfeld V Grand Countess  
+von Liebewitz 
+52 2 Cattle -/8c  
+Stanzach V Grand Countess  
+von Liebewitz 
+48 2 Agriculture -/7c  
+Willstätter V Grand Countess  
+von Liebewitz 
+46 2 Agriculture -/6c  
+        
+ 
+ 
+GAZETTEER OF THE GRAND STADTSTAAT OF NULN 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+NULN CS Grand Countess  
+von Liebewitz 
+85,000 5 Trade, Metal, 
+Government, 
+Wine 
+300a/ 
+4500b 
+City-State, Imperial School of 
+Gunnery, Richthofen Foundry, 
+Verenan Monastery of St. Flavia 
+(Holy Order of the True Light) 
+Ambosstein V Grand Countess  
+von Liebewitz 
+80 3 Trade, 
+Agriculture -/15b Local Agricultural Market. 
+Armedorf V Grand Countess  
+von Liebewitz 
+52 1 Subsistence -  
+Arschel V Grand Countess  
+von Liebewitz 
+64 2 Agriculture -/10c  
+Biberdorf V Grand Countess  
+von Liebewitz 
+46 2 Agriculture, 
+Fishing -/5c Ferry 
+Bleichdorf V Grand Countess  
+von Liebewitz 
+32 1 Subsistence -  
+Brandtstadt V Grand Countess  
+von Liebewitz 
+52 2 Agriculture -/10b  
+Braundorf V Grand Countess  
+von Liebewitz 
+62 2 Agriculture, 
+Fishing -/15b Ferry. 
+Eschedorf V Grand Countess  
+von Liebewitz 
+47 2 Agriculture, 
+Fishing -/10b Ferry. 
+Furtzhausen V Grand Countess  
+von Liebewitz 
+74 3 Trade, 
+Agriculture -/15b “Friendly Hearth” Halfling Inn; first 
+stop on the way to the Moot. 
+Königsdorf V Grand Countess  
+von Liebewitz 
+52 2 Agriculture, 
+Woodcarving -/10c Emperor Magnus the Pious spent the 
+night here once. 
+Kotzenheim V Grand Countess  
+von Liebewitz 
+61 3 Trade, 
+Agriculture, 
+Fishing -/15b Ferry, coaching inn. 
+Krauthof V Grand Countess  
+von Liebewitz 
+42 2 Agriculture - Pickled Cabbage famous throughout 
+The Empire 
+Mattersheim V Grand Countess  
+von Liebewitz 
+37 2 Agriculture, 
+Fishing -/5c Ferry 
+Segeldorf V Grand Countess  
+von Liebewitz 
+48 2 Agriculture -/10c  
+Wahnfurt V Grand Countess  
+von Liebewitz 
+32 1 Subsistence -  
+Winkelhausen V Grand Countess  
+von Liebewitz 
+62 2 Agriculture -/10b  
+Wurstheim V Grand Countess  
+von Liebewitz 
+78 2 Agriculture -/15b Signal Tower, Famous for smoked 
+sausage. 
+Zecher V Grand Countess  
+von Liebewitz 
+32 1 Subsistence -  
+        
+ 
+ 
+ 
+GAZETTEER OF THE FREISTADT OF PFEILDORF 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+PFEILDORF T Baroness 
+Toppenheimer 
+6,800 3 Trade, Fishing, 
+Clothing 
+75a/500b Former Capital of Sölland and 
+provincial capital of Sudenland until 
+2515.  Received Freistadt charter in 
+2515.  Centre for the Sudenland wool 
+trade 
+Bernau V Baroness 
+Toppenheimer 
+90 3 Wool, 
+Agriculture -/10c  
+Durbheim V Baroness 
+Toppenheimer 
+92 2 Agriculture -/10c Coaching inn 
+Elzach V Baroness 
+Toppenheimer 
+87 2 Fishing -/8c  
+Fulgenstadt V Baroness 
+Toppenheimer 
+52 2 Agriculture -  
+Gerechtfeld V Baroness 
+Toppenheimer 
+76 2 Agriculture - Temple to Taal and Rhya 
+Hausern V Baroness 
+Toppenheimer 
+56 1 Subsistence -/5c  
+Mecklenburg V Baroness 
+Toppenheimer 
+94 2 Wool, 
+Agriculture -/12c  
+Nebelhausen V Baroness 
+Toppenheimer 
+45 1 Subsistence -  
+Neukirch V Baroness 
+Toppenheimer 
+51 1 Subsistence -/4c Tollhouse on ford 
+Possenhof V Baroness 
+Toppenheimer 
+47 1 Subsistence - Nearby coaching inn 
+Rosenhausen V Baroness 
+Toppenheimer 
+48 2 Agriculture -/4c Tollhouse on ford 
+Schaffenhof V Baroness 
+Toppenheimer 
+64 2 Agriculture -  
+Tannau V Baroness 
+Toppenheimer 
+39 1 Subsistence -  
+        
+ 

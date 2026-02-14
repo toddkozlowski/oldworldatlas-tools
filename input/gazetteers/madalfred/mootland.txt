@@ -1,0 +1,136 @@
+GAZETTEER OF THE MOOT 
+(2515 I.C.) 
+LEGEND: 
+Settlement Size: 
+CS= City State (any size) 
+C= City (10,000+) 
+T= Town (1,000 - 10,000) 
+ST= Small Town (100 - 1,000) 
+V= Village (1-100) 
+F= Fort (any size) 
+M= Mine (any size) 
+Wealth (1= Improvished, 5= Very Rich) 
+Garrison/Militia (Quality rated as Excellent (a), Average (b), or Poor (c)) 
+GAZETTEER OF THE MOOT 
+Size 
+Settlement Name 
+Ruler 
+Pop 
+Wealth 
+Source 
+T 
+Garrison/ 
+Militia 
+Notes 
+EICHESCHATTEN 
+Town 
+Assembly 
+3,375 
+3 
+Agriculture, 
+Trade, Beer, 
+Government 
+Birnbaum 
+V Village 
+Assembly 
+98 
+2 
+150b/600c 
+Provincial Capital.  Ferry across 
+Aver Reach. 
+Agriculture, 
+Sausages 
+Brombeerebach 
+V Village 
+Assembly 
+68 
+2 -/35c  
+Agriculture, 
+Cheese 
+Dreiflussen 
+ST 
+Town 
+Assembly 
+698 
+2 -/18c  
+Agriculture, 
+Fishing, Beer 
+Einsamholz 
+ST 
+Town 
+Assembly 
+525 
+2 
+70b/200c 
+Bridge over Aver Reach 
+Agriculture, 
+Cheese 
+Erdbeerefeld 
+V Village 
+Assembly 
+88 
+2 
+Agriculture 
+50b/175c  -/25c 
+Known for its singers and pastries 
+Fällenblatt 
+ST 
+Town 
+Assembly 
+287 
+2 
+Agriculture, 
+Fishing 
+Gipfel 
+V Village 
+Assembly 
+91 
+2 
+10b 30c  
+Agriculture, 
+Tobacco 
+Grünhügel 
+V Village 
+Assembly 
+95 
+2 -/35c 
+Centre of tobacco farming. 
+Agriculture, 
+Livestock 
+Heukern 
+V Village 
+Assembly 
+84 
+2 
+Agriculture - /35c  -/30c  
+Hopfengerste 
+V Village 
+Assembly 
+76 
+2 
+Beer, Pigs -/20c  
+Kirschehügel 
+V Village 
+Assembly 
+72 
+2 
+Agriculture -/20c 
+Roggenbrot 
+V Village 
+Assembly 
+68 
+2 
+Agriculture -/20c  
+Largest cherries orchards in Moot 
+Sauerapfel 
+ST 
+Town 
+Assembly 
+484 
+2 
+Agriculture, 
+Livestock 
+50b/150c 
+Best apple pies in the Moot.  Ferry 
+across River Aver.  Best known for 
+its Pie Week festival 

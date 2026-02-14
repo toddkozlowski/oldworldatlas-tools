@@ -1,0 +1,653 @@
+GAZETTEER OF STIRLAND 
+(2515 I.C.) 
+ 
+LEGEND: 
+ 
+Settlement Size: 
+CS= City State (any size) 
+C= City (10,000+) 
+T= Town (1,000 - 10,000) 
+ST= Small Town (100 - 1,000) 
+V= Village (1-100) 
+F= Fort (any size) 
+M= Mine (any size) 
+ 
+Wealth (1= Improvished, 5= Very Rich) 
+ 
+Garrison/Militia (Quality rated as Excellent (a), Average (b), or Poor (c)) 
+ 
+ 
+GAZETTEER OF THE GRAND COUNTY OF STIRLAND 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+WURTBAD T Graf Alberich 
+Haupt
+Anderssen 
+8,800 4 Trade, 
+Government, 
+Wine, 
+Agriculture 
+40a & 80b/ 
+300c 
+Provincial Capital.  Grossweg Bridge 
+across River Stir.  Terminus of the 
+Old Dwarf Road.  Very fine port.  Hot 
+spring baths. 
+Autenau V Graf Haupt
+Anderssen 
+62 2 Wine, 
+Agriculture -/4c  
+Biberhof V Graf Haupt
+Anderssen 
+85 2 Agriculture, 
+Timber -/10c  
+Giering V Graf Haupt
+Anderssen 
+88 2 Agriculture, 
+Sheep, Wool -/ 9c  
+Josefstadt V Graf Haupt
+Anderssen 
+78 2 Wine, 
+Agriculture -/8c  
+Julbach V Graf Haupt
+Anderssen 
+43 1 Subsistence -/4c  
+Oberwil V Graf Haupt
+Anderssen 
+89 2 Fishing, 
+Agriculture -/10c Ferry across River Stir 
+Penzing V Graf Haupt
+Anderssen 
+45 1 Sheep -/4c  
+Seyring V Graf Haupt
+Anderssen 
+38 1 Subsistence -/4c  
+Steingraz ST Graf Haupt
+Anderssen 
+464 2 Metalwork, 
+Ore, Gems 
+30a/80b Fortified Dwarf town bestowed upon 
+Dwarf Engineer Guild 
+Tarshof V Graf Haupt
+Anderssen 
+72 2 Agriculture, 
+Sheep -/8c  
+        
+BLUTDORF V Baron Anton 
+Kiesinger 
+84 2 Agriculture 6b/8c  
+Kirchham V Baron 
+Kiesinger 
+66 2 Sheep -/7c  
+Merzenstein V Baron 
+Kiesinger 
+38 1 Subsistence -/4c  
+Steinwald V Baron 
+Kiesinger 
+62 1 Agriculture - Monastery of Taalite Order of the 
+White Stag 
+        
+ 
+ 
+GAZETTEER OF THE GRAND COUNTY OF STIRLAND (cont) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+ENZESBURG V Baron 
+Leonhard 
+Eucken 
+88 2 Agriculture, 
+Sheep 
+5b/11c Once part of the Mark of Leithag 
+Hills 
+Batzlow V Baron Eucken 74 2 Agriculture, 
+Sheep -/8c  
+Gernheim V Baron Eucken 44 1 Subsistence -  
+Warnick V Baron Eucken 42 1 Subsistence -  
+        
+FRANZEN ST Count Artur 
+von 
+Treitschke 
+345 2 Fishing, 
+Agriculture 
+20b/40c Ferry across Rivers Aver and 
+Lammer 
+Chrobok V Count von 
+Treitschke 
+84 2 Agriculture -/10c Ferry across River Aver 
+Ebeleben V Count von 
+Treitschke 
+44 1 Subsistence -/4c  
+Greussen V Count von 
+Treitschke 
+54 2 Agriculture -/5c  
+Krusdorf V Count von 
+Treitschke 
+42 1 Subsistence -/5c  
+Leitersdorf V Count von 
+Treitschke 
+46 1 Subsistence -/5c  
+Russbach V Count von 
+Treitschke 
+34 1 Subsistence -/4c  
+Trebra V Count von 
+Treitschke 
+62 2 Agriculture -/6c  
+Walburgen V Count von 
+Treitschke 
+38 1 Subsistence -/4c  
+        
+GRUSSERL V Grandmaster 
+Willibald 
+Münsterburg 
+98 2 Agriculture, 
+Sheep, Wine 
+6b/14c Once part of Sylvania but annexed by 
+Stirland in 2180.  Mórrian Abbey of 
+St. Redwald, home of the Black 
+Guards, nearby 
+Bärnbach V Grandmaster 
+Münsterburg 
+34 1 Subsistence -/-  
+Hirtenfeld V Grandmaster 
+Münsterburg 
+58 1 Subsistence -/6c  
+Texing V Grandmaster 
+Münsterburg 
+69 2 Agriculture -/8c  
+        
+HALSTEDT ST Count Erich 
+von Halstedt 
+275 2 Cattle, 
+Agriculture 
+18b/35c On the Moot Road 
+Glatzau V Count von 
+Halstedt 
+34 1 Subsistence -/3c  
+Meiselding V Count von 
+Halstedt 
+42 1 Subsistence -/3c  
+Raab V Count von 
+Halstedt 
+41 1 Subsistence -/3c  
+Tenneck V Count von 
+Halstedt 
+75 2 Agriculture -/9c  
+Vorchdorf V Count von 
+Halstedt 
+43 1 Subsistence -/5c  
+        
+ 
+ 
+GAZETTEER OF THE GRAND COUNTY OF STIRLAND (cont) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+HORNAU ST Count Konrad 
+von Krieglitz 
+520 3 Agriculture, 
+Trade, 
+Metalcraft 
+25b/100c On Zhufbar Road 
+Drebkau V Count von 
+Krieglitz 
+98 2 Agriculture, 
+Wine 
+5b/12c Mórrian Abbey of St.Wilfrid, another 
+Black Guard stronghold 
+Eichenbrunn V Count von 
+Krieglitz 
+88 2 Agriculture -/10c On Sylvania Road 
+Fort Neustift F Count von 
+Krieglitz 
+150 2 Government 30b, 100c/ - Guards bridge over Aver Reach 
+Kirnhügel M Count von 
+Krieglitz 
+125 3 Iron, Copper 15b/70c Mining town 
+Schlierbach V Count von 
+Krieglitz 
+52 1 Subsistence -/5c  
+        
+LANGWALD V Baron Erich 
+von Langwald 
+86 2 Agriculture 4b/12c Part of Auld Styrmark 
+Lichtenau V Baron von 
+Langwald 
+54 2 Agriculture -/5c  
+Marklissa V Baron von 
+Langwald 
+62 2 Agriculture, 
+Sheep -/6c  
+Tadten V Baron von 
+Langwald 
+78 2 Agriculture, 
+Horses -/8c Located in Kadlín Plains 
+        
+MARBURG T Baron 
+Immanuel 
+Krebs 
+102 2 Agriculture, 
+Pigs 
+6b/8c Ferries across Rivers Steyr and Stir 
+Haibach V Baron Krebs 37 1 Subsistence -/4c  
+Kalenzig V Baron Krebs 54 2 Timber -/5c  
+Kutzdorf V Baron Krebs 0 - - - Destroyed by mutant warband in 
+2513 
+Oehling V Baron Krebs 39 1 Subsistence -/4c  
+Wilkersdorf V Baron Krebs 38 1 Subsistence -/4c  
+Winhausen V Baron Krebs 42 1 Subsistence -/4c  
+        
+MÜNZHAUSEN ST Count Paulus 
+von 
+Schliestein 
+435 3 Trade, 
+Timber, 
+Woodcraft 
+15b/100c Ferries across Rivers Stir and Teichl 
+Esternkirchen V Count von 
+Schliestein 
+38 1 Timber -/-  
+Klam V Count von 
+Schliestein 
+85 2 Timber, 
+Agriculture -/10c  
+Pramet V Count von 
+Schliestein 
+66 2 Agriculture, 
+Wine -/8c  
+        
+NIEDLING V Baron Kurt 
+Brüning 
+97 2 Agriculture, 
+Pigs 
+4b/12c Grain-growing region 
+Eisenhügel M Baron 
+Brüning 
+88 2 Ore 4b/9c Iron and copper 
+Friesach V Baron 
+Brüning 
+78 2 Agriculture -/8c  
+Kainbach V Baron 
+Brüning 
+64 2 Agriculture -/6c  
+Liebenau V Baron 
+Brüning 
+56 2 Timber, Pigs -/6c Downhill from the mine of 
+Eisenhügel in Büchel Hills 
+Murau V Baron 
+Brüning 
+75 2 Agriculture -/7c  
+Zieldorf V Baron 
+Brüning 
+62 1 Subsistence -/6c  
+        
+ 
+ 
+GAZETTEER OF THE GRAND COUNTY OF STIRLAND (cont) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+OHLSDORF V Baron Heinz 
+Lassalle 
+92 2 Sheep 4b/10c  
+        
+PÖTTING V Baron Samuel 
+Lenard 
+98 3 Sheep, Trade, 
+Agriculture 
+5b/12c At intersection of Nuln and Old 
+Dwarf Roads  
+        
+PÜRGG V Baron Rudolf 
+Heine 
+84 2 Sheep 4b/10c  
+        
+SCHEIBBS ST Count Ralf 
+Anderssen
+Krieglitz 
+325 3 Trade, cattle, 
+agriculture 
+15b/60c Ferry across River Aver.  Cattle 
+Market 
+Gnesau V Count 
+Anderssen
+Krieglitz 
+33 1 Subsistence -/4c  
+Ossiach V Count 
+Anderssen
+Krieglitz 
+41 1 Subsistence -/5c  
+Vigaun V Count 
+Anderssen
+Krieglitz 
+68 2 Agriculture -/8c  
+        
+SCHÖLLACH V Baron 
+Reinhardt 
+Delbrück 
+89 2 Agriculture, 
+Fishing 
+4b/8c  
+Dalgetin V Baron 
+Delbrück 
+44 1 Subsistence -/4c  
+Gorgast V Baron 
+Delbrück 
+48 1 Subsistence -/4c  
+Hathenow V Baron 
+Delbrück 
+60 2 Agriculture -/6c  
+        
+SIEGFRIEDHOF ST Grandmaster 
+Frederick 
+Mauther of 
+High and 
+Chivalric 
+Order of 
+Deserved Rest 
+(Raven 
+Knights) 
+320 3 Agriculture, 
+Timber, 
+Government 
+45a/15c On the borderlands with the County 
+of Sylvania near Hunger Wood.  Site 
+of the Mórrian Abbey of St. 
+Æthelbert the Vigilant. 
+Festung Dunkelrabe F Grandmaster 
+Mauther 
+150 2 Religious 
+Order 
+15a, 85b/ - Guards the southern end of 
+Lengenfeld 
+Janov V Grandmaster 
+Mauther 
+56 2 Ore 5a/5c Silver mine located in Steinbacher 
+Berge 
+Karle V Grandmaster 
+Mauther 
+64 2 Ore 5a/6c Silver and iron mine located in 
+Steinbacher Berge 
+Osik V Grandmaster 
+Mauther 
+78 2 Horses, 
+Agriculture 
+5b/8c  
+Vanov V Grandmaster 
+Mauther 
+42 1 Subsistence -/4c  
+Žandov V Grandmaster 
+Mauther 
+66 2 Horses, 
+Agriculture 
+4b/7c  
+        
+ 
+ 
+GAZETTEER OF THE GRAND COUNTY OF STIRLAND (cont) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+SIGMARINGEN ST Countess 
+Alexandra von 
+Münsterberg 
+875 3 Agriculture, 
+Sheep, Wool 
+40b/120c Base of the Knightly Order of the 
+Black Rose.  Ferry across Blue 
+Reach. 
+Hardenburg V Countess von 
+Münsterberg 
+98 2 Agriculture, 
+Sheep -/10c  
+Kaunitz V Countess von 
+Münsterberg 
+54 1 Subsistence -/5c  
+Steuben V Countess von 
+Münsterberg 
+48 1 Subsistence -/5c  
+        
+SONNIGWIESE V Baron Otto 
+von 
+Stämmigeiche 
+72 2 Agriculture 4b/12c  
+        
+STEINBACHTAL ST Abbott 
+Hubertus von 
+Lindenthal 
+163 2 Agriculture, 
+Timber 
+2a, 20b/30c Maintains the peace along the north 
+end of Praager Strasse 
+Vorderbergen V Abbott von 
+Lindenthal 
+26 1 Subsistence -/-  
+Wurzerln V Abbott von 
+Lindenthal 
+45 1 Subsistence -/6c Sigmarite monastery of the Order of 
+the Anvil nearby. 
+        
+THALHEIM V Baron Helmut 
+Rathenau 
+86 2 Agriculture, 
+Pigs 
+4b/8c  
+Raxonkirch V Baron 
+Rathenau 
+24 1 Subsistence -/4c  
+Ysper V Baron 
+Rathenau 
+32 1 Subsistence -/4c  
+Zilcher V Baron 
+Rathenau 
+38 1 Subsistence -/4c  
+        
+WOLFSBACH ST Countess 
+Magda von 
+Bildhofen 
+340 2 Wool, 
+Agriculture 
+16b/60c Ferry across the River Aver 
+Bildhofen V Countess von 
+Bildhofen 
+93 2 Agriculture, 
+Sheep -/10c  
+Eitweg V Countess von 
+Bildhofen 
+28 1 Subsistence -/-  
+Freiland V Countess von 
+Bildhofen 
+30 1 Subsistence -/-  
+Twimkirch V Countess von 
+Bildhofen 
+77 2 Agriculture, 
+Sheep -/8c Raven Knights’ Monastery of St. 
+Gisla of Styrmark located on nearby 
+hill 
+        
+WÖRDERN ST Graf Haupt
+Anderssen 
+425 3 Agriculture, 
+Sheep, Wool 
+15b/40c At the crossroads of the Old Dwarf 
+and Moot Roads. 
+Kelham V Graf Haupt
+Anderssen 
+52 1 Subsistence -/5c  
+Nussbach V Graf Haupt
+Anderssen 
+74 2 Agriculture -/7c  
+Selzthal V Graf Haupt
+Anderssen 
+50 1 Subsistence -/5c  
+Torren V Graf Haupt
+Anderssen 
+46 1 Subsistence -/5c  
+        
+ 
+GAZETTEER OF THE GRAND COUNTY OF STIRLAND (cont) 
+Settlement Name 
+Size 
+Ruler 
+Pop 
+Wealth 
+Source 
+Garrison/ 
+Militia 
+ST 
+Notes 
+ZIPF 
+Margrave Otto 
+von 
+Mecklenburg 
+280 
+2 
+Agriculture, 
+Timber 
+10b/ 45c 
+Guards Praager Road ford at the 
+River Melk. 
+Drewitz 
+V Margrave von 
+Mecklenburg 
+48 
+2 
+Agriculture -/5c  
+Gablitz 
+V Margrave von 
+Mecklenburg 
+74 
+2 
+Agriculture -/8c  
+Krispl 
+V Margrave von 
+Mecklenburg 
+59 
+1 
+Subsistence -/6c  
+Leogang 
+V Margrave von 
+Mecklenburg 
+42 
+1 
+Subsistence -/5c  
+Neulewin 
+V Margrave von 
+Mecklenburg 
+38 
+1 
+Subsistence -/5c  
+Tamsel 
+V Margrave von 
+Mecklenburg 
+34 
+1 
+Subsistence -/5c  
+Thierbach 
+V Margrave von 
+Mecklenburg 
+47 
+1 
+Subsistence -/5c  
+GAZETTEER OF THE FREISTADT OF FLENSBURG 
+Settlement Name 
+Size 
+Ruler 
+Pop 
+Wealth 
+Source 
+Garrison/ 
+Militia 
+ST 
+Notes 
+FLENSBURG 
+Countess 
+Petra Harden 
+225 
+3 
+Sheep, Wool. 
+Agriculture 
+Lochen 
+V Countess 
+Harden 
+80 
+2 
+Agriculture 
+15b/30c -/8c  
+On the Nuln Road 
+Meiders 
+V Countess 
+Harden 
+34 
+1 
+Subsistence -/-  
+Ramsau 
+V Countess 
+Harden 
+48 
+1 
+Subsistence -/5c  
+Stafflach 
+V Countess 
+Harden 
+43 
+1 
+Subsistence -/5c  
+GAZETTEER OF THE FREISTADT OF SCHRAMLEBEN 
+Settlement Name 
+Size 
+Ruler 
+Pop 
+Wealth 
+Source 
+Garrison/ 
+Militia 
+ST 
+Notes 
+SCHRAMLEBEN 
+Count 
+Andreas von 
+Webern 
+675 
+3 
+Trade, Ale, 
+Cattle 
+25b/75c 
+On the trade route from Zhufbar.  
+Ferry across Blue Reach 
+Falkenhausen 
+V Count von 
+Webern 
+86 
+2 
+Agriculture -/10c  
+Hutten 
+V Count von 
+Webern 
+44 
+1 
+Subsistence -/5c  
+Ludenhausen 
+V Count von 
+Webern 
+41 
+1 
+Subsistence -/5c  
+Pappenheim 
+V Count von 
+Webern 
+89 
+2 
+Agriculture -/10c  
+Schwifting 
+V Count von 
+Webern 
+49 
+1 
+Subsistence -/5c  

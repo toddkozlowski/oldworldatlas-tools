@@ -1,0 +1,465 @@
+GAZETTEER OF OSTLAND 
+(2515 I.C.) 
+LEGEND: 
+Settlement Size: 
+CS= City State (any size) 
+C= City (10,000+) 
+T= Town (1,000 - 10,000) 
+ST= Small Town (100 - 1,000) 
+V= Village (1-100) 
+F= Fort (any size) 
+M= Mine (any size) 
+Wealth (1= Improvished, 5= Very Rich) 
+Garrison/Militia (Quality rated as Excellent (a), Average (b), or Poor (c)) 
+GAZETTEER OF THE GRAND PRINCIPALITY OF OSTLAND 
+Size 
+Settlement Name 
+Ruler 
+Pop 
+Wealth 
+Source 
+T 
+Garrison/ 
+Militia 
+Notes 
+WOLFENBURG 
+Grand Prince 
+Valmir von 
+Raukov 
+8,900 
+3 
+Trade, Timber, 
+Government, 
+Pewter Ware 
+Dassel 
+V Grand Prince 
+von Raukov 
+54 
+1 
+Subsistence 
+150a/200c -/5c  
+Provincial capital 
+Felde 
+V Grand Prince 
+von Raukov 
+78 
+2 
+Agriculture -/7c  
+Grünackeren 
+ST 
+Grand Prince 
+von Raukov 
+350 
+2 
+Timber, 
+Woodcraft 
+Melbeck 
+V Grand Prince 
+von Raukov 
+61 
+1 
+Subsistence 
+16b/30c  -/6c  
+Ristedt 
+M Grand Prince 
+von Raukov 
+82 
+3 
+Tin, Tourmaline 
+8b/60c 
+Wendorf 
+ST 
+Grand Prince 
+von Raukov 
+250 
+2 
+Mining Village 
+Timber, Pigs, 
+Cheese 
+ST 
+12b/30c  
+BIRKEWIESE 
+Baron 
+Martin 
+Otterbein 
+120 
+2 
+Agriculture 
+4b/12c 
+On the Erengrad-Middenheim Road 
+Löwitz 
+V Baron 
+Otterbein 
+54 
+1 
+Agriculture -/7c  
+Rossin 
+V Baron 
+Otterbein 
+62 
+1 
+Agriculture -/8c  
+F 
+BOHSENFELS 
+Grand Prince 
+von Raukov 
+350 
+3 
+Government 
+10a, 50b/ 
+10c 
+Jegow 
+V Grand Prince 
+von Raukov 
+98 
+0 
+Agriculture -/10c  
+Called “Little Middenheim” as this 
+fortress sits atop large rocks with 
+tunnels and caves beneath.  
+Vogelsang 
+V Grand Prince 
+von Raukov 
+88 
+2 
+Agriculture -/9c  
+ 
+GAZETTEER OF THE GRAND PRINCIPALITY OF OSTLAND (cont) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+BÖKENHOF ST Baron 
+Holger 
+Fröbel 
+190 2 Agriculture, 
+Timber 
+8b/20c  
+Krausnick V Baron Fröbel 54 1 Subsistence -/6c  
+Uetz V Baron Fröbel 49 1 Subsistence -/6c  
+        
+BOVEN V Baron Mayer 
+Schnabel 
+98 2 Agriculture 4b/8c  
+        
+CASTLE 
+LENKSTER 
+F Grand Prince 
+von Raukov 
+200 3 Government 15a, 100b/- Guards border crossing into northern 
+Hochland. 
+        
+FERLANGEN T Grand Prince 
+von Raukov 
+2,500 3 Antiques, Trade, 
+Timber 
+20a/40c  
+Aukrug V Grand Prince 
+von Raukov 
+32 1 Subsistence -/4c Effectively run by the proprietor of 
+the Dangling Mutant, Gerrit Trautsun. 
+Dunkelpfad M Grand Prince 
+von Raukov 
+98 3 Lead, Quartz, 
+Silver 
+8b/60c Mining village 
+Fleckeby V Grand Prince 
+von Raukov 
+55 2 Agriculture -/6c  
+Hasselhund V Grand Prince 
+von Raukov 
+72 2 Agriculture -/7c  
+        
+FORT KORVER ST Count 
+Edmund von 
+Strachen 
+420 2 Agriculture, 
+Smelting 
+20b/35c Former Talabeclander County ceded 
+to Ostland in the aftermath of 2514 
+civil war 
+Cammer V Count von 
+Strachen 
+45 1 Subsistence -/6c  
+Strüdel V Count von 
+Strachen 
+76 2 Agriculture -/10c  
+Trillheim ST Count von 
+Strachen 
+380 2 Trade, 
+Agriculture 
+15b/30c  
+Werbig V Count von 
+Strachen 
+62 1 Subsistence -/8c  
+        
+GAUSCHDORF F Margrave 
+Manfred 
+Bothe 
+250 2 Government, 
+Agriculture 
+20a, 80b/ 
+40c 
+Guards the coastline on the Kislev 
+border 
+Göhren V Margrave 
+Bothe 
+34 1 Subsistence -/4c  
+Mönkebunde V Margrave 
+Bothe 
+42 1 Fishing -/5c  
+Zinnowitz V Margrave 
+Bothe 
+48 1 Fishing -/6c  
+        
+KIENBAUM V Baron 
+Oswald 
+Lynen 
+94 2 Agriculture, 
+Timber 
+6b/9c  
+        
+ 
+ 
+GAZETTEER OF THE GRAND PRINCIPALITY OF OSTLAND (cont) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+LEVUDALDORF V Count 
+Konstantin 
+von 
+Pirkheimer 
+88 3 Trade, Rope, 
+Clothing, 
+Agriculture 
+8b/20c Centre of hemp warehousing.  
+Kurst V Count von 
+Pirkheimer 
+95 2 Agriculture -/10c  
+Rambow V Count von 
+Pirkheimer 
+46 1 Subsistence -/5c  
+Trebatsch V Count von 
+Pirkheimer 
+57 2 Agriculture -/6c  
+        
+MIERĂCH ST Baron 
+Alberich 
+Virchow 
+250 2 Agriculture, 
+Sheep, Pigs 
+15b/40c Barony in eastern reaches of the 
+Middle Mountains known for its 
+shrines to Mórr.  
+Sibiu V Baron 
+Virchow 
+78 1 Subsistence -/8c  
+Sighisoara V Baron 
+Virchow 
+86 2 Agriculture, 
+Goats -/10c  
+Suceva V Baron 
+Virchow 
+82 1 Subsistence -/8c  
+        
+ÖBELSTEIN V Count Otto 
+von 
+Öbelstein 
+69 2 Agriculture, 
+Timber 
+6b/8c Site of the Aegis Order in the Empire 
+        
+PENZFIN V Baron Bernd 
+Guderian 
+76 2 Agriculture, Pigs 6b/8c  
+        
+REGENSDORF V Baron 
+Gotthold 
+Ennum 
+75 2 Agriculture 5b/10c Village surrounds large temple of Taal 
+        
+ROEZFELS F Margrave 
+Quintus von 
+Döbreiner 
+225 3 Government, 
+Agriculture 
+20b/120c Guards passes through Middle 
+Mountains to Hochland.   
+Bardenitz V Margrave 
+von 
+Döbreiner 
+63 2 Agriculture -/6c  
+Haseloff V Margrave 
+von 
+Döbreiner 
+45 1 Subsistence -/5c  
+Wöllnau V Margrave 
+von 
+Döbreiner 
+52 2 Agriculture -/5c  
+        
+SALKALTEN T Baron 
+Gustav von 
+Wolder 
+2,400 2 Fishing, Salt, 
+Amber, Piracy 
+15b/40c Second port opened in 2462 as a 
+scheme to siphon off busy from 
+Marienburg.  
+Günz V Baron von 
+Wolder 
+34 1 Subsistence -/4c  
+Karnin V Baron von 
+Wolder 
+42 1 Subsistence -/4c  
+Stahlbrode V Baron von 
+Wolder 
+38 1 Subsistence -/4c  
+Verborgenbucht V Baron von 
+Wolder 
+76 1 Fishing -/6c  
+        
+ 
+ 
+GAZETTEER OF THE GRAND PRINCIPALITY OF OSTLAND (cont) 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+SCHÖNFELD F Margrave 
+Dietrich 
+Meitner 
+300 3 Government, 
+Agriculture 
+25a, 90b/ 
+60c 
+Guards the Erengrad Road on the 
+Kislev border 
+Boock V Margrave 
+Meitner 
+98 2 Agriculture -/10c  
+Hohenlandin V Margrave 
+Meitner 
+68 2 Agriculture -/7c  
+Wolletz V Margrave 
+Meitner 
+83 2 Agriculture, 
+Cattle -/8c  
+        
+SMALLHOF V Baron 
+Barthold 
+Steinmetz 
+82 2 Timber, 
+Agriculture 
+6b/8c  
+        
+STEINHOF V Margrave 
+Lukas 
+Suttner 
+98 2 Agriculture, Pigs 5b/10c Ferry across River Talabec 
+        
+WURZEN ST Baron 
+Pleskai von 
+Wallenstein 
+430 2 Cattle, Timber, 
+Trade, Cheese 
+12b/30c Ferry across River Talabec.   
+Csenger V Baron von 
+Wallenstein 
+45 1 Agriculture -/4c  
+Dorog V Baron von 
+Wallenstein 
+84 2 Cattle -/8c  
+        
+ZUNDAP V Baron 
+Klemens 
+Gauss 
+82 2 Timber, 
+Agriculture 
+6b/8c  
+        
+ 
+ 
+GAZETTEER OF THE FREISTADT OF LUBRECHT 
+Settlement Name Size Ruler Pop Wealth Source Garrison/ 
+Militia 
+Notes 
+        
+LUBRECHT ST Baron Heinz 
+Kesselring 
+930 3 Trade, 
+Agriculture, 
+Cattle 
+20b/80c  
+Demnitz V Baron 
+Kesselring 
+85 2 Agriculture, Pigs -/9c  
+Kolburg V Baron 
+Kesselring 
+54 2 Agriculture, 
+Timber -/5c  
+Steinbeck V Baron 
+Kesselring 
+46 2 Agriculture -/5c  
+Wulkow M Baron 
+Kesselring 
+72 3 Amber, Quarry 8b/40c Mining village 
+        
+ 
+GAZETTEER OF THE FREISTADT OF VANDENGART 
+Size 
+Settlement Name 
+Ruler 
+Pop 
+Wealth 
+Source 
+Garrison/ 
+Militia 
+ST 
+Notes 
+VANDENGART 
+Baron 
+Philipp von 
+Seeckt 
+775 
+3 
+Trade, 
+Agriculture, Pigs 
+10a, 
+40b/70c 
+Brizban 
+M Baron von 
+Seeckt 
+76 
+3 
+Amber, Quarry 
+6b/45c 
+Grenzburg 
+F 
+Grand 
+Master 
+Aldred 
+Treitszaur 
+250 
+3 
+Government, 
+Agriculture,  
+10a, 
+80b/60c 
+Mining village 
+Monastic home of the Sigmarite cult 
+of the Purging Hammer.  Guards one 
+of the southern roads into Kislev 
+Ragow 
+V Baron von 
+Seeckt 
+44 
+1 
+Subsistence -/5c  
+Sandkrug 
+V Baron von 
+Seeckt 
+67 
+2 
+Agriculture -/7c  
