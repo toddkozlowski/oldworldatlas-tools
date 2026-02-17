@@ -3,27 +3,27 @@ Old World Atlas Map Processing Report
 
 SETTLEMENTS SUMMARY
 --------------------------------------------------------------------------------
-Empire Total: 3303 settlements
+Empire Total: 3521 settlements
 Westerland Total: 118 settlements
 Karaz Ankor Total: 87 holds
-Grand Total: 3508 settlements/holds
+Grand Total: 3726 settlements/holds
 
 EMPIRE SETTLEMENTS BY PROVINCE
 --------------------------------------------------------------------------------
-Averland             - 268 settlements,    236,184 total population
-Hochland             - 110 settlements,     82,878 total population
-Middenland           - 424 settlements,    304,852 total population
-Mootland             -  50 settlements,     19,603 total population
-Nordland             - 221 settlements,    147,833 total population
-Ostermark            - 251 settlements,    175,420 total population
-Ostland              - 267 settlements,    178,769 total population
-Reikland             - 589 settlements,    658,631 total population
-Stirland             - 313 settlements,    173,865 total population
-Talabecland          - 311 settlements,    320,251 total population
-Wissenland           - 499 settlements,    374,297 total population
+Averland             - 292 settlements,    241,302 total population
+Hochland             - 121 settlements,     82,262 total population
+Middenland           - 439 settlements,    301,069 total population
+Mootland             -  50 settlements,     18,169 total population
+Nordland             - 221 settlements,    147,132 total population
+Ostermark            - 266 settlements,    182,572 total population
+Ostland              - 286 settlements,    181,288 total population
+Reikland             - 609 settlements,    665,469 total population
+Stirland             - 368 settlements,    184,833 total population
+Talabecland          - 335 settlements,    324,329 total population
+Wissenland           - 534 settlements,    376,270 total population
 
-Empire Total Population: 2,672,583
-Westerland Total Population: 430,957
+Empire Total Population: 2,704,695
+Westerland Total Population: 432,262
 
 KARAZ ANKOR (DWARF HOLDS) BY TYPE
 --------------------------------------------------------------------------------
@@ -39,12 +39,12 @@ Total Karaz Ankor Holds: 87
 POINTS OF INTEREST
 --------------------------------------------------------------------------------
 City Districts                 -  16 POI
-Forts and Castles              -  94 POI
-Monasteries and Temples        -  41 POI
-Other                          -  21 POI
+Forts and Castles              - 100 POI
+Monasteries and Temples        -  71 POI
+Other                          -  22 POI
 Taverns and Inns               -  49 POI
 
-Total Points of Interest: 221
+Total Points of Interest: 258
 
 ROADS
 --------------------------------------------------------------------------------
@@ -54,53 +54,119 @@ Total Coordinate Points (all roads): 0
 
 PROVINCE LABELS
 --------------------------------------------------------------------------------
-Grand-Province                 -  32 labels
-Nation-State                   -  13 labels
-Province                       -  23 labels
 
-Total Province Labels: 68
+Total Province Labels: 0
 
 WATER LABELS
 --------------------------------------------------------------------------------
-Lake                           -  24 labels
-Large Marsh                    -   5 labels
-Large Sea                      -   6 labels
-Major Sea                      -   3 labels
-Medium Sea                     -  25 labels
-Ocean                          -   2 labels
-Small Marsh                    -  17 labels
-Small Sea                      -  17 labels
 
-Total Water Labels: 99
+Total Water Labels: 0
 
 DATA QUALITY ISSUES
 --------------------------------------------------------------------------------
 Invalid Settlement Elements: 0
-Provinces with Duplicate Names: 1
-Settlements with Assigned Population Data: 2619
-CSV Settlements Not in SVG: 0
+Provinces with Duplicate Names: 6
+Settlements with Assigned Population Data: 2845
+CSV Settlements Not in SVG: 66
 SVG Settlements Not in CSV: 15
 Province Mismatches: 0
-CSV Province Labels Not in SVG: 5
-SVG Province Labels Not in CSV: 5
+CSV Province Labels Not in SVG: 0
+SVG Province Labels Not in CSV: 0
 Invalid Tags: 0
 
 Settlements with Randomly Assigned Populations:
-  Averland: 194 settlements
-  Hochland: 82 settlements
-  Middenland: 367 settlements
+  Averland: 218 settlements
+  Hochland: 93 settlements
+  Middenland: 384 settlements
   Mootland: 37 settlements
   Nordland: 149 settlements
-  Ostermark: 181 settlements
-  Ostland: 198 settlements
-  Reikland: 445 settlements
-  Stirland: 223 settlements
-  Talabecland: 225 settlements
+  Ostermark: 197 settlements
+  Ostland: 217 settlements
+  Reikland: 465 settlements
+  Stirland: 278 settlements
+  Talabecland: 252 settlements
   Westerland: 105 settlements
-  Wissenland: 413 settlements
+  Wissenland: 450 settlements
 
 CSV Settlements Not Found in SVG (should be added to map):
+  Averland:
+    - Hirshhügel
+    - Hocheleben
+    - Nennslingen
+    - Solnhofen
+  Hochland:
+    - Heteborn
+    - Pabstorf
+    - Peckfitz
   Karaz Ankor:
+  Middenland:
+    - Bruena
+    - Cornau
+    - Eisenweiler
+    - Grimminhügel
+    - Haldem
+    - Hausel
+    - Holtorf
+    - Hopsten
+    - Langförden
+    - Leer
+    - Leichlinburg
+    - Metelen
+    - Sokh
+    - Sottrum
+    - Tannbruck
+  Mootland:
+    - T=
+  Nordland:
+    - Kustlandhaus
+    - Manaansheim
+  Ostermark:
+    - Beetz
+    - Brunfähre
+    - Burgenhof
+    - Börnicke
+    - Diehlo
+    - Dissellhof
+    - Durres
+    - Krewelin
+    - Lüsse
+    - Pieskow
+    - Rugenbuttel
+    - Rundespitze
+    - Spreeau
+    - Storkow
+    - Tolkewitz
+    - Zühlsdorf
+  Ostland:
+    - Cammer
+    - Csenger
+    - Fleckeby
+    - Penzfin
+    - Strüdel
+    - Trillheim
+    - Werbig
+  Reikland:
+    - Kleindorf
+    - T=
+  Stirland:
+    - Ebeleben
+    - Glatzau
+    - Meiselding
+    - Vanov
+  Talabecland:
+    - Kiel
+    - Kirchlauter
+    - Torpin
+    - Waldfährt
+  Wissenland:
+    - Deutzen
+    - Flourin
+    - Fraunburg
+    - Holswang
+    - Kröning
+    - Neukirch
+    - Nobitz
+    - Stonecarver
 
 SVG Settlements Not Found in CSV (should be added to gazetteer):
   Karaz Ankor:
@@ -119,23 +185,4 @@ SVG Settlements Not Found in CSV (should be added to gazetteer):
     - Khazid Wyrwarn
     - Kolaz Ungor
     - Skraklaz Ungor
-
-CSV Province Labels Not Found in SVG (should be added to map):
-  - KAMENNAYA ZIMA
-(Troll Country)
-  - POLYANYA OBLAST
-(Southern Oblast)
-  - PRIMORYE OBLAST
-(Western Oblast)
-  - SEVERYNA OBLAST
-(Northern Oblast)
-  - UNGOLSK OBLAST
-(Eastern Oblast)
-
-SVG Province Labels Not Found in CSV (should be added to gazetteer):
-  - KAMENNAYA ZIMA (Troll Country)
-  - POLYANYA OBLAST (
-  - PRIMORYE OBLAST (
-  - SEVERYNA OBLAST (Northern Oblast)
-  - UNGOLSK OBLAST (
 

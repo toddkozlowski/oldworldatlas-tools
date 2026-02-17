@@ -6,6 +6,7 @@ Extracts settlements, points of interest, and labels from the FULL_MAP_CLEANED.s
 import json
 import csv
 import logging
+from platform import processor
 import re
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
@@ -293,13 +294,22 @@ class SVGMapProcessor:
             })
             return None
 
-        # Get coordinates and apply fudge factor (+3 to X, +4 to Y)
+        # Get coordinates
         try:
-            svg_x = float(elem.get("x", 0)) + 3
-            svg_y = float(elem.get("y", 0)) + 4
+            svg_x = float(elem.get("x", 0))
+            svg_y = float(elem.get("y", 0))
+            
+            # Check if element or parent has transform
+            elem_transform = elem.get("transform", "")
+            has_transform = bool(elem_transform or parent_transform)
+            
+            # Only apply fudge factor (+3 to X, +4 to Y) if NO transforms present
+            # Transforms already account for positioning, so adding fudge causes offset
+            if not has_transform:
+                svg_x += 3
+                svg_y += 4
             
             # Apply element-level transform if present
-            elem_transform = elem.get("transform", "")
             if elem_transform:
                 svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, elem_transform)
             
@@ -397,7 +407,9 @@ class SVGMapProcessor:
             settlements_in_province = {}
 
             # Extract settlements from this province (may be nested in sub-layers like estates)
-            self._process_settlement_elements(province_group, province_name, settlements_in_province, self.settlements_empire)
+            # Also extract any transform applied to the province group itself
+            province_transform = province_group.get("transform", "")
+            self._process_settlement_elements(province_group, province_name, settlements_in_province, self.settlements_empire, province_transform)
 
         logger.info(f"  Found {len(self.settlements_empire)} valid settlements across {len(provinces_seen)} provinces")
 
@@ -430,7 +442,9 @@ class SVGMapProcessor:
         settlements_in_faction = {}
 
         # Extract settlements from Westerland (may be nested in sub-layers)
-        self._process_settlement_elements(westerland_faction, "Westerland", settlements_in_faction, self.settlements_westerland)
+        # Also extract any transform applied to the Westerland faction group itself
+        westerland_transform = westerland_faction.get("transform", "")
+        self._process_settlement_elements(westerland_faction, "Westerland", settlements_in_faction, self.settlements_westerland, westerland_transform)
 
         logger.info(f"  Found {len(self.settlements_westerland)} valid Westerland settlements")
 
@@ -547,13 +561,22 @@ class SVGMapProcessor:
         if not name:
             return None
 
-        # Get coordinates and apply fudge factor (+3 to X, +4 to Y)
+        # Get coordinates
         try:
-            svg_x = float(elem.get("x", 0)) + 3
-            svg_y = float(elem.get("y", 0)) + 4
+            svg_x = float(elem.get("x", 0))
+            svg_y = float(elem.get("y", 0))
+            
+            # Check if element or parent has transform
+            elem_transform = elem.get("transform", "")
+            has_transform = bool(elem_transform or parent_transform)
+            
+            # Only apply fudge factor (+3 to X, +4 to Y) if NO transforms present
+            # Transforms already account for positioning, so adding fudge causes offset
+            if not has_transform:
+                svg_x += 3
+                svg_y += 4
             
             # Apply element-level transform if present
-            elem_transform = elem.get("transform", "")
             if elem_transform:
                 svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, elem_transform)
             
@@ -607,8 +630,8 @@ class SVGMapProcessor:
         csv_file = None
 
         if faction == "Empire":
-            # Use the main empire.csv file which contains all provinces
-            csv_file = INPUT_DIR / "empire.csv"
+            # Use the empire_combined.csv file which contains all provinces
+            csv_file = INPUT_DIR / "empire_combined.csv"
         elif faction == "Westerland":
             csv_file = INPUT_DIR / "westerland.csv"
 
@@ -657,7 +680,7 @@ class SVGMapProcessor:
         """Validate tags and log any issues."""
         valid_sources = {"AndyLaw", "2eSH", "4eAotE1", "4eEiS", "4ePBtTC", "4eSCoSaS",
                         "4eCRB", "4eDotRC", "NCC", "WFB8e", "AmbChron", "G&FT", "TOW", "1eMSDtR",
-                        "4eLoSaS","4eTHRC","4eMCotWW","1eDSaS","TWW3","2eKAAotDC"}
+                        "4eLoSaS","4eTHRC","4eMCotWW","1eDSaS","TWW3","2eKAAotDC", "MadAlfred"}
         issues = []
         
         for tag in tags:
@@ -805,7 +828,7 @@ class SVGMapProcessor:
         
         # Track CSV settlements not in SVG
         # Load all Empire CSV data and check against SVG by province
-        empire_csv_file = INPUT_DIR / "empire.csv"
+        empire_csv_file = INPUT_DIR / "empire_combined.csv"
         if empire_csv_file.exists():
             try:
                 with open(empire_csv_file, 'r', encoding='utf-8') as f:
@@ -1935,33 +1958,33 @@ def main():
 
     processor = SVGMapProcessor()
 
-    # Process all data
-    # processor.process_settlements_empire()
-    # processor.process_settlements_westerland()
-    # processor.process_settlements_karaz_ankor()
-    # processor.populate_settlement_data()
-    # processor.populate_karaz_ankor_data()
+    # Process all data - ONLY Empire settlements enabled
+    processor.process_settlements_empire()
+    processor.process_settlements_westerland()
+    processor.process_settlements_karaz_ankor()
+    processor.populate_settlement_data()
+    processor.populate_karaz_ankor_data()
     processor.process_points_of_interest()
     # processor.process_roads()  # Disabled: road extraction not needed currently
     # processor.process_province_labels()
     # processor.populate_province_data()
     # processor.process_water_labels()
 
-    # Generate output files
-    # processor.generate_empire_geojson()
-    # processor.generate_westerland_geojson()
-    # processor.generate_karaz_ankor_geojson()
+    # Generate output files - ONLY Empire GeoJSON enabled
+    processor.generate_empire_geojson()
+    processor.generate_westerland_geojson()
+    processor.generate_karaz_ankor_geojson()
     processor.generate_poi_geojson()
     # processor.generate_roads_geojson()  # Disabled: road extraction not needed currently
     # processor.generate_province_labels_geojson()
     # processor.generate_water_labels_geojson()
 
     # Write logs
-    # processor.write_invalid_settlements_log()
-    # processor.write_duplicate_settlements_log()
+    processor.write_invalid_settlements_log()
+    processor.write_duplicate_settlements_log()
 
     # Generate report
-    # processor.generate_report()
+    processor.generate_report()
 
     logger.info("Processing complete!")
 
