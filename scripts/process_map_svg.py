@@ -299,13 +299,13 @@ class SVGMapProcessor:
             svg_x = float(elem.get("x", 0))
             svg_y = float(elem.get("y", 0))
             
-            # Check if element or parent has transform
+            # Check if element has direct transform (not parent transforms from Inkscape groups)
             elem_transform = elem.get("transform", "")
-            has_transform = bool(elem_transform or parent_transform)
             
-            # Only apply fudge factor (+3 to X, +4 to Y) if NO transforms present
-            # Transforms already account for positioning, so adding fudge causes offset
-            if not has_transform:
+            # Only apply fudge factor (+3 to X, +4 to Y) if NO element-level transforms present
+            # Element-level transforms account for positioning, so adding fudge causes offset
+            # Parent transforms from Inkscape groups are organizational but still need to be applied
+            if not elem_transform:
                 svg_x += 3
                 svg_y += 4
             
@@ -313,7 +313,7 @@ class SVGMapProcessor:
             if elem_transform:
                 svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, elem_transform)
             
-            # Apply accumulated parent transforms
+            # Apply parent transforms (from Inkscape layer groups like Mootland)
             if parent_transform:
                 svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, parent_transform)
             
@@ -566,13 +566,13 @@ class SVGMapProcessor:
             svg_x = float(elem.get("x", 0))
             svg_y = float(elem.get("y", 0))
             
-            # Check if element or parent has transform
+            # Check if element has direct transform (not parent transforms from Inkscape groups)
             elem_transform = elem.get("transform", "")
-            has_transform = bool(elem_transform or parent_transform)
             
-            # Only apply fudge factor (+3 to X, +4 to Y) if NO transforms present
-            # Transforms already account for positioning, so adding fudge causes offset
-            if not has_transform:
+            # Only apply fudge factor (+3 to X, +4 to Y) if NO element-level transforms present
+            # Element-level transforms account for positioning, so adding fudge causes offset
+            # Parent transforms from Inkscape groups are organizational but still need to be applied
+            if not elem_transform:
                 svg_x += 3
                 svg_y += 4
             
@@ -580,7 +580,7 @@ class SVGMapProcessor:
             if elem_transform:
                 svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, elem_transform)
             
-            # Apply accumulated parent transforms
+            # Apply parent transforms (from Inkscape layer groups)
             if parent_transform:
                 svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, parent_transform)
             

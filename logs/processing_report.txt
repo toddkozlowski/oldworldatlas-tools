@@ -10,20 +10,20 @@ Grand Total: 3726 settlements/holds
 
 EMPIRE SETTLEMENTS BY PROVINCE
 --------------------------------------------------------------------------------
-Averland             - 292 settlements,    241,302 total population
-Hochland             - 121 settlements,     82,262 total population
-Middenland           - 439 settlements,    301,069 total population
-Mootland             -  50 settlements,     18,169 total population
-Nordland             - 221 settlements,    147,132 total population
-Ostermark            - 266 settlements,    182,572 total population
-Ostland              - 286 settlements,    181,288 total population
-Reikland             - 609 settlements,    665,469 total population
-Stirland             - 368 settlements,    184,833 total population
-Talabecland          - 335 settlements,    324,329 total population
-Wissenland           - 534 settlements,    376,270 total population
+Averland             - 292 settlements,    243,689 total population
+Hochland             - 121 settlements,     80,223 total population
+Middenland           - 439 settlements,    298,187 total population
+Mootland             -  50 settlements,     18,608 total population
+Nordland             - 221 settlements,    145,515 total population
+Ostermark            - 266 settlements,    172,265 total population
+Ostland              - 286 settlements,    183,609 total population
+Reikland             - 609 settlements,    656,991 total population
+Stirland             - 368 settlements,    186,155 total population
+Talabecland          - 335 settlements,    321,169 total population
+Wissenland           - 534 settlements,    381,354 total population
 
-Empire Total Population: 2,704,695
-Westerland Total Population: 432,262
+Empire Total Population: 2,687,765
+Westerland Total Population: 429,207
 
 KARAZ ANKOR (DWARF HOLDS) BY TYPE
 --------------------------------------------------------------------------------
