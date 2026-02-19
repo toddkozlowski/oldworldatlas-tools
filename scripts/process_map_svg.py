@@ -22,7 +22,7 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 logger = logging.getLogger(__name__)
 
 # Constants
-SVG_PATH = Path(__file__).parent.parent.parent / "oldworldatlas-maps" / "FULL_MAP_CLEANED.svg"
+SVG_PATH = Path(__file__).parent.parent.parent / "oldworldatlas-maps" / "OLD_WORLD_ATLAS.svg"
 INPUT_DIR = Path(__file__).parent.parent / "input" / "gazetteers"
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
 LOGS_DIR = Path(__file__).parent.parent / "logs"
@@ -631,7 +631,7 @@ class SVGMapProcessor:
 
         if faction == "Empire":
             # Use the empire_combined.csv file which contains all provinces
-            csv_file = INPUT_DIR / "empire_combined.csv"
+            csv_file = INPUT_DIR / "empire.csv"
         elif faction == "Westerland":
             csv_file = INPUT_DIR / "westerland.csv"
 
@@ -680,7 +680,8 @@ class SVGMapProcessor:
         """Validate tags and log any issues."""
         valid_sources = {"AndyLaw", "2eSH", "4eAotE1", "4eEiS", "4ePBtTC", "4eSCoSaS",
                         "4eCRB", "4eDotRC", "NCC", "WFB8e", "AmbChron", "G&FT", "TOW", "1eMSDtR",
-                        "4eLoSaS","4eTHRC","4eMCotWW","1eDSaS","TWW3","2eKAAotDC", "MadAlfred"}
+                        "4eLoSaS","4eTHRC","4eMCotWW","1eDSaS","TWW3","2eKAAotDC", "MadAlfred", "MA",
+                        "4eStarter", "4eUA1", "4eAotE3", "4eUA2", "4eAotE1"}
         issues = []
         
         for tag in tags:
@@ -828,7 +829,7 @@ class SVGMapProcessor:
         
         # Track CSV settlements not in SVG
         # Load all Empire CSV data and check against SVG by province
-        empire_csv_file = INPUT_DIR / "empire_combined.csv"
+        empire_csv_file = INPUT_DIR / "empire.csv"
         if empire_csv_file.exists():
             try:
                 with open(empire_csv_file, 'r', encoding='utf-8') as f:

@@ -2022,16 +2022,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          6.612822593799593,
-          47.10145627790039
+          6.608729792186426,
+          47.0973617487845
         ]
       },
       "properties": {
         "name": "Abbey of Saint Wilfrid",
         "type": "Monasteries and Temples",
         "inkscape_coordinates": [
-          806.33545,
-          657.42328
+          806.10156,
+          657.65717
         ]
       }
     },
@@ -4632,16 +4632,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          6.141091846401291,
-          50.338971260517255
+          6.1451839234450185,
+          50.345930485722974
         ]
       },
       "properties": {
         "name": "Mordheim",
         "type": "Other",
         "inkscape_coordinates": [
-          779.43121,
-          472.46066
+          779.6651,
+          472.06311
         ]
       }
     }
