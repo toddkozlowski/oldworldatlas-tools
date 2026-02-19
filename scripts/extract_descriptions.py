@@ -169,16 +169,23 @@ def update_descriptions_for_csv(csv_file: str):
 
 
 if __name__ == "__main__":
+    import sys
+    
     print("\n" + "="*70)
     print("WIKI DESCRIPTION EXTRACTOR")
     print("Extracting descriptions for settlements with existing wiki URLs")
     print("="*70)
     
-    # Process both CSV files
-    csv_files = [
-        "input/gazetteers/empire.csv",
-        "input/gazetteers/westerland.csv"
-    ]
+    # Accept an optional CSV filename argument; default to processing both
+    # empire.csv and westerland.csv for backward compatibility
+    if len(sys.argv) > 1:
+        csv_name = sys.argv[1]
+        csv_files = [f"input/gazetteers/{csv_name}"]
+    else:
+        csv_files = [
+            "input/gazetteers/empire.csv",
+            "input/gazetteers/westerland.csv",
+        ]
     
     for csv_file in csv_files:
         try:

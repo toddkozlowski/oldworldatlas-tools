@@ -1986,16 +1986,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          2.5782472302827584,
-          48.97456194188811
+          2.5765116679431204,
+          48.972245419386
         ]
       },
       "properties": {
         "name": "Monastery of the White Stag",
         "type": "Monasteries and Temples",
         "inkscape_coordinates": [
-          575.85828,
-          550.38293
+          575.75909,
+          550.51526
         ]
       }
     },
@@ -2094,15 +2094,15 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          1.3119567978801365,
-          46.79957909502171
+          1.3073256107359628,
+          46.799578494577965
         ]
       },
       "properties": {
         "name": "Abbey of the Order of Black Hammers",
         "type": "Monasteries and Temples",
         "inkscape_coordinates": [
-          503.48087,
+          503.21628,
           674.63025
         ]
       }
@@ -2148,16 +2148,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          3.257618986330354,
-          51.5727475966127
+          3.2580287302830717,
+          51.57070056297966
         ]
       },
       "properties": {
         "name": "Cloister of the Roaring Stag",
         "type": "Monasteries and Temples",
         "inkscape_coordinates": [
-          614.70984,
-          401.9537
+          614.73322,
+          402.07065
         ]
       }
     },
@@ -3318,16 +3318,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          2.3558507322184488,
-          53.80312555860551
+          2.346434001392608,
+          53.8092647227797
         ]
       },
       "properties": {
         "name": "Fort Denkh",
         "type": "Forts and Castles",
         "inkscape_coordinates": [
-          563.22205,
-          274.5256
+          562.68414,
+          274.1748
         ]
       }
     },
@@ -3930,16 +3930,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          3.77500119568331,
-          50.53120298710947
+          3.7758208291381505,
+          50.52915621666689
         ]
       },
       "properties": {
         "name": "Festung Wolfsrudel",
         "type": "Forts and Castles",
         "inkscape_coordinates": [
-          644.2539821,
-          461.460942
+          644.30078,
+          461.57788
         ]
       }
     },
@@ -4362,16 +4362,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -0.5870837423506128,
-          49.25204524859207
+          -0.5766644715007239,
+          49.25494143745657
         ]
       },
       "properties": {
         "name": "Black Rock Mine",
         "type": "Other",
         "inkscape_coordinates": [
-          395.0199121,
-          534.5068719999999
+          395.61523,
+          534.34149
         ]
       }
     },
@@ -4642,6 +4642,24 @@
         "inkscape_coordinates": [
           779.6651,
           472.06311
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.232351391492826,
+          43.60286149713615
+        ]
+      },
+      "properties": {
+        "name": "Bugman's Brewery",
+        "type": "Other",
+        "inkscape_coordinates": [
+          556.01886,
+          857.26544
         ]
       }
     }

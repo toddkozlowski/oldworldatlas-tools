@@ -206,6 +206,7 @@ class SVGMapProcessor:
 
         self.settlements_empire = []
         self.settlements_westerland = []
+        self.settlements_bretonnia = []
         self.settlements_karaz_ankor = []
         self.points_of_interest = []
         self.roads = []
@@ -219,6 +220,7 @@ class SVGMapProcessor:
         # Track CSV data
         self.csv_data_empire = {}  # {province: {name: row_data}}
         self.csv_data_westerland = {}  # {name: row_data}
+        self.csv_data_bretonnia = {}  # {name: row_data}
         self.csv_data_karaz_ankor = {}  # {name: row_data}
         self.csv_data_provinces = {}  # {name: row_data}
         
@@ -448,6 +450,41 @@ class SVGMapProcessor:
 
         logger.info(f"  Found {len(self.settlements_westerland)} valid Westerland settlements")
 
+    def process_settlements_bretonnia(self):
+        """Process all Bretonnia settlements."""
+        logger.info("Processing Bretonnia settlements...")
+
+        # Find Settlements layer
+        settlements_layer = None
+        for g in self.root.findall(f".//{{{NS['svg']}}}g"):
+            if g.get(f"{{{NS['inkscape']}}}label") == "Settlements":
+                settlements_layer = g
+                break
+
+        if settlements_layer is None:
+            logger.error("Settlements layer not found!")
+            return
+
+        # Find Bretonnia faction
+        bretonnia_faction = None
+        for child in settlements_layer:
+            if child.get(f"{{{NS['inkscape']}}}label") == "Bretonnia":
+                bretonnia_faction = child
+                break
+
+        if bretonnia_faction is None:
+            logger.error("Bretonnia faction not found!")
+            return
+
+        settlements_in_faction = {}
+
+        # Extract settlements from Bretonnia (may be nested in sub-layers)
+        # Also extract any transform applied to the Bretonnia faction group itself
+        bretonnia_transform = bretonnia_faction.get("transform", "")
+        self._process_settlement_elements(bretonnia_faction, "Bretonnia", settlements_in_faction, self.settlements_bretonnia, bretonnia_transform)
+
+        logger.info(f"  Found {len(self.settlements_bretonnia)} valid Bretonnia settlements")
+
     def process_settlements_karaz_ankor(self):
         """Process all Karaz Ankor (Dwarf Holds) settlements."""
         logger.info("Processing Karaz Ankor settlements...")
@@ -634,6 +671,8 @@ class SVGMapProcessor:
             csv_file = INPUT_DIR / "empire.csv"
         elif faction == "Westerland":
             csv_file = INPUT_DIR / "westerland.csv"
+        elif faction == "Bretonnia":
+            csv_file = INPUT_DIR / "bretonnia.csv"
 
         if csv_file and csv_file.exists():
             try:
@@ -826,7 +865,44 @@ class SVGMapProcessor:
                 settlement.notes = []
             
             settlement.size_category = self.calculate_size_category(settlement.population)
-        
+
+        # Process Bretonnia settlements
+        csv_data = self.load_csv_data("Bretonnia")
+        for settlement in self.settlements_bretonnia:
+            if settlement.name in csv_data:
+                row = csv_data[settlement.name]
+
+                # Population
+                try:
+                    settlement.population = int(row['Population'].strip())
+                except (ValueError, KeyError):
+                    settlement.population = self._assign_random_population()
+                    self.missing_population_data["Bretonnia"].append(settlement.name)
+
+                # Tags
+                tags_str = row.get('Tags', '')
+                trade_str = row.get('Trade', '')
+                settlement.tags = self.parse_tags(tags_str, trade_str)
+                settlement.tags = self.validate_tags(settlement.tags, settlement.name)
+
+                # Notes
+                settlement.notes = self.parse_notes(row.get('Notes', ''))
+
+                # Wiki data
+                settlement.wiki = {
+                    "title": row.get('wiki_title') or None,
+                    "url": row.get('wiki_url') or None,
+                    "description": row.get('wiki_description') or None,
+                    "image": row.get('wiki_image') or None
+                }
+            else:
+                settlement.population = self._assign_random_population()
+                self.missing_population_data["Bretonnia"].append(settlement.name)
+                settlement.tags = []
+                settlement.notes = []
+
+            settlement.size_category = self.calculate_size_category(settlement.population)
+
         # Track CSV settlements not in SVG
         # Load all Empire CSV data and check against SVG by province
         empire_csv_file = INPUT_DIR / "empire.csv"
@@ -849,6 +925,12 @@ class SVGMapProcessor:
         for csv_name in westerland_csv.keys():
             if csv_name not in westerland_svg_names:
                 self.csv_settlements_not_in_svg["Westerland"].append(csv_name)
+
+        bretonnia_csv = self.load_csv_data("Bretonnia")
+        bretonnia_svg_names = {s.name for s in self.settlements_bretonnia}
+        for csv_name in bretonnia_csv.keys():
+            if csv_name not in bretonnia_svg_names:
+                self.csv_settlements_not_in_svg["Bretonnia"].append(csv_name)
 
         # Log summary
         if self.missing_population_data:
@@ -1573,6 +1655,40 @@ class SVGMapProcessor:
 
         logger.info(f"Generated {output_file}: {len(features)} settlements")
 
+    def generate_bretonnia_geojson(self):
+        """Generate GeoJSON for Bretonnia settlements."""
+        features = []
+        for settlement in self.settlements_bretonnia:
+            feature = {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [settlement.geo_lon, settlement.geo_lat]
+                },
+                "properties": {
+                    "name": settlement.name,
+                    "province": "Bretonnia",
+                    "population": settlement.population,
+                    "tags": settlement.tags,
+                    "notes": settlement.notes,
+                    "size_category": settlement.size_category,
+                    "inkscape_coordinates": [settlement.svg_x, settlement.svg_y],
+                    "wiki": settlement.wiki
+                }
+            }
+            features.append(feature)
+
+        geojson = {
+            "type": "FeatureCollection",
+            "features": features
+        }
+
+        output_file = OUTPUT_DIR / "bretonnia_settlements.geojson"
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(geojson, f, indent=2, ensure_ascii=False)
+
+        logger.info(f"Generated {output_file}: {len(features)} settlements")
+
     def generate_karaz_ankor_geojson(self):
         """Generate GeoJSON for Karaz Ankor (Dwarf Holds) settlements."""
         features = []
@@ -1805,7 +1921,10 @@ class SVGMapProcessor:
 
         westerland_total_pop = sum(s.population for s in self.settlements_westerland)
         westerland_total_count = len(self.settlements_westerland)
-        
+
+        bretonnia_total_pop = sum(s.population for s in self.settlements_bretonnia)
+        bretonnia_total_count = len(self.settlements_bretonnia)
+
         karaz_ankor_total_count = len(self.settlements_karaz_ankor)
         karaz_ankor_by_type = defaultdict(int)
         for hold in self.settlements_karaz_ankor:
@@ -1822,8 +1941,9 @@ class SVGMapProcessor:
             f.write("-" * 80 + "\n")
             f.write(f"Empire Total: {len(self.settlements_empire)} settlements\n")
             f.write(f"Westerland Total: {westerland_total_count} settlements\n")
+            f.write(f"Bretonnia Total: {bretonnia_total_count} settlements\n")
             f.write(f"Karaz Ankor Total: {karaz_ankor_total_count} holds\n")
-            f.write(f"Grand Total: {len(self.settlements_empire) + westerland_total_count + karaz_ankor_total_count} settlements/holds\n\n")
+            f.write(f"Grand Total: {len(self.settlements_empire) + westerland_total_count + bretonnia_total_count + karaz_ankor_total_count} settlements/holds\n\n")
 
             f.write("EMPIRE SETTLEMENTS BY PROVINCE\n")
             f.write("-" * 80 + "\n")
@@ -1833,7 +1953,12 @@ class SVGMapProcessor:
                 f.write(f"{province:20s} - {count:3d} settlements, {pop:10,d} total population\n")
 
             f.write(f"\nEmpire Total Population: {sum(empire_pop_by_province.values()):,d}\n")
-            f.write(f"Westerland Total Population: {westerland_total_pop:,d}\n\n")
+            f.write(f"Westerland Total Population: {westerland_total_pop:,d}\n")
+            f.write(f"Bretonnia Total Population: {bretonnia_total_pop:,d}\n\n")
+
+            f.write("BRETONNIA SETTLEMENTS\n")
+            f.write("-" * 80 + "\n")
+            f.write(f"Total: {bretonnia_total_count} settlements, {bretonnia_total_pop:,d} total population\n\n")
 
             f.write("KARAZ ANKOR (DWARF HOLDS) BY TYPE\n")
             f.write("-" * 80 + "\n")
@@ -1962,6 +2087,7 @@ def main():
     # Process all data - ONLY Empire settlements enabled
     processor.process_settlements_empire()
     processor.process_settlements_westerland()
+    processor.process_settlements_bretonnia()
     processor.process_settlements_karaz_ankor()
     processor.populate_settlement_data()
     processor.populate_karaz_ankor_data()
@@ -1974,6 +2100,7 @@ def main():
     # Generate output files - ONLY Empire GeoJSON enabled
     processor.generate_empire_geojson()
     processor.generate_westerland_geojson()
+    processor.generate_bretonnia_geojson()
     processor.generate_karaz_ankor_geojson()
     processor.generate_poi_geojson()
     # processor.generate_roads_geojson()  # Disabled: road extraction not needed currently

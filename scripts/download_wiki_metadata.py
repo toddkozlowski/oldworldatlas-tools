@@ -417,8 +417,13 @@ if __name__ == "__main__":
     import sys
     
     # Default to empire.csv, but allow specifying a different CSV file
-    if len(sys.argv) > 1:
-        csv_name = sys.argv[1]
+    # Optional --yes / -y flag skips the interactive update prompt
+    args = sys.argv[1:]
+    auto_yes = '--yes' in args or '-y' in args
+    csv_args = [a for a in args if not a.startswith('-')]
+    
+    if csv_args:
+        csv_name = csv_args[0]
     else:
         csv_name = "empire.csv"
     
@@ -434,23 +439,27 @@ if __name__ == "__main__":
     # Check if input file exists
     if not os.path.exists(input_csv):
         print(f"\n❌ Error: Input file not found: {input_csv}")
-        print(f"Usage: python download_wiki_metadata.py [csv_filename]")
+        print(f"Usage: python download_wiki_metadata.py [csv_filename] [-y|--yes]")
         sys.exit(1)
     
     # Step 1: Download wiki metadata
     process_settlements(input_csv, output_csv, log_file)
     
-    # Step 2: Ask user if they want to update the original CSV
-    print("\nWould you like to update the original CSV file with the wiki metadata?")
-    print(f"This will update: {input_csv}")
-    response = input("Enter 'yes' to proceed, or press Enter to skip: ").strip().lower()
-    
-    if response == 'yes':
+    # Step 2: Update the original CSV (auto if -y/--yes, otherwise prompt)
+    if auto_yes:
         update_original_csv(input_csv, output_csv)
         print("✓ All done! The original CSV has been updated with wiki metadata.")
     else:
-        print(f"\nSkipped updating original CSV.")
-        print(f"You can manually update it later using the data in: {output_csv}")
+        print("\nWould you like to update the original CSV file with the wiki metadata?")
+        print(f"This will update: {input_csv}")
+        response = input("Enter 'yes' to proceed, or press Enter to skip: ").strip().lower()
+        
+        if response == 'yes':
+            update_original_csv(input_csv, output_csv)
+            print("✓ All done! The original CSV has been updated with wiki metadata.")
+        else:
+            print(f"\nSkipped updating original CSV.")
+            print(f"You can manually update it later using the data in: {output_csv}")
     
     print("\n" + "="*70)
     print("Process complete!")
