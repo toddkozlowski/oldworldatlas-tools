@@ -6,6 +6,7 @@ Extracts settlements, points of interest, and labels from the FULL_MAP_CLEANED.s
 import json
 import csv
 import logging
+import math
 from platform import processor
 import re
 from pathlib import Path
@@ -27,13 +28,42 @@ INPUT_DIR = Path(__file__).parent.parent / "input" / "gazetteers"
 OUTPUT_DIR = Path(__file__).parent.parent / "output"
 LOGS_DIR = Path(__file__).parent.parent / "logs"
 
-# Calibration points for coordinate conversion
+# ---------------------------------------------------------------------------
+# Coordinate conversion: Inkscape display formula
+# ---------------------------------------------------------------------------
+# The Inkscape document has been configured so that its *display* coordinates
+# (the values shown in the Inkscape status bar) equal geospatial coordinates
+# (degrees longitude / latitude) for an equirectangular projection.
+# Settings used:
+#   - Display unit : inches, scale = 0.017504 (so 1 SVG user-unit = SCALE degrees)
+#   - Viewbox origin : x = 428.530, y = -1470.000 (SVG user units)
+#   - Y-axis inverted : positive display-y points north (up)
+# Conversion from *absolute* SVG coordinates (after all layer transforms have
+# been flattened and applied) to geographic coordinates:
+#
+#   geo_lon = (svg_x_abs - INKSCAPE_VB_X) * INKSCAPE_SCALE
+#   geo_lat = (INKSCAPE_C_Y - svg_y_abs) * INKSCAPE_SCALE
+#
+# INKSCAPE_C_Y is derived empirically by averaging the four calibration points
+# below (≈ 3347.85).  It encodes both the viewbox y-origin and the document
+# height, and does not need to be changed unless the SVG canvas is resized.
+# ---------------------------------------------------------------------------
+INKSCAPE_VB_X   = 428.530   # SVG absolute x corresponding to geo longitude 0.0°
+INKSCAPE_SCALE  = 0.017504  # Degrees per SVG user unit (both axes)
+INKSCAPE_C_Y    = 3347.85   # y-axis constant; geo_lat = (C_Y - svg_y_abs) * SCALE
+
+# Reference calibration points (for validation only).
+# SVG coords are the *absolute* positions after flattening all layer transforms.
+# Geo coords are the Inkscape display coordinates (= geospatial coordinates).
 CALIBRATION_POINTS = [
-    # SVG coords -> Geographic coords (longitude, latitude)
-    {"svg": (429.058, 408.152), "geo": (0.007, 51.465), "settlement": "Altdorf", "province": "Reikland"},
-    {"svg": (495.263, 187.911), "geo": (1.167, 55.318), "settlement": "Middenheim", "province": "Middenland"},
-    {"svg": (738.171, 778.741), "geo": (5.421, 44.977), "settlement": "Wachdorf", "province": "Averland"},
-    {"svg": (891.383, 479.367), "geo": (8.100, 50.219), "settlement": "Waldenhof (Stirland)", "province": "Stirland"},
+    {"svg": (428.519, 407.885), "geo": (0.000, 51.460),
+     "settlement": "Altdorf",           "province": "Reikland"},
+    {"svg": (495.376, 187.843), "geo": (1.172, 55.312),
+     "settlement": "Middenheim",        "province": "Middenland"},
+    {"svg": (738.284, 778.673), "geo": (5.422, 44.970),
+     "settlement": "Wachdorf",          "province": "Averland"},
+    {"svg": (891.496, 479.299), "geo": (8.104, 50.210),
+     "settlement": "Waldenhof (Sylvania)", "province": "Stirland"},
 ]
 
 NS = {
@@ -156,42 +186,53 @@ class DwarfHold:
             }
 
 
+# SVG affine transform matrix type alias: (a, b, c, d, e, f)
+# Applies as:  x' = a*x + c*y + e
+#              y' = b*x + d*y + f
+# Identity  :  (1, 0, 0, 1, 0, 0)
+TransformMatrix = Tuple[float, float, float, float, float, float]
+IDENTITY_MATRIX: TransformMatrix = (1.0, 0.0, 0.0, 1.0, 0.0, 0.0)
+
+
 class CoordinateConverter:
-    """Converts between SVG and geographic coordinate systems."""
+    """Converts absolute SVG coordinates to geographic coordinates.
+
+    Uses the direct Inkscape display formula:
+        geo_lon = (svg_x_abs - INKSCAPE_VB_X) * INKSCAPE_SCALE
+        geo_lat = (INKSCAPE_C_Y - svg_y_abs) * INKSCAPE_SCALE
+
+    This works because Inkscape has been configured so that the display
+    coordinates (shown in the status bar) ARE the geospatial coordinates.
+    The svg_x_abs / svg_y_abs values must be *absolute* SVG coordinates,
+    i.e., the element position after all ancestor layer transforms have
+    been composed and applied.
+    """
 
     def __init__(self, calibration_points: List[Dict]):
-        """Initialize with calibration points."""
+        """Initialize with calibration points (used for validation only)."""
         self.calibration_points = calibration_points
-        self._calculate_transformation()
-
-    def _calculate_transformation(self):
-        """Calculate affine transformation parameters from calibration points."""
-        svg_coords = np.array([p["svg"] for p in self.calibration_points])
-        geo_coords = np.array([p["geo"] for p in self.calibration_points])
-
-        # Use least squares to fit affine transformation
-        # geo = A * svg + B where A is 2x2 and B is 2x1
-        A_matrix = np.hstack([svg_coords, np.ones((svg_coords.shape[0], 1))])
-        
-        # Solve for longitude
-        self.lon_coeffs = np.linalg.lstsq(A_matrix, geo_coords[:, 0], rcond=None)[0]
-        # Solve for latitude
-        self.lat_coeffs = np.linalg.lstsq(A_matrix, geo_coords[:, 1], rcond=None)[0]
 
     def svg_to_geo(self, svg_x: float, svg_y: float) -> Tuple[float, float]:
-        """Convert SVG coordinates to geographic coordinates."""
-        lon = self.lon_coeffs[0] * svg_x + self.lon_coeffs[1] * svg_y + self.lon_coeffs[2]
-        lat = self.lat_coeffs[0] * svg_x + self.lat_coeffs[1] * svg_y + self.lat_coeffs[2]
+        """Convert absolute SVG coordinates to geographic (lon, lat)."""
+        lon = (svg_x - INKSCAPE_VB_X) * INKSCAPE_SCALE
+        lat = (INKSCAPE_C_Y - svg_y) * INKSCAPE_SCALE
         return (lon, lat)
 
     def validate_calibration(self):
-        """Validate the transformation against calibration points."""
-        logger.info("Validating coordinate transformation:")
+        """Validate the formula against all calibration points and log results."""
+        logger.info("Validating coordinate conversion formula:")
         for point in self.calibration_points:
             calc_geo = self.svg_to_geo(point["svg"][0], point["svg"][1])
             expected_geo = point["geo"]
-            error = np.sqrt((calc_geo[0] - expected_geo[0])**2 + (calc_geo[1] - expected_geo[1])**2)
-            logger.info(f"  {point['settlement']}: Calculated {calc_geo}, Expected {expected_geo}, Error: {error:.6f}")
+            lon_err = calc_geo[0] - expected_geo[0]
+            lat_err = calc_geo[1] - expected_geo[1]
+            dist_err = math.sqrt(lon_err**2 + lat_err**2)
+            logger.info(
+                f"  {point['settlement']:25s}: "
+                f"calc=({calc_geo[0]:.4f}, {calc_geo[1]:.4f})  "
+                f"expected=({expected_geo[0]:.4f}, {expected_geo[1]:.4f})  "
+                f"error={dist_err:.5f}°"
+            )
 
 
 class SVGMapProcessor:
@@ -234,6 +275,10 @@ class SVGMapProcessor:
         self.csv_provinces_not_in_svg = []  # List of province names
         self.svg_provinces_not_in_csv = []  # List of province names
 
+        # Track all groups/layers whose transforms were detected and absorbed.
+        # Each entry: {"layer_path": str, "transform": str, "context": str}
+        self.layers_with_transforms: List[Dict] = []
+
     def _get_text_element_label(self, elem) -> Optional[str]:
         """Extract text from text/tspan elements."""
         text_content = []
@@ -250,32 +295,149 @@ class SVGMapProcessor:
         
         return " ".join(text_content) if text_content else None
 
+    def _parse_transform_to_matrix(self, transform_str: str) -> TransformMatrix:
+        """Parse an SVG transform string into an affine matrix (a, b, c, d, e, f).
+
+        Handles: translate, scale, matrix, rotate and sequences of transforms.
+        Returns the identity matrix for empty or unrecognised input.
+
+        SVG matrix convention (column-vector):
+            x' = a*x + c*y + e
+            y' = b*x + d*y + f
+        """
+        if not transform_str or not transform_str.strip():
+            return IDENTITY_MATRIX
+
+        result: TransformMatrix = IDENTITY_MATRIX
+
+        for match in re.finditer(r'([a-zA-Z]+)\s*\(([^)]+)\)', transform_str):
+            func = match.group(1)
+            args_str = match.group(2).strip()
+            try:
+                args = [float(v) for v in re.split(r'[,\s]+', args_str) if v]
+            except ValueError:
+                logger.warning(f"Unreadable transform args in: {match.group(0)!r}")
+                continue
+
+            if func == 'translate':
+                tx = args[0] if len(args) >= 1 else 0.0
+                ty = args[1] if len(args) >= 2 else 0.0
+                t: TransformMatrix = (1.0, 0.0, 0.0, 1.0, tx, ty)
+            elif func == 'scale':
+                sx = args[0] if len(args) >= 1 else 1.0
+                sy = args[1] if len(args) >= 2 else sx
+                t = (sx, 0.0, 0.0, sy, 0.0, 0.0)
+            elif func == 'matrix':
+                if len(args) >= 6:
+                    t = (args[0], args[1], args[2], args[3], args[4], args[5])
+                else:
+                    logger.warning(f"Incomplete matrix transform (need 6 values): {match.group(0)!r}")
+                    continue
+            elif func == 'rotate':
+                angle = math.radians(args[0]) if args else 0.0
+                cos_a = math.cos(angle)
+                sin_a = math.sin(angle)
+                if len(args) >= 3:
+                    cx, cy = args[1], args[2]
+                    t = (cos_a, sin_a, -sin_a, cos_a,
+                         cx - cx * cos_a + cy * sin_a,
+                         cy - cx * sin_a - cy * cos_a)
+                else:
+                    t = (cos_a, sin_a, -sin_a, cos_a, 0.0, 0.0)
+            else:
+                logger.warning(f"Unrecognised transform function: {func!r} in {transform_str!r}")
+                continue
+
+            # Compose: accumulate left-to-right per SVG spec (result applied first, t applied second)
+            result = self._compose_transforms(outer=result, inner=t)
+
+        return result
+
+    def _compose_transforms(self, outer: TransformMatrix, inner: TransformMatrix) -> TransformMatrix:
+        """Compose two affine transforms: apply *inner* first, then *outer*.
+
+        Equivalent to the matrix product outer * inner.
+        Uses standard SVG/matrix convention (column vectors):
+            (outer \u2218 inner)(x) = outer(inner(x))
+        """
+        a1, b1, c1, d1, e1, f1 = outer
+        a2, b2, c2, d2, e2, f2 = inner
+        return (
+            a1 * a2 + c1 * b2,   # a
+            b1 * a2 + d1 * b2,   # b
+            a1 * c2 + c1 * d2,   # c
+            b1 * c2 + d1 * d2,   # d
+            a1 * e2 + c1 * f2 + e1,  # e
+            b1 * e2 + d1 * f2 + f1,  # f
+        )
+
+    def _apply_transform_matrix(self, x: float, y: float, matrix: TransformMatrix) -> Tuple[float, float]:
+        """Apply affine transform matrix (a,b,c,d,e,f) to point (x, y)."""
+        a, b, c, d, e, f = matrix
+        return (a * x + c * y + e, b * x + d * y + f)
+
+    def _get_group_transform(
+        self,
+        group_elem,
+        layer_path: str,
+        parent_matrix: TransformMatrix = IDENTITY_MATRIX,
+    ) -> TransformMatrix:
+        """Return the composed transform for *group_elem* within its parent context.
+
+        If the element has a 'transform' attribute, that transform is:
+          1. Parsed into an affine matrix.
+          2. Logged to self.layers_with_transforms.
+          3. Composed with parent_matrix (parent is applied first, then element).
+
+        The composed matrix represents the total coordinate mapping from the
+        group's local coordinate space to absolute SVG space.
+        """
+        transform_str = group_elem.get("transform", "")
+        if not transform_str:
+            return parent_matrix
+
+        label = (
+            group_elem.get(f"{{{NS['inkscape']}}}label")
+            or group_elem.get("id", "<unlabeled group>")
+        )
+        full_path = f"{layer_path}/{label}" if layer_path else label
+
+        self.layers_with_transforms.append({
+            "layer_path": full_path,
+            "transform": transform_str,
+            "context": f"Group '{label}' in layer path '{layer_path}'",
+        })
+        logger.debug(f"Layer transform absorbed: {full_path!r} -> {transform_str}")
+
+        elem_matrix = self._parse_transform_to_matrix(transform_str)
+        # child_absolute = parent_matrix * elem_matrix
+        return self._compose_transforms(outer=parent_matrix, inner=elem_matrix)
+
+    # ------------------------------------------------------------------
+    # Legacy helper kept for backward compatibility with any callers that
+    # still pass a transform string directly.  New code should use
+    # _get_group_transform / _apply_transform_matrix instead.
+    # ------------------------------------------------------------------
     def _apply_svg_transform(self, x: float, y: float, transform: str) -> Tuple[float, float]:
-        """Apply SVG transform attribute to coordinates. Currently supports translate only."""
+        """Apply an SVG transform string to (x, y) and return the new coordinates."""
         if not transform:
             return (x, y)
-        
-        # Parse translate(x, y) or translate(x y)
-        translate_match = re.search(r'translate\s*\(\s*([-\d.]+)\s*[,\s]\s*([-\d.]+)\s*\)', transform)
-        if translate_match:
-            tx = float(translate_match.group(1))
-            ty = float(translate_match.group(2))
-            return (x + tx, y + ty)
-        
-        return (x, y)
+        matrix = self._parse_transform_to_matrix(transform)
+        return self._apply_transform_matrix(x, y, matrix)
 
-    def _validate_settlement_element(self, elem, province: str, parent_transform: str = "") -> Optional[Tuple[str, float, float]]:
-        """Validate that element is a textbox with valid coordinates and return (name, x, y).
-        
-        Args:
-            elem: The XML element to validate
-            province: The province name for logging
-            parent_transform: Accumulated transform from parent groups
-            
-        Returns:
-            Tuple of (name, x, y) or None if invalid
+    def _validate_settlement_element(
+        self, elem, province: str,
+        parent_matrix: TransformMatrix = IDENTITY_MATRIX,
+        layer_path: str = "Settlements",
+    ) -> Optional[Tuple[str, float, float]]:
+        """Validate a text element and return (name, abs_svg_x, abs_svg_y).
+
+        All ancestor layer transforms must already be encoded in *parent_matrix*.
+        Any transform on the text element itself is also detected, logged, and
+        absorbed so that the returned coordinates are absolute SVG coordinates
+        (suitable for direct conversion with CoordinateConverter.svg_to_geo).
         """
-        # Check if it's a text element
+        # Must be a text element
         if elem.tag != f"{{{NS['svg']}}}text":
             self.invalid_settlements.append({
                 "province": province,
@@ -296,29 +458,27 @@ class SVGMapProcessor:
             })
             return None
 
-        # Get coordinates
+        # Extract base coordinates from the text element
         try:
             svg_x = float(elem.get("x", 0))
             svg_y = float(elem.get("y", 0))
-            
-            # Check if element has direct transform (not parent transforms from Inkscape groups)
-            elem_transform = elem.get("transform", "")
-            
-            # Only apply fudge factor (+3 to X, +4 to Y) if NO element-level transforms present
-            # Element-level transforms account for positioning, so adding fudge causes offset
-            # Parent transforms from Inkscape groups are organizational but still need to be applied
-            if not elem_transform:
-                svg_x += 3
-                svg_y += 4
-            
-            # Apply element-level transform if present
-            if elem_transform:
-                svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, elem_transform)
-            
-            # Apply parent transforms (from Inkscape layer groups like Mootland)
-            if parent_transform:
-                svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, parent_transform)
-            
+
+            # Detect and absorb any transform on the text element itself
+            elem_transform_str = elem.get("transform", "")
+            if elem_transform_str:
+                elem_path = f"{layer_path}/text:'{name}'"
+                self.layers_with_transforms.append({
+                    "layer_path": elem_path,
+                    "transform": elem_transform_str,
+                    "context": f"Text element '{name}' in province '{province}'",
+                })
+                logger.debug(f"Text element transform absorbed: {elem_path!r}")
+                elem_matrix = self._parse_transform_to_matrix(elem_transform_str)
+                svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, elem_matrix)
+
+            # Apply the fully accumulated ancestor transform to reach absolute SVG space
+            svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, parent_matrix)
+
             return (name, svg_x, svg_y)
         except ValueError:
             self.invalid_settlements.append({
@@ -330,24 +490,39 @@ class SVGMapProcessor:
             })
             return None
 
-    def _process_settlement_elements(self, parent_elem, province_name: str, settlements_dict: dict, settlements_list: list, parent_transform: str = ""):
-        """Recursively process settlement elements, handling nested layers (like Reikland estates) and transforms."""
+    def _process_settlement_elements(
+        self, parent_elem, province_name: str,
+        settlements_dict: dict, settlements_list: list,
+        parent_matrix: TransformMatrix = IDENTITY_MATRIX,
+        layer_path: str = "Settlements",
+    ):
+        """Recursively process settlement text elements, flattening all group transforms.
+
+        Every group encountered is checked for a 'transform' attribute; if found,
+        that transform is logged and composed into the running matrix before
+        recursing into the group's children.
+        """
         for elem in parent_elem:
-            # Check if this is a layer/group
             if elem.tag == f"{{{NS['svg']}}}g":
-                # Get group transform and accumulate with parent
-                group_transform = elem.get("transform", "")
-                # Combine transforms: if both exist, concatenate them
-                combined_transform = (parent_transform + " " + group_transform).strip() if group_transform else parent_transform
-                # Recursively process children of this layer with accumulated transform
-                self._process_settlement_elements(elem, province_name, settlements_dict, settlements_list, combined_transform)
+                # Compose this group's transform with the accumulated parent matrix
+                label = (
+                    elem.get(f"{{{NS['inkscape']}}}label")
+                    or elem.get("id", "")
+                )
+                child_path = f"{layer_path}/{label}" if label else layer_path
+                child_matrix = self._get_group_transform(elem, layer_path, parent_matrix)
+                self._process_settlement_elements(
+                    elem, province_name, settlements_dict, settlements_list,
+                    child_matrix, child_path
+                )
             else:
-                # Process as settlement element
-                result = self._validate_settlement_element(elem, province_name, parent_transform)
+                result = self._validate_settlement_element(
+                    elem, province_name, parent_matrix, layer_path
+                )
                 if result:
                     name, svg_x, svg_y = result
-                    
-                    # Check for duplicates
+
+                    # Track duplicates
                     if name in settlements_dict:
                         self.duplicate_settlements[province_name].append({
                             "name": name,
@@ -357,9 +532,7 @@ class SVGMapProcessor:
                     else:
                         settlements_dict[name] = (svg_x, svg_y)
 
-                        # Convert coordinates
                         geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
-
                         settlement = Settlement(
                             name=name,
                             province=province_name,
@@ -396,6 +569,14 @@ class SVGMapProcessor:
             logger.error("Empire faction not found!")
             return
 
+        # Build the transform chain: Settlements layer -> Empire faction
+        settlements_matrix = self._get_group_transform(
+            settlements_layer, "Settlements", IDENTITY_MATRIX
+        )
+        empire_matrix = self._get_group_transform(
+            empire_faction, "Settlements/Empire", settlements_matrix
+        )
+
         # Process each province
         provinces_seen = set()
         for province_group in empire_faction:
@@ -407,13 +588,22 @@ class SVGMapProcessor:
             logger.info(f"  Processing province: {province_name}")
 
             settlements_in_province = {}
+            prov_path = f"Settlements/Empire/{province_name}"
 
-            # Extract settlements from this province (may be nested in sub-layers like estates)
-            # Also extract any transform applied to the province group itself
-            province_transform = province_group.get("transform", "")
-            self._process_settlement_elements(province_group, province_name, settlements_in_province, self.settlements_empire, province_transform)
+            # Absorb province-level transform and recurse into its children
+            province_matrix = self._get_group_transform(
+                province_group, "Settlements/Empire", empire_matrix
+            )
+            self._process_settlement_elements(
+                province_group, province_name,
+                settlements_in_province, self.settlements_empire,
+                province_matrix, prov_path
+            )
 
-        logger.info(f"  Found {len(self.settlements_empire)} valid settlements across {len(provinces_seen)} provinces")
+        logger.info(
+            f"  Found {len(self.settlements_empire)} valid settlements "
+            f"across {len(provinces_seen)} provinces"
+        )
 
     def process_settlements_westerland(self):
         """Process all Westerland settlements."""
@@ -443,10 +633,18 @@ class SVGMapProcessor:
 
         settlements_in_faction = {}
 
-        # Extract settlements from Westerland (may be nested in sub-layers)
-        # Also extract any transform applied to the Westerland faction group itself
-        westerland_transform = westerland_faction.get("transform", "")
-        self._process_settlement_elements(westerland_faction, "Westerland", settlements_in_faction, self.settlements_westerland, westerland_transform)
+        # Build transform chain: Settlements -> Westerland faction
+        settlements_matrix = self._get_group_transform(
+            settlements_layer, "Settlements", IDENTITY_MATRIX
+        )
+        westerland_matrix = self._get_group_transform(
+            westerland_faction, "Settlements/Westerland", settlements_matrix
+        )
+        self._process_settlement_elements(
+            westerland_faction, "Westerland",
+            settlements_in_faction, self.settlements_westerland,
+            westerland_matrix, "Settlements/Westerland"
+        )
 
         logger.info(f"  Found {len(self.settlements_westerland)} valid Westerland settlements")
 
@@ -478,10 +676,18 @@ class SVGMapProcessor:
 
         settlements_in_faction = {}
 
-        # Extract settlements from Bretonnia (may be nested in sub-layers)
-        # Also extract any transform applied to the Bretonnia faction group itself
-        bretonnia_transform = bretonnia_faction.get("transform", "")
-        self._process_settlement_elements(bretonnia_faction, "Bretonnia", settlements_in_faction, self.settlements_bretonnia, bretonnia_transform)
+        # Build transform chain: Settlements -> Bretonnia faction
+        settlements_matrix = self._get_group_transform(
+            settlements_layer, "Settlements", IDENTITY_MATRIX
+        )
+        bretonnia_matrix = self._get_group_transform(
+            bretonnia_faction, "Settlements/Bretonnia", settlements_matrix
+        )
+        self._process_settlement_elements(
+            bretonnia_faction, "Bretonnia",
+            settlements_in_faction, self.settlements_bretonnia,
+            bretonnia_matrix, "Settlements/Bretonnia"
+        )
 
         logger.info(f"  Found {len(self.settlements_bretonnia)} valid Bretonnia settlements")
 
@@ -513,56 +719,44 @@ class SVGMapProcessor:
 
         settlements_in_faction = {}
 
-        # Extract settlements from Dwarf Holds, accumulating any transforms
-        faction_transform = dwarf_holds_faction.get("transform", "")
-        
-        for elem in dwarf_holds_faction:
-            # Check if this is a layer/group
-            if elem.tag == f"{{{NS['svg']}}}g":
-                # Get group transform and combine with faction transform
-                group_transform = elem.get("transform", "")
-                combined_transform = (faction_transform + " " + group_transform).strip() if group_transform else faction_transform
-                # Process nested elements
-                self._process_dwarf_hold_elements(elem, settlements_in_faction, combined_transform)
-            elif elem.tag == f"{{{NS['svg']}}}text":
-                # Direct text element
-                result = self._validate_dwarf_hold_element(elem, faction_transform)
-                if result:
-                    name, svg_x, svg_y = result
-                    if name not in settlements_in_faction:
-                        settlements_in_faction[name] = (svg_x, svg_y)
-                        
-                        # Convert coordinates
-                        geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
-                        
-                        hold = DwarfHold(
-                            name=name,
-                            svg_x=svg_x,
-                            svg_y=svg_y,
-                            geo_lon=geo_lon,
-                            geo_lat=geo_lat
-                        )
-                        self.settlements_karaz_ankor.append(hold)
+        # Build transform chain: Settlements -> Dwarf Holds faction
+        settlements_matrix = self._get_group_transform(
+            settlements_layer, "Settlements", IDENTITY_MATRIX
+        )
+        faction_matrix = self._get_group_transform(
+            dwarf_holds_faction, "Settlements/Dwarf Holds", settlements_matrix
+        )
+
+        # Recurse into Dwarf Holds with fully composed initial matrix
+        self._process_dwarf_hold_elements(
+            dwarf_holds_faction, settlements_in_faction,
+            faction_matrix, "Settlements/Dwarf Holds"
+        )
 
         logger.info(f"  Found {len(self.settlements_karaz_ankor)} valid Karaz Ankor settlements")
 
-    def _process_dwarf_hold_elements(self, parent_elem, settlements_dict: dict, parent_transform: str = ""):
-        """Recursively process dwarf hold elements, handling nested layers and transforms."""
+    def _process_dwarf_hold_elements(
+        self, parent_elem, settlements_dict: dict,
+        parent_matrix: TransformMatrix = IDENTITY_MATRIX,
+        layer_path: str = "Settlements/Dwarf Holds",
+    ):
+        """Recursively process dwarf hold elements, flattening all group transforms."""
         for elem in parent_elem:
-            # Check if this is a layer/group
             if elem.tag == f"{{{NS['svg']}}}g":
-                # Get group transform and accumulate with parent
-                group_transform = elem.get("transform", "")
-                combined_transform = (parent_transform + " " + group_transform).strip() if group_transform else parent_transform
-                # Recursively process children with accumulated transform
-                self._process_dwarf_hold_elements(elem, settlements_dict, combined_transform)
+                label = (
+                    elem.get(f"{{{NS['inkscape']}}}label")
+                    or elem.get("id", "")
+                )
+                child_path = f"{layer_path}/{label}" if label else layer_path
+                child_matrix = self._get_group_transform(elem, layer_path, parent_matrix)
+                self._process_dwarf_hold_elements(
+                    elem, settlements_dict, child_matrix, child_path
+                )
             elif elem.tag == f"{{{NS['svg']}}}text":
-                # Process text element
-                result = self._validate_dwarf_hold_element(elem, parent_transform)
+                result = self._validate_dwarf_hold_element(elem, parent_matrix, layer_path)
                 if result:
                     name, svg_x, svg_y = result
-                    
-                    # Check for duplicates
+
                     if name in settlements_dict:
                         self.duplicate_settlements["Karaz Ankor"].append({
                             "name": name,
@@ -571,10 +765,7 @@ class SVGMapProcessor:
                         })
                     else:
                         settlements_dict[name] = (svg_x, svg_y)
-
-                        # Convert coordinates
                         geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
-
                         hold = DwarfHold(
                             name=name,
                             svg_x=svg_x,
@@ -584,43 +775,42 @@ class SVGMapProcessor:
                         )
                         self.settlements_karaz_ankor.append(hold)
 
-    def _validate_dwarf_hold_element(self, elem, parent_transform: str = "") -> Optional[Tuple[str, float, float]]:
-        """Validate that element is a textbox with valid coordinates and return (name, x, y).
-        
-        Similar to _validate_settlement_element but for Dwarf Holds (no province parameter).
+    def _validate_dwarf_hold_element(
+        self, elem,
+        parent_matrix: TransformMatrix = IDENTITY_MATRIX,
+        layer_path: str = "Settlements/Dwarf Holds",
+    ) -> Optional[Tuple[str, float, float]]:
+        """Validate a dwarf-hold text element; return (name, abs_svg_x, abs_svg_y).
+
+        Mirrors _validate_settlement_element but for Dwarf Holds (no province field).
+        All ancestor transforms must be encoded in parent_matrix.
         """
-        # Check if it's a text element
         if elem.tag != f"{{{NS['svg']}}}text":
             return None
 
-        # Get text content
         name = self._get_text_element_label(elem)
         if not name:
             return None
 
-        # Get coordinates
         try:
             svg_x = float(elem.get("x", 0))
             svg_y = float(elem.get("y", 0))
-            
-            # Check if element has direct transform (not parent transforms from Inkscape groups)
-            elem_transform = elem.get("transform", "")
-            
-            # Only apply fudge factor (+3 to X, +4 to Y) if NO element-level transforms present
-            # Element-level transforms account for positioning, so adding fudge causes offset
-            # Parent transforms from Inkscape groups are organizational but still need to be applied
-            if not elem_transform:
-                svg_x += 3
-                svg_y += 4
-            
-            # Apply element-level transform if present
-            if elem_transform:
-                svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, elem_transform)
-            
-            # Apply parent transforms (from Inkscape layer groups)
-            if parent_transform:
-                svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, parent_transform)
-            
+
+            # Detect and absorb any transform on the text element itself
+            elem_transform_str = elem.get("transform", "")
+            if elem_transform_str:
+                elem_path = f"{layer_path}/text:'{name}'"
+                self.layers_with_transforms.append({
+                    "layer_path": elem_path,
+                    "transform": elem_transform_str,
+                    "context": f"Dwarf hold text element '{name}'",
+                })
+                logger.debug(f"Text element transform absorbed: {elem_path!r}")
+                elem_matrix = self._parse_transform_to_matrix(elem_transform_str)
+                svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, elem_matrix)
+
+            # Apply accumulated ancestor transform
+            svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, parent_matrix)
             return (name, svg_x, svg_y)
         except ValueError:
             return None
@@ -1089,35 +1279,44 @@ class SVGMapProcessor:
             return 782
         return _random_population
 
-    def _process_poi_elements(self, parent_elem, poi_type: str, poi_list: list, parent_transform: str = ""):
-        """Recursively process POI elements, handling nested layers and transforms."""
+    def _process_poi_elements(
+        self, parent_elem, poi_type: str, poi_list: list,
+        parent_matrix: TransformMatrix = IDENTITY_MATRIX,
+        layer_path: str = "Points of Interest",
+    ):
+        """Recursively process POI text elements, flattening all group transforms."""
         for elem in parent_elem:
-            # Check if this is a layer/group
             if elem.tag == f"{{{NS['svg']}}}g":
-                # Get group transform and accumulate with parent
-                group_transform = elem.get("transform", "")
-                combined_transform = (parent_transform + " " + group_transform).strip() if group_transform else parent_transform
-                # Recursively process children of this layer with accumulated transform
-                self._process_poi_elements(elem, poi_type, poi_list, combined_transform)
+                label = (
+                    elem.get(f"{{{NS['inkscape']}}}label")
+                    or elem.get("id", "")
+                )
+                child_path = f"{layer_path}/{label}" if label else layer_path
+                child_matrix = self._get_group_transform(elem, layer_path, parent_matrix)
+                self._process_poi_elements(elem, poi_type, poi_list, child_matrix, child_path)
             elif elem.tag == f"{{{NS['svg']}}}text":
                 name = self._get_text_element_label(elem)
                 if name:
                     try:
-                        # Get base coordinates (no fudge factor needed for POI)
                         svg_x = float(elem.get("x", 0))
                         svg_y = float(elem.get("y", 0))
-                        
-                        # Apply element-level transform if present
-                        elem_transform = elem.get("transform", "")
-                        if elem_transform:
-                            svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, elem_transform)
-                        
-                        # Apply accumulated parent transforms
-                        if parent_transform:
-                            svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, parent_transform)
-                        
+
+                        # Detect and absorb any element-level transform
+                        elem_transform_str = elem.get("transform", "")
+                        if elem_transform_str:
+                            elem_path = f"{layer_path}/text:'{name}'"
+                            self.layers_with_transforms.append({
+                                "layer_path": elem_path,
+                                "transform": elem_transform_str,
+                                "context": f"POI text element '{name}' (type={poi_type})",
+                            })
+                            elem_matrix = self._parse_transform_to_matrix(elem_transform_str)
+                            svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, elem_matrix)
+
+                        # Apply accumulated ancestor transform
+                        svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, parent_matrix)
+
                         geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
-                        
                         poi = PointOfInterest(
                             name=name,
                             poi_type=poi_type,
@@ -1145,6 +1344,11 @@ class SVGMapProcessor:
             logger.error("Points of Interest layer not found!")
             return
 
+        # Build the initial transform from the POI layer itself
+        poi_layer_matrix = self._get_group_transform(
+            poi_layer, "Points of Interest", IDENTITY_MATRIX
+        )
+
         poi_types = {
             "Other": "Other",
             "City Districts": "City Districts",
@@ -1161,12 +1365,16 @@ class SVGMapProcessor:
             poi_type = poi_types.get(poi_type, poi_type)
             logger.info(f"  Processing POI type: {poi_type}")
 
-            # Extract POI from this group (may be nested in sub-layers)
-            initial_count = len(self.points_of_interest)
-            group_transform = poi_group.get("transform", "")
-            self._process_poi_elements(poi_group, poi_type, self.points_of_interest, group_transform)
-            count = len(self.points_of_interest) - initial_count
+            # Compose sub-group transform with the POI layer matrix
+            group_path = f"Points of Interest/{poi_type}"
+            group_matrix = self._get_group_transform(poi_group, "Points of Interest", poi_layer_matrix)
 
+            initial_count = len(self.points_of_interest)
+            self._process_poi_elements(
+                poi_group, poi_type, self.points_of_interest,
+                group_matrix, group_path
+            )
+            count = len(self.points_of_interest) - initial_count
             logger.info(f"    Found {count} POI")
 
     def parse_svg_path(self, path_d: str) -> List[Tuple[float, float]]:
@@ -1431,6 +1639,11 @@ class SVGMapProcessor:
             logger.error("Region-Labels-post2512 layer not found!")
             return
 
+        # Build initial transform from the Region-Labels layer itself
+        regions_layer_matrix = self._get_group_transform(
+            regions_layer, "Region-Labels-post2512", IDENTITY_MATRIX
+        )
+
         # Map layer names to province types
         province_type_map = {
             "Nation-States": "Nation-State",
@@ -1446,28 +1659,59 @@ class SVGMapProcessor:
             province_type = province_type_map[layer_name]
             logger.info(f"  Processing province type: {province_type}")
 
-            # Extract labels from this group
-            initial_count = len(self.province_labels)
-            self._process_province_label_elements(region_group, province_type, self.province_labels)
-            count = len(self.province_labels) - initial_count
+            group_path = f"Region-Labels-post2512/{layer_name}"
+            group_matrix = self._get_group_transform(
+                region_group, "Region-Labels-post2512", regions_layer_matrix
+            )
 
+            initial_count = len(self.province_labels)
+            self._process_province_label_elements(
+                region_group, province_type, self.province_labels,
+                group_matrix, group_path
+            )
+            count = len(self.province_labels) - initial_count
             logger.info(f"    Found {count} labels")
 
-    def _process_province_label_elements(self, parent_elem, province_type: str, label_list: list):
-        """Recursively process province label elements, handling nested layers."""
+    def _process_province_label_elements(
+        self, parent_elem, province_type: str, label_list: list,
+        parent_matrix: TransformMatrix = IDENTITY_MATRIX,
+        layer_path: str = "Region-Labels-post2512",
+    ):
+        """Recursively process province label elements, flattening all group transforms."""
         for elem in parent_elem:
-            # Check if this is a layer/group
             if elem.tag == f"{{{NS['svg']}}}g":
-                # Recursively process children of this layer
-                self._process_province_label_elements(elem, province_type, label_list)
+                label = (
+                    elem.get(f"{{{NS['inkscape']}}}label")
+                    or elem.get("id", "")
+                )
+                child_path = f"{layer_path}/{label}" if label else layer_path
+                child_matrix = self._get_group_transform(elem, layer_path, parent_matrix)
+                self._process_province_label_elements(
+                    elem, province_type, label_list, child_matrix, child_path
+                )
             elif elem.tag == f"{{{NS['svg']}}}text":
                 name = self._get_text_element_label(elem)
                 if name:
                     try:
                         svg_x = float(elem.get("x", 0))
                         svg_y = float(elem.get("y", 0))
+
+                        # Detect and absorb any element-level transform
+                        elem_transform_str = elem.get("transform", "")
+                        if elem_transform_str:
+                            elem_path = f"{layer_path}/text:'{name}'"
+                            self.layers_with_transforms.append({
+                                "layer_path": elem_path,
+                                "transform": elem_transform_str,
+                                "context": f"Province label text element '{name}'",
+                            })
+                            elem_matrix = self._parse_transform_to_matrix(elem_transform_str)
+                            svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, elem_matrix)
+
+                        # Apply accumulated ancestor transform
+                        svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, parent_matrix)
+
                         geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
-                        
                         label = ProvinceLabel(
                             name=name,
                             province_type=province_type,
@@ -1497,6 +1741,13 @@ class SVGMapProcessor:
             logger.error("Water Labels layer not found!")
             return
 
+        # Build the initial transform from the Water Labels layer itself.
+        # This is critical: the Water Labels layer has its own translate that must
+        # be composed with every sub-group's transform before extracting coordinates.
+        water_layer_matrix = self._get_group_transform(
+            water_layer, "Water Labels", IDENTITY_MATRIX
+        )
+
         # Map layer names to waterbody types
         waterbody_type_map = {
             "ocean": "Ocean",
@@ -1517,64 +1768,82 @@ class SVGMapProcessor:
             # Handle marshes which has sub-layers
             if layer_name == "marshes":
                 logger.info(f"  Processing marshes...")
+                # The marshes group itself may have a transform
+                marshes_matrix = self._get_group_transform(
+                    water_group, "Water Labels", water_layer_matrix
+                )
                 for marsh_group in water_group:
                     marsh_layer_name = marsh_group.get(f"{{{NS['inkscape']}}}label")
                     if marsh_layer_name and marsh_layer_name in waterbody_type_map:
                         waterbody_type = waterbody_type_map[marsh_layer_name]
+                        marsh_path = f"Water Labels/marshes/{marsh_layer_name}"
+                        marsh_matrix = self._get_group_transform(
+                            marsh_group, "Water Labels/marshes", marshes_matrix
+                        )
                         initial_count = len(self.water_labels)
-                        # Get transform from marsh_group if it exists
-                        marsh_transform = marsh_group.get("transform", "")
-                        self._process_water_label_elements(marsh_group, waterbody_type, self.water_labels, marsh_transform)
+                        self._process_water_label_elements(
+                            marsh_group, waterbody_type, self.water_labels,
+                            marsh_matrix, marsh_path
+                        )
                         count = len(self.water_labels) - initial_count
                         logger.info(f"    Found {count} {waterbody_type} labels")
-            # Handle lakes which is a new tier
-            elif layer_name == "lakes":
-                logger.info(f"  Processing lakes...")
-                waterbody_type = waterbody_type_map[layer_name]
-                initial_count = len(self.water_labels)
-                lakes_transform = water_group.get("transform", "")
-                self._process_water_label_elements(water_group, waterbody_type, self.water_labels, lakes_transform)
-                count = len(self.water_labels) - initial_count
-                logger.info(f"    Found {count} {waterbody_type} labels")
+
             elif layer_name in waterbody_type_map:
                 waterbody_type = waterbody_type_map[layer_name]
                 logger.info(f"  Processing {waterbody_type}...")
-                
-                # Extract labels from this group
-                initial_count = len(self.water_labels)
-                group_transform = water_group.get("transform", "")
-                self._process_water_label_elements(water_group, waterbody_type, self.water_labels, group_transform)
-                count = len(self.water_labels) - initial_count
 
+                group_path = f"Water Labels/{layer_name}"
+                group_matrix = self._get_group_transform(
+                    water_group, "Water Labels", water_layer_matrix
+                )
+                initial_count = len(self.water_labels)
+                self._process_water_label_elements(
+                    water_group, waterbody_type, self.water_labels,
+                    group_matrix, group_path
+                )
+                count = len(self.water_labels) - initial_count
                 logger.info(f"    Found {count} labels")
 
-    def _process_water_label_elements(self, parent_elem, waterbody_type: str, label_list: list, parent_transform: str = ""):
-        """Recursively process water label elements, handling nested layers and transforms."""
+    def _process_water_label_elements(
+        self, parent_elem, waterbody_type: str, label_list: list,
+        parent_matrix: TransformMatrix = IDENTITY_MATRIX,
+        layer_path: str = "Water Labels",
+    ):
+        """Recursively process water label elements, flattening all group transforms."""
         for elem in parent_elem:
-            # Check if this is a layer/group
             if elem.tag == f"{{{NS['svg']}}}g":
-                # Get group transform and accumulate with parent
-                group_transform = elem.get("transform", "")
-                # Combine transforms: if both exist, concatenate them
-                combined_transform = (parent_transform + " " + group_transform).strip() if group_transform else parent_transform
-                # Recursively process children with accumulated transform
-                self._process_water_label_elements(elem, waterbody_type, label_list, combined_transform)
+                label = (
+                    elem.get(f"{{{NS['inkscape']}}}label")
+                    or elem.get("id", "")
+                )
+                child_path = f"{layer_path}/{label}" if label else layer_path
+                child_matrix = self._get_group_transform(elem, layer_path, parent_matrix)
+                self._process_water_label_elements(
+                    elem, waterbody_type, label_list, child_matrix, child_path
+                )
             elif elem.tag == f"{{{NS['svg']}}}text":
                 name = self._get_text_element_label(elem)
                 if name:
                     try:
                         svg_x = float(elem.get("x", 0))
                         svg_y = float(elem.get("y", 0))
-                        
-                        # Apply element-level transform if present
-                        transform = elem.get("transform", "")
-                        svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, transform)
-                        
-                        # Apply parent/group transform
-                        svg_x, svg_y = self._apply_svg_transform(svg_x, svg_y, parent_transform)
-                        
+
+                        # Detect and absorb any element-level transform
+                        elem_transform_str = elem.get("transform", "")
+                        if elem_transform_str:
+                            elem_path = f"{layer_path}/text:'{name}'"
+                            self.layers_with_transforms.append({
+                                "layer_path": elem_path,
+                                "transform": elem_transform_str,
+                                "context": f"Water label text element '{name}' (type={waterbody_type})",
+                            })
+                            elem_matrix = self._parse_transform_to_matrix(elem_transform_str)
+                            svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, elem_matrix)
+
+                        # Apply accumulated ancestor transform
+                        svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, parent_matrix)
+
                         geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
-                        
                         label = WaterLabel(
                             name=name,
                             waterbody_type=waterbody_type,
@@ -2013,8 +2282,61 @@ class SVGMapProcessor:
                 f.write(f"{water_type:30s} - {count:3d} labels\n")
             f.write(f"\nTotal Water Labels: {len(self.water_labels)}\n\n")
 
+            # ----------------------------------------------------------------
+            # Layer transform report
+            # ----------------------------------------------------------------
+            f.write("LAYER TRANSFORMS DETECTED AND ABSORBED\n")
+            f.write("-" * 80 + "\n")
+            f.write(
+                "All transforms listed below were detected on SVG groups/layers.\n"
+                "Each transform was absorbed (applied to element coordinates) so that\n"
+                "extracted coordinates are in absolute SVG space, consistent across\n"
+                "all layers regardless of how Inkscape organises its layer hierarchy.\n\n"
+            )
+            if self.layers_with_transforms:
+                f.write(f"Total groups/layers with transforms absorbed: {len(self.layers_with_transforms)}\n\n")
+                # Group by top-level layer for readability
+                by_layer: Dict[str, List[Dict]] = defaultdict(list)
+                for entry in self.layers_with_transforms:
+                    top = entry["layer_path"].split("/")[0]
+                    by_layer[top].append(entry)
+                for top_layer in sorted(by_layer.keys()):
+                    f.write(f"  [{top_layer}] ({len(by_layer[top_layer])} transform(s))\n")
+                    for entry in by_layer[top_layer]:
+                        f.write(f"    Path      : {entry['layer_path']}\n")
+                        f.write(f"    Transform : {entry['transform']}\n")
+                        f.write(f"    Context   : {entry['context']}\n")
+                        f.write("\n")
+            else:
+                f.write("  (No layer transforms detected.)\n\n")
+
+            f.write("COORDINATE CONVERSION\n")
+            f.write("-" * 80 + "\n")
+            f.write(
+                "Calibration: Inkscape display formula (direct, no least-squares fitting).\n"
+                f"  INKSCAPE_VB_X  = {INKSCAPE_VB_X}  (SVG x at longitude 0.0\u00b0)\n"
+                f"  INKSCAPE_C_Y   = {INKSCAPE_C_Y}  (SVG y constant for latitude)\n"
+                f"  INKSCAPE_SCALE = {INKSCAPE_SCALE}  (degrees per SVG user unit)\n"
+                "  geo_lon = (svg_x_abs - VB_X)  * SCALE\n"
+                "  geo_lat = (C_Y       - svg_y_abs) * SCALE\n\n"
+            )
+            f.write("Reference calibration points (validation only):\n")
+            for pt in CALIBRATION_POINTS:
+                calc = self.converter.svg_to_geo(pt["svg"][0], pt["svg"][1])
+                lon_err = calc[0] - pt["geo"][0]
+                lat_err = calc[1] - pt["geo"][1]
+                f.write(
+                    f"  {pt['settlement']:25s}: "
+                    f"svg=({pt['svg'][0]:.3f},{pt['svg'][1]:.3f})  "
+                    f"expected=({pt['geo'][0]:.4f},{pt['geo'][1]:.4f})  "
+                    f"calc=({calc[0]:.4f},{calc[1]:.4f})  "
+                    f"err=({lon_err:+.4f},{lat_err:+.4f})\u00b0\n"
+                )
+            f.write("\n")
+
             f.write("DATA QUALITY ISSUES\n")
             f.write("-" * 80 + "\n")
+            f.write(f"Groups/Layers with Transforms Absorbed: {len(self.layers_with_transforms)}\n")
             f.write(f"Invalid Settlement Elements: {len(self.invalid_settlements)}\n")
             f.write(f"Provinces with Duplicate Names: {len(self.duplicate_settlements)}\n")
             f.write(f"Settlements with Assigned Population Data: {sum(len(v) for v in self.missing_population_data.values())}\n")
@@ -2093,9 +2415,9 @@ def main():
     processor.populate_karaz_ankor_data()
     processor.process_points_of_interest()
     # processor.process_roads()  # Disabled: road extraction not needed currently
-    # processor.process_province_labels()
-    # processor.populate_province_data()
-    # processor.process_water_labels()
+    processor.process_province_labels()
+    processor.populate_province_data()
+    processor.process_water_labels()
 
     # Generate output files - ONLY Empire GeoJSON enabled
     processor.generate_empire_geojson()
@@ -2104,8 +2426,8 @@ def main():
     processor.generate_karaz_ankor_geojson()
     processor.generate_poi_geojson()
     # processor.generate_roads_geojson()  # Disabled: road extraction not needed currently
-    # processor.generate_province_labels_geojson()
-    # processor.generate_water_labels_geojson()
+    processor.generate_province_labels_geojson()
+    processor.generate_water_labels_geojson()
 
     # Write logs
     processor.write_invalid_settlements_log()
