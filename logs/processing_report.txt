@@ -12,25 +12,25 @@ Grand Total: 5297 settlements/holds
 
 EMPIRE SETTLEMENTS BY PROVINCE
 --------------------------------------------------------------------------------
-Averland             - 294 settlements,    239,218 total population
-Hochland             - 124 settlements,     82,869 total population
-Middenland           - 439 settlements,    304,241 total population
-Mootland             -  50 settlements,     20,171 total population
-Nordland             - 222 settlements,    146,417 total population
-Ostermark            - 260 settlements,    178,161 total population
-Ostland              - 292 settlements,    182,826 total population
-Reikland             - 609 settlements,    670,269 total population
-Stirland             - 372 settlements,    188,080 total population
-Talabecland          - 336 settlements,    323,560 total population
-Wissenland           - 537 settlements,    381,380 total population
+Averland             - 294 settlements,    242,085 total population
+Hochland             - 124 settlements,     86,526 total population
+Middenland           - 439 settlements,    306,649 total population
+Mootland             -  50 settlements,     20,752 total population
+Nordland             - 222 settlements,    143,473 total population
+Ostermark            - 260 settlements,    176,985 total population
+Ostland              - 292 settlements,    179,319 total population
+Reikland             - 609 settlements,    667,163 total population
+Stirland             - 372 settlements,    185,190 total population
+Talabecland          - 336 settlements,    322,859 total population
+Wissenland           - 537 settlements,    387,537 total population
 
-Empire Total Population: 2,717,192
-Westerland Total Population: 365,167
-Bretonnia Total Population: 660,276
+Empire Total Population: 2,718,538
+Westerland Total Population: 363,790
+Bretonnia Total Population: 671,340
 
 BRETONNIA SETTLEMENTS
 --------------------------------------------------------------------------------
-Total: 1482 settlements, 660,276 total population
+Total: 1482 settlements, 671,340 total population
 
 KARAZ ANKOR (DWARF HOLDS) BY TYPE
 --------------------------------------------------------------------------------
@@ -567,185 +567,185 @@ SVG Province Labels Not Found in CSV (should be added to gazetteer):
 Settlements with Invalid Tag Format:
   Fluorn:
     Tags: ['source:MadAlfred', 'source: 2eSH']
-    - Invalid source ' 2eSH' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source ' 2eSH' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Walen:
     Tags: ['source:4eStarter', 'source:4eBotR']
-    - Invalid source '4eBotR' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '4eBotR' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Couronne:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   L'Anguille:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Gisoreux:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Mousillon:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Bordeleaux:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Brionne:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Parravon:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Nez-en-Bessant:
     Tags: ['source:MoWC']
-    - Invalid source 'MoWC' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'MoWC' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Soreil:
     Tags: ['source:MoWC']
-    - Invalid source 'MoWC' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'MoWC' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Thurin:
     Tags: ['source:WDM']
-    - Invalid source 'WDM' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'WDM' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Erguy:
     Tags: ['source:MoWC']
-    - Invalid source 'MoWC' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'MoWC' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Serrac:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Hendaye:
     Tags: ['source:MoWC']
-    - Invalid source 'MoWC' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'MoWC' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Uesin:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Yremy:
     Tags: ['source:BrianCraig']
-    - Invalid source 'BrianCraig' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'BrianCraig' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Oisillon:
     Tags: ['source:1eCRB']
-    - Invalid source '1eCRB' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '1eCRB' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Poussenc:
     Tags: ['source:BretProj,source:TWW1']
-    - Invalid source 'BretProj,source:TWW1' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'BretProj,source:TWW1' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Grunère:
     Tags: ['source:TWW1']
-    - Invalid source 'TWW1' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'TWW1' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Montlac:
     Tags: ['source:TWW1']
-    - Invalid source 'TWW1' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'TWW1' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Sibourne:
     Tags: ['source:TVS']
-    - Invalid source 'TVS' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'TVS' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Saint-Jacques:
     Tags: ['source:BretProj']
-    - Invalid source 'BretProj' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'BretProj' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Brusse:
     Tags: ['source:TVS']
-    - Invalid source 'TVS' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'TVS' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Aquitaine:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Martel:
     Tags: ['source:MoWC']
-    - Invalid source 'MoWC' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'MoWC' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Portsall:
     Tags: ['source:MoWC']
-    - Invalid source 'MoWC' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'MoWC' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Merton:
     Tags: ['source:MoWC']
-    - Invalid source 'MoWC' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'MoWC' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Chantillon:
     Tags: ['source:MoWC']
-    - Invalid source 'MoWC' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'MoWC' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Aix Fronnard:
     Tags: ['source:WHMonthly']
-    - Invalid source 'WHMonthly' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'WHMonthly' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Marguilles:
     Tags: ['source:1eDDS']
-    - Invalid source '1eDDS' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '1eDDS' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Paillole:
     Tags: ['source:1eDDS']
-    - Invalid source '1eDDS' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '1eDDS' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Montdidier:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Derrevin Libre:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Gien:
     Tags: ['source:TWW1']
-    - Invalid source 'TWW1' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'TWW1' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Montfort:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   L'Arret:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Sigmarsheim:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Bastonne:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Quenelles:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Lyonesse:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Salignac-La-Rouge:
     Tags: ['source:1eDDS']
-    - Invalid source '1eDDS' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '1eDDS' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Merceaux-Descloux:
     Tags: ['source:1eDDS']
-    - Invalid source '1eDDS' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '1eDDS' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Laguiller:
     Tags: ['source:TVS']
-    - Invalid source 'TVS' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'TVS' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Muret:
     Tags: ['source:TVS']
-    - Invalid source 'TVS' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'TVS' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Ferignac:
     Tags: ['source:TVS']
-    - Invalid source 'TVS' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'TVS' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Clouseau:
     Tags: ['source:1eDDS']
-    - Invalid source '1eDDS' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '1eDDS' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Carcassonne:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Bergerac:
     Tags: ['source:WDM']
-    - Invalid source 'WDM' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'WDM' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Cavour:
     Tags: ['source:WDM']
-    - Invalid source 'WDM' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'WDM' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Chambourg:
     Tags: ['source:SonHeir', 'source:WFB8e']
-    - Invalid source 'SonHeir' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'SonHeir' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Chimay:
     Tags: ['source:BretProj']
-    - Invalid source 'BretProj' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'BretProj' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Cixous:
     Tags: ['source:TVS']
-    - Invalid source 'TVS' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'TVS' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Malmont:
     Tags: ['source:1eCRB']
-    - Invalid source '1eCRB' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '1eCRB' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Brillionne:
     Tags: ['source:Archaon']
-    - Invalid source 'Archaon' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'Archaon' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Ora Lamae:
     Tags: ['source:1eCRB']
-    - Invalid source '1eCRB' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '1eCRB' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Gasgoigne:
     Tags: ['source:4eDSLF']
-    - Invalid source '4eDSLF' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '4eDSLF' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Mercal:
     Tags: ['source:RedDuke']
-    - Invalid source 'RedDuke' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'RedDuke' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Aubenas:
     Tags: ['source:WHMonthly']
-    - Invalid source 'WHMonthly' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'WHMonthly' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Wainfleet:
     Tags: ['source:KniErrant']
-    - Invalid source 'KniErrant' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source 'KniErrant' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
   Tharravil:
     Tags: ['source:2eKotG']
-    - Invalid source '2eKotG' not in {'NCC', '4eUA2', 'AmbChron', 'G&FT', '4eTHRC', '4eStarter', '1eDSaS', '4eLoSaS', '4eEiS', '4eAotE1', '2eSH', '4ePBtTC', 'WFB8e', '4eMCotWW', '4eSCoSaS', '4eAotE3', '2eKAAotDC', '4eUA1', 'WAWE8E', '4eDotRC', '4eCRB', 'TWW3', 'MA', 'WAWE6E', 'TOW', 'MadAlfred', 'AndyLaw', '1eMSDtR'}
+    - Invalid source '2eKotG' not in {'G&FT', '4eMCotWW', '1eDSaS', '4eCRB', 'TWW3', '4eSCoSaS', '4eLoSaS', 'WFB8e', '2eKAAotDC', 'NCC', 'MA', '1eMSDtR', '4eDotRC', '4eAotE1', '4eTHRC', 'AmbChron', 'WAWE8E', 'AndyLaw', '4ePBtTC', 'MadAlfred', '4eAotE3', '4eStarter', '4eUA2', '2eSH', 'TOW', '4eUA1', 'WAWE6E', '4eEiS'}
 
