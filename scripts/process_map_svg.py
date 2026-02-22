@@ -186,6 +186,33 @@ class DwarfHold:
             }
 
 
+@dataclass
+class WoodElfSettlement:
+    """Represents a Wood Elf settlement within Athel Loren."""
+    name: str
+    svg_x: float
+    svg_y: float
+    geo_lon: float = 0.0
+    geo_lat: float = 0.0
+    settlement_type: str = ""
+    tags: List[str] = None
+    notes: List[str] = None
+    wiki: Dict = None
+
+    def __post_init__(self):
+        if self.tags is None:
+            self.tags = []
+        if self.notes is None:
+            self.notes = []
+        if self.wiki is None:
+            self.wiki = {
+                "title": None,
+                "url": None,
+                "description": None,
+                "image": None
+            }
+
+
 # SVG affine transform matrix type alias: (a, b, c, d, e, f)
 # Applies as:  x' = a*x + c*y + e
 #              y' = b*x + d*y + f
@@ -249,6 +276,7 @@ class SVGMapProcessor:
         self.settlements_westerland = []
         self.settlements_bretonnia = []
         self.settlements_karaz_ankor = []
+        self.settlements_wood_elves = []
         self.points_of_interest = []
         self.roads = []
         self.province_labels = []
@@ -263,6 +291,7 @@ class SVGMapProcessor:
         self.csv_data_westerland = {}  # {name: row_data}
         self.csv_data_bretonnia = {}  # {name: row_data}
         self.csv_data_karaz_ankor = {}  # {name: row_data}
+        self.csv_data_wood_elves = {}  # {name: row_data}
         self.csv_data_provinces = {}  # {name: row_data}
         
         # Track validation issues
@@ -815,6 +844,130 @@ class SVGMapProcessor:
         except ValueError:
             return None
 
+    def process_settlements_wood_elves(self):
+        """Process all Wood Elf settlements from the 'Wood Elves' sub-layer of Settlements."""
+        logger.info("Processing Wood Elf settlements...")
+
+        # Find Settlements layer
+        settlements_layer = None
+        for g in self.root.findall(f".//{{{NS['svg']}}}g"):
+            if g.get(f"{{{NS['inkscape']}}}label") == "Settlements":
+                settlements_layer = g
+                break
+
+        if settlements_layer is None:
+            logger.error("Settlements layer not found!")
+            return
+
+        # Find Wood Elves faction layer
+        wood_elves_faction = None
+        for child in settlements_layer:
+            if child.get(f"{{{NS['inkscape']}}}label") == "Wood Elves":
+                wood_elves_faction = child
+                break
+
+        if wood_elves_faction is None:
+            logger.error("Wood Elves faction layer not found in Settlements!")
+            return
+
+        settlements_in_faction = {}
+
+        # Build transform chain: Settlements -> Wood Elves faction
+        settlements_matrix = self._get_group_transform(
+            settlements_layer, "Settlements", IDENTITY_MATRIX
+        )
+        faction_matrix = self._get_group_transform(
+            wood_elves_faction, "Settlements/Wood Elves", settlements_matrix
+        )
+
+        # Recurse into the Wood Elves layer with the composed transform
+        self._process_wood_elf_elements(
+            wood_elves_faction, settlements_in_faction,
+            faction_matrix, "Settlements/Wood Elves"
+        )
+
+        logger.info(f"  Found {len(self.settlements_wood_elves)} valid Wood Elf settlements")
+
+    def _process_wood_elf_elements(
+        self, parent_elem, settlements_dict: dict,
+        parent_matrix: TransformMatrix = IDENTITY_MATRIX,
+        layer_path: str = "Settlements/Wood Elves",
+    ):
+        """Recursively process Wood Elf settlement elements, flattening all group transforms."""
+        for elem in parent_elem:
+            if elem.tag == f"{{{NS['svg']}}}g":
+                label = (
+                    elem.get(f"{{{NS['inkscape']}}}label")
+                    or elem.get("id", "")
+                )
+                child_path = f"{layer_path}/{label}" if label else layer_path
+                child_matrix = self._get_group_transform(elem, layer_path, parent_matrix)
+                self._process_wood_elf_elements(
+                    elem, settlements_dict, child_matrix, child_path
+                )
+            elif elem.tag == f"{{{NS['svg']}}}text":
+                result = self._validate_wood_elf_element(elem, parent_matrix, layer_path)
+                if result:
+                    name, svg_x, svg_y = result
+
+                    if name in settlements_dict:
+                        self.duplicate_settlements["Wood Elves"].append({
+                            "name": name,
+                            "occurrences": 2,
+                            "coordinates": [settlements_dict[name], (svg_x, svg_y)]
+                        })
+                    else:
+                        settlements_dict[name] = (svg_x, svg_y)
+                        geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
+                        settlement = WoodElfSettlement(
+                            name=name,
+                            svg_x=svg_x,
+                            svg_y=svg_y,
+                            geo_lon=geo_lon,
+                            geo_lat=geo_lat
+                        )
+                        self.settlements_wood_elves.append(settlement)
+
+    def _validate_wood_elf_element(
+        self, elem,
+        parent_matrix: TransformMatrix = IDENTITY_MATRIX,
+        layer_path: str = "Settlements/Wood Elves",
+    ) -> Optional[Tuple[str, float, float]]:
+        """Validate a Wood Elf settlement text element; return (name, abs_svg_x, abs_svg_y).
+
+        Mirrors _validate_dwarf_hold_element but for Wood Elf settlements.
+        All ancestor transforms must be encoded in parent_matrix.
+        """
+        if elem.tag != f"{{{NS['svg']}}}text":
+            return None
+
+        name = self._get_text_element_label(elem)
+        if not name:
+            return None
+
+        try:
+            svg_x = float(elem.get("x", 0))
+            svg_y = float(elem.get("y", 0))
+
+            # Detect and absorb any transform on the text element itself
+            elem_transform_str = elem.get("transform", "")
+            if elem_transform_str:
+                elem_path = f"{layer_path}/text:'{name}'"
+                self.layers_with_transforms.append({
+                    "layer_path": elem_path,
+                    "transform": elem_transform_str,
+                    "context": f"Wood Elf settlement text element '{name}'",
+                })
+                logger.debug(f"Text element transform absorbed: {elem_path!r}")
+                elem_matrix = self._parse_transform_to_matrix(elem_transform_str)
+                svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, elem_matrix)
+
+            # Apply accumulated ancestor transform
+            svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, parent_matrix)
+            return (name, svg_x, svg_y)
+        except ValueError:
+            return None
+
     def load_population_data(self, faction: str, province: Optional[str] = None) -> Dict[str, int]:
         """Load population data from CSV files."""
         populations = {}
@@ -910,7 +1063,8 @@ class SVGMapProcessor:
         valid_sources = {"AndyLaw", "2eSH", "4eAotE1", "4eEiS", "4ePBtTC", "4eSCoSaS",
                         "4eCRB", "4eDotRC", "NCC", "WFB8e", "AmbChron", "G&FT", "TOW", "1eMSDtR",
                         "4eLoSaS","4eTHRC","4eMCotWW","1eDSaS","TWW3","2eKAAotDC", "MadAlfred", "MA",
-                        "4eStarter", "4eUA1", "4eAotE3", "4eUA2", "4eAotE1"}
+                        "4eStarter", "4eUA1", "4eAotE3", "4eUA2", "4eAotE1",
+                        "WAWE6E", "WAWE8E"}  # Warhammer Armies: Wood Elves 6th/8th Edition
         issues = []
         
         for tag in tags:
@@ -1191,6 +1345,70 @@ class SVGMapProcessor:
             logger.warning(f"Karaz Ankor settlements in SVG but not in CSV: {len(self.svg_settlements_not_in_csv['Karaz Ankor'])}")
         if self.csv_settlements_not_in_svg["Karaz Ankor"]:
             logger.warning(f"Karaz Ankor settlements in CSV but not in SVG: {len(self.csv_settlements_not_in_svg['Karaz Ankor'])}")
+
+    def populate_wood_elves_data(self):
+        """Load data from wood_elves.csv and assign to Wood Elf settlements."""
+        logger.info("Loading and processing Wood Elves CSV data...")
+
+        # Load CSV data
+        csv_file = INPUT_DIR / "wood_elves.csv"
+        csv_data = {}
+
+        if csv_file.exists():
+            try:
+                with open(csv_file, 'r', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        settlement_name = row['Settlement'].strip()
+                        csv_data[settlement_name] = row
+            except Exception as e:
+                logger.warning(f"Error loading CSV from {csv_file}: {e}")
+                return
+
+        # Get set of SVG settlement names
+        svg_settlement_names = {s.name for s in self.settlements_wood_elves}
+
+        # Process each Wood Elf settlement
+        for settlement in self.settlements_wood_elves:
+            if settlement.name in csv_data:
+                row = csv_data[settlement.name]
+
+                # Settlement type (instead of population)
+                settlement.settlement_type = row.get('Type', '').strip()
+
+                # Tags
+                tags_str = row.get('Tags', '')
+                trade_str = row.get('Trade', '')
+                settlement.tags = self.parse_tags(tags_str, trade_str)
+                settlement.tags = self.validate_tags(settlement.tags, settlement.name)
+
+                # Notes
+                settlement.notes = self.parse_notes(row.get('Notes', ''))
+
+                # Wiki data
+                settlement.wiki = {
+                    "title": row.get('wiki_title') or None,
+                    "url": row.get('wiki_url') or None,
+                    "description": row.get('wiki_description') or None,
+                    "image": row.get('wiki_image') or None
+                }
+            else:
+                # Settlement in SVG but not in CSV
+                self.svg_settlements_not_in_csv["Wood Elves"].append(settlement.name)
+                settlement.settlement_type = ""
+                settlement.tags = []
+                settlement.notes = []
+
+        # Track CSV settlements not in SVG
+        for csv_name in csv_data.keys():
+            if csv_name not in svg_settlement_names:
+                self.csv_settlements_not_in_svg["Wood Elves"].append(csv_name)
+
+        # Log summaries
+        if self.svg_settlements_not_in_csv["Wood Elves"]:
+            logger.warning(f"Wood Elf settlements in SVG but not in CSV: {len(self.svg_settlements_not_in_csv['Wood Elves'])}")
+        if self.csv_settlements_not_in_svg["Wood Elves"]:
+            logger.warning(f"Wood Elf settlements in CSV but not in SVG: {len(self.csv_settlements_not_in_svg['Wood Elves'])}")
 
     def populate_province_data(self):
         """Load data from provinces.csv and assign to province labels."""
@@ -1990,6 +2208,37 @@ class SVGMapProcessor:
 
         logger.info(f"Generated {output_file}: {len(features)} holds")
 
+    def generate_wood_elves_geojson(self):
+        """Generate GeoJSON for Wood Elf settlements."""
+        features = []
+        for settlement in self.settlements_wood_elves:
+            feature = {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [settlement.geo_lon, settlement.geo_lat]
+                },
+                "properties": {
+                    "name": settlement.name,
+                    "settlement_type": settlement.settlement_type,
+                    "tags": settlement.tags,
+                    "notes": settlement.notes,
+                    "inkscape_coordinates": [settlement.svg_x, settlement.svg_y],
+                    "wiki": settlement.wiki
+                }
+            }
+            features.append(feature)
+
+        geojson = {
+            "type": "FeatureCollection",
+            "features": features
+        }
+
+        output_file = OUTPUT_DIR / "wood_elves.geojson"
+        with open(output_file, 'w', encoding='utf-8') as f:
+            json.dump(geojson, f, indent=2, ensure_ascii=False)
+
+        logger.info(f"Generated {output_file}: {len(features)} settlements")
 
     def generate_poi_geojson(self):
         """Generate GeoJSON for points of interest."""
@@ -2200,6 +2449,12 @@ class SVGMapProcessor:
             if hold.hold_type:
                 karaz_ankor_by_type[hold.hold_type] += 1
 
+        wood_elves_total_count = len(self.settlements_wood_elves)
+        wood_elves_by_type = defaultdict(int)
+        for s in self.settlements_wood_elves:
+            if s.settlement_type:
+                wood_elves_by_type[s.settlement_type] += 1
+
         total_road_points = sum(len(road.geo_coordinates) for road in self.roads)
 
         with open(output_file, 'w', encoding='utf-8') as f:
@@ -2212,7 +2467,8 @@ class SVGMapProcessor:
             f.write(f"Westerland Total: {westerland_total_count} settlements\n")
             f.write(f"Bretonnia Total: {bretonnia_total_count} settlements\n")
             f.write(f"Karaz Ankor Total: {karaz_ankor_total_count} holds\n")
-            f.write(f"Grand Total: {len(self.settlements_empire) + westerland_total_count + bretonnia_total_count + karaz_ankor_total_count} settlements/holds\n\n")
+            f.write(f"Wood Elves Total: {wood_elves_total_count} settlements\n")
+            f.write(f"Grand Total: {len(self.settlements_empire) + westerland_total_count + bretonnia_total_count + karaz_ankor_total_count + wood_elves_total_count} settlements/holds\n\n")
 
             f.write("EMPIRE SETTLEMENTS BY PROVINCE\n")
             f.write("-" * 80 + "\n")
@@ -2239,6 +2495,17 @@ class SVGMapProcessor:
             if holds_without_type > 0:
                 f.write(f"{'(No type assigned)':40s} - {holds_without_type:3d} holds\n")
             f.write(f"\nTotal Karaz Ankor Holds: {karaz_ankor_total_count}\n\n")
+
+            f.write("WOOD ELF SETTLEMENTS BY TYPE\n")
+            f.write("-" * 80 + "\n")
+            for settlement_type in sorted(wood_elves_by_type.keys()):
+                count = wood_elves_by_type[settlement_type]
+                f.write(f"{settlement_type:40s} - {count:3d} settlements\n")
+            # Count settlements without type
+            without_type = wood_elves_total_count - sum(wood_elves_by_type.values())
+            if without_type > 0:
+                f.write(f"{'(No type assigned)':40s} - {without_type:3d} settlements\n")
+            f.write(f"\nTotal Wood Elf Settlements: {wood_elves_total_count}\n\n")
 
 
             f.write("POINTS OF INTEREST\n")
@@ -2411,8 +2678,10 @@ def main():
     processor.process_settlements_westerland()
     processor.process_settlements_bretonnia()
     processor.process_settlements_karaz_ankor()
+    processor.process_settlements_wood_elves()
     processor.populate_settlement_data()
     processor.populate_karaz_ankor_data()
+    processor.populate_wood_elves_data()
     processor.process_points_of_interest()
     # processor.process_roads()  # Disabled: road extraction not needed currently
     processor.process_province_labels()
@@ -2424,6 +2693,7 @@ def main():
     processor.generate_westerland_geojson()
     processor.generate_bretonnia_geojson()
     processor.generate_karaz_ankor_geojson()
+    processor.generate_wood_elves_geojson()
     processor.generate_poi_geojson()
     # processor.generate_roads_geojson()  # Disabled: road extraction not needed currently
     processor.generate_province_labels_geojson()

@@ -2184,6 +2184,528 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -1.1490487108594813,
+          48.92112598587447
+        ]
+      },
+      "properties": {
+        "name": "La Maisontaal Abbey",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          362.88507821872247,
+          552.9959103133871
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.708307505707481,
+          49.55273262011447
+        ]
+      },
+      "properties": {
+        "name": "The Humble Chapel",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          45.2857412187225,
+          516.912350313387
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9.86174610445948,
+          54.27782767003447
+        ]
+      },
+      "properties": {
+        "name": "Hospice of Saint Guet",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -134.8695717812775,
+          246.968620313387
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -10.08087567289984,
+          53.40775403996767
+        ]
+      },
+      "properties": {
+        "name": "Hermitage of Gillemont",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -147.38839996,
+          296.67575182999997
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.61602299344384,
+          51.79006306652767
+        ]
+      },
+      "properties": {
+        "name": "Priory of Fayard",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -63.701660960000005,
+          389.09411183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.759760763587839,
+          50.544340495007674
+        ]
+      },
+      "properties": {
+        "name": "Pied-a-Cochon Shrine",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -14.78357196,
+          460.26199183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.84538674326784,
+          50.84264996444768
+        ]
+      },
+      "properties": {
+        "name": "Chapel of Frenegonde",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -19.675366959999998,
+          443.21963182999997
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.021905731603839,
+          49.07536282291167
+        ]
+      },
+      "properties": {
+        "name": "Mont-Saint-Gilles",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          84.49973654,
+          544.1843908300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.0493982703398395,
+          48.430385215647675
+        ]
+      },
+      "properties": {
+        "name": "Grail Chapel of Malmont",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          254.31849004,
+          581.0318318300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.021456640227838,
+          54.03568115836768
+        ]
+      },
+      "properties": {
+        "name": "Hermitage of Saint Cheval",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          84.52539304000001,
+          260.80240183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.374195881219839,
+          50.24694928540768
+        ]
+      },
+      "properties": {
+        "name": "Grail Chapel of Saint Gilles le Breton",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          121.50327004,
+          477.25189183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.63627862224384,
+          49.85749018652768
+        ]
+      },
+      "properties": {
+        "name": "Hermitage of Saint Beatrice",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -64.85886096,
+          499.50161183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.076823012419839,
+          45.34078078172767
+        ]
+      },
+      "properties": {
+        "name": "Chapel of the Enchantress",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          252.75172004,
+          757.5403118300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.449218900419838,
+          50.191040984287675
+        ]
+      },
+      "properties": {
+        "name": "Cathedral of Bastonne",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          117.21722004,
+          480.44592183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.2903646549798395,
+          47.87072842332768
+        ]
+      },
+      "properties": {
+        "name": "Abbey of the Grail Companions",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          183.42233004,
+          613.0049118300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.451823107139839,
+          43.812134756767676
+        ]
+      },
+      "properties": {
+        "name": "Abbey of the Holy Wine",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          231.32804004000002,
+          844.87155183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.790364820419839,
+          42.77437423356768
+        ]
+      },
+      "properties": {
+        "name": "Monastery of Shallya's Sons",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          211.98722004,
+          904.1586018300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.108073139651838,
+          47.46838427996767
+        ]
+      },
+      "properties": {
+        "name": "Grail Chapel of Saint Remy",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -34.68258796,
+          635.99075183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.967448156643839,
+          47.847290742367676
+        ]
+      },
+      "properties": {
+        "name": "Abbey of Saint Baoust the Seafarer",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -26.64871096,
+          614.34390183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.723958533699839,
+          52.82906182268767
+        ]
+      },
+      "properties": {
+        "name": "Abbey of Saint Pollard",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          101.52140004,
+          329.73632183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.8567709896998394,
+          52.41499927644768
+        ]
+      },
+      "properties": {
+        "name": "Hermitage of Saint Hughes",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          151.06365004,
+          353.39163183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.925781439107839,
+          51.960572156127675
+        ]
+      },
+      "properties": {
+        "name": "Grail Chapel du Roi",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          89.99129804,
+          379.35296182999997
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1031195640998399,
+          51.49083323676767
+        ]
+      },
+      "properties": {
+        "name": "Reikgott Temple",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          422.63880004,
+          406.18905183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9.631567947459839,
+          51.50372195708768
+        ]
+      },
+      "properties": {
+        "name": "Temple of the Benevolent Tides",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -121.71953995999999,
+          405.45272183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -10.750233008899839,
+          52.952922577247676
+        ]
+      },
+      "properties": {
+        "name": "Monastery of Manann's Trident",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -185.62864996,
+          322.66018183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.252341177667839,
+          55.359663413727674
+        ]
+      },
+      "properties": {
+        "name": "Temple of the Crested Wave",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -42.92459196,
+          185.16356183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.774598640131838,
+          56.95709860083167
+        ]
+      },
+      "properties": {
+        "name": "Hermitage of Saint Feulard",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          41.49854204,
+          93.90241083000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -10.062500148739838,
+          55.37658820636767
+        ]
+      },
+      "properties": {
+        "name": "Chapel du Leonceour",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          -146.33860995999999,
+          184.19665182999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.83742101785984,
+          51.025872559327674
+        ]
+      },
+      "properties": {
+        "name": "Plague Hospital of Saint Claret",
+        "type": "Monasteries and Temples",
+        "inkscape_coordinates": [
+          152.16911004,
+          432.75216183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -2.26398416313984,
           53.34157999292767
         ]
@@ -2850,16 +3372,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -2.27984716313984,
-          50.195063928607674
+          -2.2733367253798393,
+          50.17748571164768
         ]
       },
       "properties": {
         "name": "Helspire",
         "type": "Forts and Castles",
         "inkscape_coordinates": [
-          298.28279003999995,
-          480.21609183
+          298.65473004,
+          481.22033182999996
         ]
       }
     },
@@ -3984,6 +4506,816 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -2.3576991788198396,
+          50.14493649852768
+        ]
+      },
+      "properties": {
+        "name": "Taal's Horn Keep",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          293.83512004,
+          483.07986182999997
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.62109380793984,
+          55.90328076572767
+        ]
+      },
+      "properties": {
+        "name": "Château D'yon",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          164.52784004,
+          154.10681183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.111979465539839,
+          55.417603579167675
+        ]
+      },
+      "properties": {
+        "name": "Fort Villeroy",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          193.61344004,
+          181.85345182999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.6257636808998392,
+          54.868005110367676
+        ]
+      },
+      "properties": {
+        "name": "Tancred Castle",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          221.39085004,
+          213.25190182999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -10.42982508953984,
+          55.560380206367675
+        ]
+      },
+      "properties": {
+        "name": "Château Basquet",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          -167.32380996,
+          173.69665182999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -10.63974723577984,
+          54.68386180508767
+        ]
+      },
+      "properties": {
+        "name": "Château Lambor",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          -179.31661996,
+          223.77197182999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.968762304451839,
+          54.85557411964768
+        ]
+      },
+      "properties": {
+        "name": "Grasgar Castle",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          -26.72378796,
+          213.96208183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.164874004739838,
+          50.807663844447674
+        ]
+      },
+      "properties": {
+        "name": "Castle Rachard",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          -37.927609960000005,
+          445.21838183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.06359566819584,
+          50.264443658207675
+        ]
+      },
+      "properties": {
+        "name": "Château Oisement",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          -32.14159896,
+          476.25244183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.72753547949184,
+          50.031502876767675
+        ]
+      },
+      "properties": {
+        "name": "Turris Vigilans",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          -12.94254796,
+          489.56030183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.346354174659839,
+          52.38244743772768
+        ]
+      },
+      "properties": {
+        "name": "Castle Desfleuve",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          180.22366004,
+          355.25131182999996
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.8940115480998395,
+          48.83549866684767
+        ]
+      },
+      "properties": {
+        "name": "Sanglac Castle",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          377.45530004,
+          557.88778183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.412760641399039,
+          45.84989459900767
+        ]
+      },
+      "properties": {
+        "name": "Castle Gransette",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          5.04047524,
+          728.4547418300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.341864419555839,
+          47.52532566716768
+        ]
+      },
+      "properties": {
+        "name": "Château d'Epee",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          66.22056104,
+          632.73770183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.476394735619839,
+          50.22485188572768
+        ]
+      },
+      "properties": {
+        "name": "Castle Bastonne",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          115.66467004,
+          478.51431183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.22043689433984,
+          49.80592952892767
+        ]
+      },
+      "properties": {
+        "name": "Castle Garamont",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          130.28749004,
+          502.44726183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.816244328579839,
+          50.075697151007674
+        ]
+      },
+      "properties": {
+        "name": "Castle Sangasse",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          153.37893004,
+          487.03549183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.062500267875839,
+          53.84078094492768
+        ]
+      },
+      "properties": {
+        "name": "Castle Artois",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          -32.07901896,
+          271.93701183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9.381510704579838,
+          55.58296824316767
+        ]
+      },
+      "properties": {
+        "name": "Barley Motte",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          -107.43381996,
+          172.40620183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.2356772979558395,
+          47.59078082492768
+        ]
+      },
+      "properties": {
+        "name": "Castle Aquin",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          15.15721104,
+          628.99826183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.7057294604198394,
+          43.61942621916768
+        ]
+      },
+      "properties": {
+        "name": "Castle Carrard",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          273.95222004,
+          855.8809518300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.59456610745984,
+          42.42918520124768
+        ]
+      },
+      "properties": {
+        "name": "Fort Solstice",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          280.30296003999996,
+          923.87918183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.355074298179839,
+          43.69884589308767
+        ]
+      },
+      "properties": {
+        "name": "Summerfall Fort",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          236.85528004,
+          851.34372183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.084635542819839,
+          44.118124631327674
+        ]
+      },
+      "properties": {
+        "name": "Castle Carcassonne",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          80.91599504,
+          827.3904118300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.6662751135398395,
+          51.148326867487675
+        ]
+      },
+      "properties": {
+        "name": "Garban Hold",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          219.07644004,
+          425.75637183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.430145486419838,
+          50.77728127644768
+        ]
+      },
+      "properties": {
+        "name": "Grenouille Gate",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          4.047282539999999,
+          446.95413183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.23201954662016025,
+          41.96882912604767
+        ]
+      },
+      "properties": {
+        "name": "Gaudaron Keep",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          441.78523004,
+          950.17923183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.56640623577984,
+          48.38765515100768
+        ]
+      },
+      "properties": {
+        "name": "Crac de Sang",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          167.65213004,
+          583.4729918300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.72438679897984,
+          42.257932541727676
+        ]
+      },
+      "properties": {
+        "name": "Château Lovarre",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          272.88633003999996,
+          933.66281183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.75016686521984,
+          41.702744695647674
+        ]
+      },
+      "properties": {
+        "name": "La Salvegarde",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          271.41352004,
+          965.3805818300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -2.6258706111398395,
+          49.89155419580767
+        ]
+      },
+      "properties": {
+        "name": "Château de Chegney",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          278.51454004,
+          497.55554183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.326823036419839,
+          51.335572231647674
+        ]
+      },
+      "properties": {
+        "name": "La Maumotte",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          181.33947004,
+          415.05908182999997
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.789062701251838,
+          52.38635345532767
+        ]
+      },
+      "properties": {
+        "name": "Château Billot",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          97.80201204000001,
+          355.02816183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -10.703125368899839,
+          52.90067646300768
+        ]
+      },
+      "properties": {
+        "name": "Fort Lagalant",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          -182.93739996,
+          325.64499183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.19010444537984,
+          50.50744731420768
+        ]
+      },
+      "properties": {
+        "name": "Donjon de Dol",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          -39.36901996,
+          462.36969182999997
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.8932293519398393,
+          48.07124882108767
+        ]
+      },
+      "properties": {
+        "name": "Château Godiveau",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          206.11059004,
+          601.5492218300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.057291718339839,
+          49.57385344508767
+        ]
+      },
+      "properties": {
+        "name": "Château d'Orquelis",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          196.73774004,
+          515.70572183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.6843689509158395,
+          50.822396436127676
+        ]
+      },
+      "properties": {
+        "name": "Château Valois",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          46.653346039999995,
+          444.37671183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.03125014573184,
+          53.194947584607675
+        ]
+      },
+      "properties": {
+        "name": "Château Herry",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          83.96589204,
+          308.83334183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.170572861059839,
+          54.316041151007674
+        ]
+      },
+      "properties": {
+        "name": "La Neuferte",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          247.39581004000001,
+          244.78549182999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.021349797507839,
+          57.43678915683168
+        ]
+      },
+      "properties": {
+        "name": "Château Langon",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          27.401698040000003,
+          66.49778583000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.0297427012518385,
+          56.58697370268768
+        ]
+      },
+      "properties": {
+        "name": "Château d'Andousse",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          84.05201204000001,
+          115.04757183000001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -6.76631250909184,
+          55.89275718588768
+        ]
+      },
+      "properties": {
+        "name": "Château Chablis",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          41.97192704,
+          154.70802182999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.901443147427837,
+          54.44723870716767
+        ]
+      },
+      "properties": {
+        "name": "Château Thibault",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          -80.00765695999999,
+          237.29020183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.8528646028198392,
+          52.57255138012768
+        ]
+      },
+      "properties": {
+        "name": "Bergbres",
+        "type": "Forts and Castles",
+        "inkscape_coordinates": [
+          208.41662004,
+          344.39071183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -2.61253168793984,
           53.13041698812768
         ]
@@ -4678,6 +6010,60 @@
         "inkscape_coordinates": [
           555.98878004,
           857.0846218300001
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -4.200520998979839,
+          52.48921816188767
+        ]
+      },
+      "properties": {
+        "name": "King of the Gap",
+        "type": "Other",
+        "inkscape_coordinates": [
+          188.55508004,
+          349.15152183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.832031503211481,
+          50.99312417723447
+        ]
+      },
+      "properties": {
+        "name": "Guerac Circle",
+        "type": "Other",
+        "inkscape_coordinates": [
+          -18.9123847812775,
+          434.62307031338696
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.66974412653948,
+          46.22712227931447
+        ]
+      },
+      "properties": {
+        "name": "Barrows of Cuileux",
+        "type": "Other",
+        "inkscape_coordinates": [
+          104.61865821872252,
+          706.9038003133871
         ]
       }
     }
