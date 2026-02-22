@@ -968,8 +968,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          4.2354044289632,
-          40.52179195355199
+          3.5539054433632002,
+          39.87471108315199
         ]
       },
       "properties": {
@@ -978,8 +978,8 @@
         "formal_title": "The Border Principalities",
         "part_of": "",
         "inkscape_coordinates": [
-          670.4978033,
-          1032.8481745000001
+          631.5639033,
+          1069.8157745
         ],
         "info": {
           "wiki_url": "https://warhammerfantasy.fandom.com/wiki/Border_Princes",
@@ -1904,38 +1904,12 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          5.4755313217632,
-          58.295514660368
-        ]
-      },
-      "properties": {
-        "name": "PRIMORYE OBLAST (",
-        "province_type": "Grand-Province",
-        "formal_title": "",
-        "part_of": "",
-        "inkscape_coordinates": [
-          741.3460033,
-          17.4389705
-        ],
-        "info": {
-          "wiki_url": null,
-          "image": null,
-          "description": null
-        },
-        "population": 0
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           8.3942912894432,
           54.776564342671996
         ]
       },
       "properties": {
-        "name": "POLYANYA OBLAST (",
+        "name": "POLYANYA OBLAST (Southern Oblast)",
         "province_type": "Grand-Province",
         "formal_title": "",
         "part_of": "",
@@ -1961,7 +1935,7 @@
         ]
       },
       "properties": {
-        "name": "UNGOLSK OBLAST (",
+        "name": "UNGOLSK OBLAST (Eastern Oblast)",
         "province_type": "Grand-Province",
         "formal_title": "",
         "part_of": "",
@@ -2077,6 +2051,32 @@
           "wiki_url": "https://warhammerfantasy.fandom.com/wiki/Magritta",
           "image": null,
           "description": "Magritta, formally the Kingdom of Magritta, is the largest and one of the most important cities in Estalia. Built by natural deep-water harbours within the sheltered Bay of Quietude, its reputation as a friendly port with ready markets for all manner of cargoes draws traders from many ports across the world of Mallus. Its quays are usually crowded, and, among the assortment of Old Worlder merchantmen, one can occasionally catch a glimpse of a strangely rigged craft from Araby or even further afield."
+        },
+        "population": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.979611844643201,
+          58.26649985492799
+        ]
+      },
+      "properties": {
+        "name": "PRIMORYE OBLAST (Western Oblast)",
+        "province_type": "Grand-Province",
+        "formal_title": "",
+        "part_of": "",
+        "inkscape_coordinates": [
+          713.0142233,
+          19.0965805
+        ],
+        "info": {
+          "wiki_url": null,
+          "image": null,
+          "description": null
         },
         "population": 0
       }
