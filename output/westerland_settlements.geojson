@@ -13,7 +13,7 @@
       "properties": {
         "name": "Erlach",
         "province": "Westerland",
-        "population": 128,
+        "population": 149,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -41,7 +41,7 @@
       "properties": {
         "name": "Siert",
         "province": "Westerland",
-        "population": 62,
+        "population": 173,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -69,10 +69,10 @@
       "properties": {
         "name": "Ammerhuis",
         "province": "Westerland",
-        "population": 543,
+        "population": 153,
         "tags": [],
         "notes": [],
-        "size_category": 2,
+        "size_category": 1,
         "inkscape_coordinates": [
           276.7523421,
           378.9653637
@@ -157,7 +157,7 @@
       "properties": {
         "name": "Grimpengratz",
         "province": "Westerland",
-        "population": 223,
+        "population": 32,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -185,7 +185,7 @@
       "properties": {
         "name": "Lemmbourg",
         "province": "Westerland",
-        "population": 21,
+        "population": 167,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -273,7 +273,7 @@
       "properties": {
         "name": "Keterveen",
         "province": "Westerland",
-        "population": 100,
+        "population": 134,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -301,10 +301,10 @@
       "properties": {
         "name": "Maasten",
         "province": "Westerland",
-        "population": 191,
+        "population": 379,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           257.0537221,
           333.3086937
@@ -329,10 +329,10 @@
       "properties": {
         "name": "Teskerdorp",
         "province": "Westerland",
-        "population": 66,
+        "population": 782,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           245.9522221,
           336.8374037
@@ -357,10 +357,10 @@
       "properties": {
         "name": "Koorst",
         "province": "Westerland",
-        "population": 782,
+        "population": 75,
         "tags": [],
         "notes": [],
-        "size_category": 2,
+        "size_category": 1,
         "inkscape_coordinates": [
           263.2124221,
           329.10440370000003
@@ -385,7 +385,7 @@
       "properties": {
         "name": "Vesterecht",
         "province": "Westerland",
-        "population": 163,
+        "population": 32,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -413,7 +413,7 @@
       "properties": {
         "name": "Moerasstad",
         "province": "Westerland",
-        "population": 52,
+        "population": 66,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -499,7 +499,7 @@
       "properties": {
         "name": "Almshoven",
         "province": "Westerland",
-        "population": 358,
+        "population": 363,
         "tags": [],
         "notes": [],
         "size_category": 2,
@@ -527,7 +527,7 @@
       "properties": {
         "name": "Randstaad",
         "province": "Westerland",
-        "population": 264,
+        "population": 51,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -555,7 +555,7 @@
       "properties": {
         "name": "Loenen",
         "province": "Westerland",
-        "population": 38,
+        "population": 256,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -583,10 +583,10 @@
       "properties": {
         "name": "Oostwald",
         "province": "Westerland",
-        "population": 53,
+        "population": 390,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           349.9873921,
           135.33939370000002
@@ -611,10 +611,10 @@
       "properties": {
         "name": "Stedum",
         "province": "Westerland",
-        "population": 470,
+        "population": 266,
         "tags": [],
         "notes": [],
-        "size_category": 2,
+        "size_category": 1,
         "inkscape_coordinates": [
           346.8206121,
           143.26213370000002
@@ -699,7 +699,7 @@
       "properties": {
         "name": "Haarskamp",
         "province": "Westerland",
-        "population": 215,
+        "population": 248,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -727,7 +727,7 @@
       "properties": {
         "name": "Vasse",
         "province": "Westerland",
-        "population": 83,
+        "population": 107,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -785,7 +785,7 @@
       "properties": {
         "name": "Ruttenkoop",
         "province": "Westerland",
-        "population": 198,
+        "population": 258,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -813,10 +813,10 @@
       "properties": {
         "name": "Heuveldorp",
         "province": "Westerland",
-        "population": 130,
+        "population": 468,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           247.1872621,
           364.6695937
@@ -841,7 +841,7 @@
       "properties": {
         "name": "Heppeldorp",
         "province": "Westerland",
-        "population": 80,
+        "population": 101,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -869,10 +869,10 @@
       "properties": {
         "name": "Fort Bergbres",
         "province": "Westerland",
-        "population": 218,
+        "population": 354,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           210.8405421,
           345.8148837
@@ -897,7 +897,7 @@
       "properties": {
         "name": "Kleindorpje",
         "province": "Westerland",
-        "population": 449,
+        "population": 550,
         "tags": [],
         "notes": [],
         "size_category": 2,
@@ -925,10 +925,10 @@
       "properties": {
         "name": "Grensstad",
         "province": "Westerland",
-        "population": 307,
+        "population": 87,
         "tags": [],
         "notes": [],
-        "size_category": 2,
+        "size_category": 1,
         "inkscape_coordinates": [
           362.5089321,
           247.3883137
@@ -953,7 +953,7 @@
       "properties": {
         "name": "Wouduin",
         "province": "Westerland",
-        "population": 130,
+        "population": 155,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1011,7 +1011,7 @@
       "properties": {
         "name": "Gieten",
         "province": "Westerland",
-        "population": 72,
+        "population": 91,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1039,7 +1039,7 @@
       "properties": {
         "name": "Diever",
         "province": "Westerland",
-        "population": 224,
+        "population": 47,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1067,7 +1067,7 @@
       "properties": {
         "name": "Rotsachhaven",
         "province": "Westerland",
-        "population": 144,
+        "population": 132,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1155,10 +1155,10 @@
       "properties": {
         "name": "Smerigwaard",
         "province": "Westerland",
-        "population": 60,
+        "population": 487,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           315.8452721,
           321.4815137
@@ -1183,7 +1183,7 @@
       "properties": {
         "name": "Klauperdorf",
         "province": "Westerland",
-        "population": 103,
+        "population": 211,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1211,7 +1211,7 @@
       "properties": {
         "name": "Fessel",
         "province": "Westerland",
-        "population": 68,
+        "population": 96,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1269,7 +1269,7 @@
       "properties": {
         "name": "Middeldijk",
         "province": "Westerland",
-        "population": 271,
+        "population": 207,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1297,10 +1297,10 @@
       "properties": {
         "name": "Havenrijk",
         "province": "Westerland",
-        "population": 413,
+        "population": 129,
         "tags": [],
         "notes": [],
-        "size_category": 2,
+        "size_category": 1,
         "inkscape_coordinates": [
           277.4130521,
           322.2977937
@@ -1325,7 +1325,7 @@
       "properties": {
         "name": "Kloosterdam",
         "province": "Westerland",
-        "population": 117,
+        "population": 162,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1353,10 +1353,10 @@
       "properties": {
         "name": "Driewegen",
         "province": "Westerland",
-        "population": 174,
+        "population": 577,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           274.1634121,
           309.3715237
@@ -1381,10 +1381,10 @@
       "properties": {
         "name": "Oudegracht",
         "province": "Westerland",
-        "population": 104,
+        "population": 391,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           275.6265221,
           325.7288537
@@ -1409,7 +1409,7 @@
       "properties": {
         "name": "Kranedam",
         "province": "Westerland",
-        "population": 77,
+        "population": 75,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1437,7 +1437,7 @@
       "properties": {
         "name": "Zwanedam",
         "province": "Westerland",
-        "population": 55,
+        "population": 118,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1465,7 +1465,7 @@
       "properties": {
         "name": "Zwaneveerboot",
         "province": "Westerland",
-        "population": 126,
+        "population": 190,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1493,7 +1493,7 @@
       "properties": {
         "name": "Zijlpoort",
         "province": "Westerland",
-        "population": 186,
+        "population": 152,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1521,7 +1521,7 @@
       "properties": {
         "name": "Stillebroek",
         "province": "Westerland",
-        "population": 101,
+        "population": 162,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1549,10 +1549,10 @@
       "properties": {
         "name": "Slangenmeer",
         "province": "Westerland",
-        "population": 50,
+        "population": 572,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           264.1845921,
           318.6252837
@@ -1577,7 +1577,7 @@
       "properties": {
         "name": "Gieterveen",
         "province": "Westerland",
-        "population": 92,
+        "population": 116,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1605,7 +1605,7 @@
       "properties": {
         "name": "Blekersdijk",
         "province": "Westerland",
-        "population": 176,
+        "population": 118,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1633,10 +1633,10 @@
       "properties": {
         "name": "Molenwaard",
         "province": "Westerland",
-        "population": 45,
+        "population": 733,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           236.4554721,
           339.2618437
@@ -1661,7 +1661,7 @@
       "properties": {
         "name": "Kranegracht",
         "province": "Westerland",
-        "population": 203,
+        "population": 106,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1689,7 +1689,7 @@
       "properties": {
         "name": "Zilvermeer",
         "province": "Westerland",
-        "population": 62,
+        "population": 94,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1717,7 +1717,7 @@
       "properties": {
         "name": "Torenbroek",
         "province": "Westerland",
-        "population": 114,
+        "population": 67,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1745,7 +1745,7 @@
       "properties": {
         "name": "Weteringh",
         "province": "Westerland",
-        "population": 48,
+        "population": 108,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1773,10 +1773,10 @@
       "properties": {
         "name": "Swartenmeer",
         "province": "Westerland",
-        "population": 79,
+        "population": 314,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           253.8115121,
           254.20303370000002
@@ -1801,10 +1801,10 @@
       "properties": {
         "name": "Veldendam",
         "province": "Westerland",
-        "population": 163,
+        "population": 591,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           291.5627021,
           306.9479437
@@ -1829,7 +1829,7 @@
       "properties": {
         "name": "Polderwoude",
         "province": "Westerland",
-        "population": 141,
+        "population": 272,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1857,10 +1857,10 @@
       "properties": {
         "name": "Kruiswaard",
         "province": "Westerland",
-        "population": 313,
+        "population": 116,
         "tags": [],
         "notes": [],
-        "size_category": 2,
+        "size_category": 1,
         "inkscape_coordinates": [
           272.5421121,
           336.5957737
@@ -1885,7 +1885,7 @@
       "properties": {
         "name": "Slangenbroek",
         "province": "Westerland",
-        "population": 83,
+        "population": 286,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -1913,10 +1913,10 @@
       "properties": {
         "name": "Vlietdam",
         "province": "Westerland",
-        "population": 667,
+        "population": 46,
         "tags": [],
         "notes": [],
-        "size_category": 2,
+        "size_category": 1,
         "inkscape_coordinates": [
           261.6376621,
           332.30640370000003
@@ -1941,10 +1941,10 @@
       "properties": {
         "name": "Spaarwoude",
         "province": "Westerland",
-        "population": 236,
+        "population": 305,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           255.1536021,
           346.12052370000004
@@ -1969,7 +1969,7 @@
       "properties": {
         "name": "Vossenmeer",
         "province": "Westerland",
-        "population": 352,
+        "population": 423,
         "tags": [],
         "notes": [],
         "size_category": 2,
@@ -1997,7 +1997,7 @@
       "properties": {
         "name": "Wijkersdijk",
         "province": "Westerland",
-        "population": 61,
+        "population": 281,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2025,7 +2025,7 @@
       "properties": {
         "name": "Modderbroek",
         "province": "Westerland",
-        "population": 94,
+        "population": 50,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2053,7 +2053,7 @@
       "properties": {
         "name": "Rietwaard",
         "province": "Westerland",
-        "population": 159,
+        "population": 25,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2081,7 +2081,7 @@
       "properties": {
         "name": "Zompveen",
         "province": "Westerland",
-        "population": 80,
+        "population": 228,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2109,7 +2109,7 @@
       "properties": {
         "name": "Moerwijk",
         "province": "Westerland",
-        "population": 129,
+        "population": 80,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2137,10 +2137,10 @@
       "properties": {
         "name": "Weckenfast",
         "province": "Westerland",
-        "population": 80,
+        "population": 474,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           361.8027621,
           163.73499370000002
@@ -2195,7 +2195,7 @@
       "properties": {
         "name": "Frederichsdorp",
         "province": "Westerland",
-        "population": 19,
+        "population": 111,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2223,10 +2223,10 @@
       "properties": {
         "name": "Rutten",
         "province": "Westerland",
-        "population": 46,
+        "population": 568,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           289.8558021,
           316.2638337
@@ -2251,10 +2251,10 @@
       "properties": {
         "name": "Calden",
         "province": "Westerland",
-        "population": 675,
+        "population": 48,
         "tags": [],
         "notes": [],
-        "size_category": 2,
+        "size_category": 1,
         "inkscape_coordinates": [
           298.9839121,
           320.62946370000003
@@ -2279,7 +2279,7 @@
       "properties": {
         "name": "Didern",
         "province": "Westerland",
-        "population": 245,
+        "population": 101,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2307,10 +2307,10 @@
       "properties": {
         "name": "Stapelhugel",
         "province": "Westerland",
-        "population": 148,
+        "population": 524,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           316.8246121,
           322.9639337
@@ -2335,7 +2335,7 @@
       "properties": {
         "name": "Niddesdorf",
         "province": "Westerland",
-        "population": 223,
+        "population": 155,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2363,7 +2363,7 @@
       "properties": {
         "name": "Kleibroek aan Zee",
         "province": "Westerland",
-        "population": 123,
+        "population": 124,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2391,7 +2391,7 @@
       "properties": {
         "name": "Brakwaterdam",
         "province": "Westerland",
-        "population": 176,
+        "population": 130,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2419,10 +2419,10 @@
       "properties": {
         "name": "Verdronkenhoek",
         "province": "Westerland",
-        "population": 114,
+        "population": 372,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           284.0018821,
           306.6396237
@@ -2447,7 +2447,7 @@
       "properties": {
         "name": "Oud Torenburg",
         "province": "Westerland",
-        "population": 91,
+        "population": 23,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2475,10 +2475,10 @@
       "properties": {
         "name": "Hoogkamp",
         "province": "Westerland",
-        "population": 174,
+        "population": 331,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           324.7358621,
           233.3201637
@@ -2503,7 +2503,7 @@
       "properties": {
         "name": "Zwartweteren",
         "province": "Westerland",
-        "population": 144,
+        "population": 112,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2531,7 +2531,7 @@
       "properties": {
         "name": "Heidestein",
         "province": "Westerland",
-        "population": 72,
+        "population": 27,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2559,7 +2559,7 @@
       "properties": {
         "name": "Gelderham",
         "province": "Westerland",
-        "population": 193,
+        "population": 167,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2587,10 +2587,10 @@
       "properties": {
         "name": "Hogedam",
         "province": "Westerland",
-        "population": 100,
+        "population": 604,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           319.4038621,
           258.4835837
@@ -2615,7 +2615,7 @@
       "properties": {
         "name": "Middenveld",
         "province": "Westerland",
-        "population": 97,
+        "population": 186,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2643,7 +2643,7 @@
       "properties": {
         "name": "Kromdijk aan Zee",
         "province": "Westerland",
-        "population": 185,
+        "population": 275,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2671,10 +2671,10 @@
       "properties": {
         "name": "Driftstrand",
         "province": "Westerland",
-        "population": 310,
+        "population": 126,
         "tags": [],
         "notes": [],
-        "size_category": 2,
+        "size_category": 1,
         "inkscape_coordinates": [
           259.1726321,
           185.34522370000002
@@ -2699,7 +2699,7 @@
       "properties": {
         "name": "Noordwindhaven",
         "province": "Westerland",
-        "population": 221,
+        "population": 87,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2727,10 +2727,10 @@
       "properties": {
         "name": "Kaap Tuinder",
         "province": "Westerland",
-        "population": 69,
+        "population": 464,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           256.2831321,
           168.49297370000002
@@ -2755,10 +2755,10 @@
       "properties": {
         "name": "Zeemond",
         "province": "Westerland",
-        "population": 122,
+        "population": 316,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           273.00585209999997,
           203.6118037
@@ -2783,7 +2783,7 @@
       "properties": {
         "name": "Laagvliet Haven",
         "province": "Westerland",
-        "population": 116,
+        "population": 124,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2811,7 +2811,7 @@
       "properties": {
         "name": "Rijpendijk",
         "province": "Westerland",
-        "population": 171,
+        "population": 126,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2839,7 +2839,7 @@
       "properties": {
         "name": "Brugwalde",
         "province": "Westerland",
-        "population": 68,
+        "population": 124,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2867,7 +2867,7 @@
       "properties": {
         "name": "Dreumelholt",
         "province": "Westerland",
-        "population": 119,
+        "population": 252,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2895,7 +2895,7 @@
       "properties": {
         "name": "Grootveen",
         "province": "Westerland",
-        "population": 202,
+        "population": 68,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2923,7 +2923,7 @@
       "properties": {
         "name": "Peelwijk",
         "province": "Westerland",
-        "population": 135,
+        "population": 231,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2951,7 +2951,7 @@
       "properties": {
         "name": "Vloedwijk",
         "province": "Westerland",
-        "population": 294,
+        "population": 113,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -2979,7 +2979,7 @@
       "properties": {
         "name": "Middelplaat",
         "province": "Westerland",
-        "population": 57,
+        "population": 94,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -3007,7 +3007,7 @@
       "properties": {
         "name": "Oosterplaat",
         "province": "Westerland",
-        "population": 81,
+        "population": 39,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -3035,7 +3035,7 @@
       "properties": {
         "name": "Zandvoorde",
         "province": "Westerland",
-        "population": 156,
+        "population": 39,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -3063,10 +3063,10 @@
       "properties": {
         "name": "Noordwijker",
         "province": "Westerland",
-        "population": 574,
+        "population": 143,
         "tags": [],
         "notes": [],
-        "size_category": 2,
+        "size_category": 1,
         "inkscape_coordinates": [
           276.2297621,
           129.1372537
@@ -3091,7 +3091,7 @@
       "properties": {
         "name": "Woltersum",
         "province": "Westerland",
-        "population": 86,
+        "population": 289,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -3119,7 +3119,7 @@
       "properties": {
         "name": "Heerenwerf",
         "province": "Westerland",
-        "population": 101,
+        "population": 297,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -3147,7 +3147,7 @@
       "properties": {
         "name": "Zegveld",
         "province": "Westerland",
-        "population": 161,
+        "population": 64,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -3175,10 +3175,10 @@
       "properties": {
         "name": "Rijpermeer",
         "province": "Westerland",
-        "population": 330,
+        "population": 158,
         "tags": [],
         "notes": [],
-        "size_category": 2,
+        "size_category": 1,
         "inkscape_coordinates": [
           302.8865321,
           279.8836437
@@ -3203,7 +3203,7 @@
       "properties": {
         "name": "Bovenkarspel",
         "province": "Westerland",
-        "population": 211,
+        "population": 84,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -3231,7 +3231,7 @@
       "properties": {
         "name": "Schoonhoven",
         "province": "Westerland",
-        "population": 183,
+        "population": 105,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -3259,7 +3259,7 @@
       "properties": {
         "name": "Kreekhuizen",
         "province": "Westerland",
-        "population": 71,
+        "population": 156,
         "tags": [],
         "notes": [],
         "size_category": 1,
@@ -3287,10 +3287,10 @@
       "properties": {
         "name": "Buitenkaag",
         "province": "Westerland",
-        "population": 131,
+        "population": 782,
         "tags": [],
         "notes": [],
-        "size_category": 1,
+        "size_category": 2,
         "inkscape_coordinates": [
           274.1792221,
           301.7778937
@@ -3315,7 +3315,7 @@
       "properties": {
         "name": "Fauligmere",
         "province": "Westerland",
-        "population": 51,
+        "population": 69,
         "tags": [],
         "notes": [],
         "size_category": 1,
