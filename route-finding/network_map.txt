@@ -1,0 +1,29 @@
+============================================================
+NODE-BRANCH NETWORK MAP
+============================================================
+
+NODES:
+  A            (location    ) at (  89.2,   33.0)
+  B            (location    ) at (  49.9,   94.2)
+  C            (location    ) at ( 126.0,  151.5)
+  D            (location    ) at ( 153.7,  121.4)
+  E            (location    ) at ( 119.8,  208.5)
+  EP_path1_1   (endpoint    ) at ( 122.1,  208.8)
+  EP_path2_1   (endpoint    ) at ( 114.8,   54.8)
+  EP_path3_0   (endpoint    ) at ( 178.3,  146.4)
+  EP_path3_1   (endpoint    ) at (  54.7,  161.4)
+  INT1         (intersection) at ( 118.3,  111.2)
+  INT2         (intersection) at (  89.0,   63.4)
+  INT3         (intersection) at ( 112.7,   72.2)
+
+EDGES (showing distance and weighted distance):
+  A: INT2 [37.35mm, weighted:37.35mm]
+  B: INT2 [55.95mm, weighted:55.95mm]
+  C: INT1 [117.96mm, weighted:117.96mm], E [102.94mm, weighted:102.94mm], EP_path3_0 [51.76mm, weighted:51.76mm], EP_path3_1 [72.26mm, weighted:72.26mm]
+  D: INT1 [38.43mm, weighted:38.43mm]
+  E: EP_path1_1 [2.42mm, weighted:2.42mm]
+  EP_path2_1: INT2 [33.06mm, weighted:33.06mm], INT3 [17.61mm, weighted:17.61mm]
+  INT1: INT3 [57.83mm, weighted:57.83mm]
+  INT2: INT3 [25.68mm, weighted:25.68mm]
+
+============================================================
