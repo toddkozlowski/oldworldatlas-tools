@@ -1,8 +1,12 @@
 """
-Renames every settlement text element in the Settlements layer of the SVG by
-setting (or updating) its inkscape:label attribute to match its text content.
+Renames text elements in selected map layers of the SVG by setting (or
+updating) each element's inkscape:label to match its text content.
 
-Only inkscape:label attributes on settlement text elements are modified.
+Currently processes:
+- Settlements
+- Points of Interest
+
+Only inkscape:label attributes on text elements in those layers are modified.
 All other content is preserved exactly as-is.
 
 The updated SVG is saved back to the original file path.
@@ -41,6 +45,7 @@ SVG_TEXT = f"{{{NS['svg']}}}text"
 SVG_TSPAN = f"{{{NS['svg']}}}tspan"
 SVG_G = f"{{{NS['svg']}}}g"
 INKSCAPE_GROUP_MODE = f"{{{NS['inkscape']}}}groupmode"
+TARGET_LAYER_LABELS = ['Settlements', 'Points of Interest']
 
 
 def get_text_content(text_elem: ET.Element) -> Optional[str]:
@@ -85,7 +90,7 @@ def find_layer_by_label(root: ET.Element, label: str) -> Optional[ET.Element]:
 
 
 def main() -> None:
-    """Entry point: parse SVG, relabel settlement text elements, save."""
+    """Entry point: parse SVG, relabel text elements in target layers, save."""
     if not SVG_PATH.exists():
         logger.error(f"SVG not found at: {SVG_PATH}")
         return
@@ -102,23 +107,33 @@ def main() -> None:
     tree = ET.parse(str(SVG_PATH))
     root = tree.getroot()
 
-    # Locate the top-level Settlements layer
-    settlements_layer = find_layer_by_label(root, 'Settlements')
-    if settlements_layer is None:
-        logger.error("Could not find Settlements layer – aborting.")
-        return
-
-    factions = [
-        child for child in settlements_layer
-        if child.tag == SVG_G
-    ]
-    logger.info(
-        f"Found Settlements layer with {len(factions)} faction sub-layer(s): "
-        + ", ".join(f.get(INKSCAPE_LABEL, '<unnamed>') for f in factions)
-    )
-
     count = {'updated': 0, 'already_correct': 0, 'no_text': 0, 'no_text_by_layer': defaultdict(int)}
-    relabel_text_elements(settlements_layer, count)
+
+    found_layers = 0
+    for layer_label in TARGET_LAYER_LABELS:
+        target_layer = find_layer_by_label(root, layer_label)
+        if target_layer is None:
+            logger.warning(f"Could not find {layer_label} layer – skipping.")
+            continue
+
+        found_layers += 1
+        child_groups = [
+            child for child in target_layer
+            if child.tag == SVG_G
+        ]
+        logger.info(
+            f"Found {layer_label} layer with {len(child_groups)} direct sub-layer(s): "
+            + ", ".join(g.get(INKSCAPE_LABEL, '<unnamed>') for g in child_groups)
+        )
+
+        relabel_text_elements(target_layer, count, current_layer=layer_label)
+
+    if found_layers == 0:
+        logger.error(
+            "Could not find any target layers "
+            f"({', '.join(TARGET_LAYER_LABELS)}) – aborting."
+        )
+        return
 
     logger.info(
         f"Labels updated: {count['updated']:,}  |  "

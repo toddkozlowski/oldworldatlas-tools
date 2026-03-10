@@ -76,6 +76,15 @@ SHEETS: dict[str, dict] = {
             "wiki_url", "wiki_title", "wiki_description", "wiki_image",
         ],
     },
+    "tilea": {
+        "gid": "1839982734",
+        "expected_header": [
+            "Settlement", "Population", "Estate", "Trade", "Tags", "Notes",
+            "Coordinates", "Province_2515", "Province_2512", "Province_2276",
+            "Ruler_2515", "Ruler_2512", "Ruler_2276",
+            "wiki_url", "wiki_title", "wiki_description", "wiki_image",
+        ],
+    },
     "karaz_ankor": {
         "gid": "164637166",
         "expected_header": [

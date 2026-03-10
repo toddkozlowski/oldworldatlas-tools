@@ -48,6 +48,21 @@ python scripts/extract_descriptions.py
 
 Script for processing SVG map files (separate functionality).
 
+### validate_tilea_settlements.py
+
+Tilea-specific SVG settlement validation and relabeling script for `JUST_TILEA.svg`.
+
+**Usage:**
+```bash
+python scripts/validate_tilea_settlements.py
+```
+
+**Checks/Actions:**
+- Renames settlement text `inkscape:label` values to match each text object's content
+- Detects duplicate settlement names in the `Tilea Settlements` layer
+- Verifies all settlements in `input/gazetteers/tilea.csv` exist on the SVG map
+- Writes a validation report to `logs/tilea_settlement_validation.log`
+
 ## Requirements
 
 Install required packages:
