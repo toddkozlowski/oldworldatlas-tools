@@ -120,9 +120,7 @@ VISIBLE_LAYERS: frozenset = frozenset({
     "Forests",
     "Marshes",
     "Urban Areas",
-    "Bretonnian Rivers",
     "Rivers",
-    "Bretonnia Lakes",
     "Lakes",
     "Roads",
 })

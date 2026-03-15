@@ -86,7 +86,7 @@ SHEETS: dict[str, dict] = {
         ],
     },
     "karaz_ankor": {
-        "gid": "164637166",
+        "gid": "2134669291",
         "expected_header": [
             "Settlement", "Type", "Estate", "Trade", "Tags", "Notes",
             "Coordinates", "Province_2515", "Province_2512", "Province_2276",
