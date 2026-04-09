@@ -118,8 +118,8 @@ GEO_FEATURE_COLUMNS = [
 POI_COLUMNS = [
     "name",
     "type",
-    "description",
     "tags",
+    "notes",
     "wiki_url",
     "wiki_title",
     "wiki_description",
@@ -205,16 +205,19 @@ GAZETTEER_SCHEMAS: dict[str, GazetteerSchema] = {
         filename="estalia.csv",
         required_columns=STANDARD_SETTLEMENT_COLUMNS,
         required_non_empty=["Settlement"],
+        gid="124941632",
     ),
     "norsca.csv": GazetteerSchema(
         filename="norsca.csv",
         required_columns=STANDARD_SETTLEMENT_COLUMNS,
         required_non_empty=["Settlement"],
+        gid="2036460226",
     ),
     "border_princes.csv": GazetteerSchema(
         filename="border_princes.csv",
         required_columns=STANDARD_SETTLEMENT_COLUMNS,
         required_non_empty=["Settlement"],
+        gid="1123781756",
     ),
     "kislev.csv": GazetteerSchema(
         filename="kislev.csv",
@@ -238,6 +241,7 @@ GAZETTEER_SCHEMAS: dict[str, GazetteerSchema] = {
         filename="skavendom.csv",
         required_columns=SKAVENDOM_COLUMNS,
         required_non_empty=["Settlement", "Type"],
+        gid="1825010677",
     ),
     "provinces.csv": GazetteerSchema(
         filename="provinces.csv",
@@ -270,6 +274,7 @@ GAZETTEER_SCHEMAS: dict[str, GazetteerSchema] = {
                 "Other",
             }
         },
+        gid="1527667508",
     ),
     "points_of_interest.csv": GazetteerSchema(
         filename="points_of_interest.csv",
@@ -285,6 +290,7 @@ GAZETTEER_SCHEMAS: dict[str, GazetteerSchema] = {
                 "Other",
             }
         },
+        gid="695954623"
     ),
 }
 
