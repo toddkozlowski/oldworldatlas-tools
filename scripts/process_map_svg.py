@@ -277,6 +277,9 @@ class SVGMapProcessor:
         self.settlements_bretonnia = []
         self.settlements_kislev = []
         self.settlements_tilea = []
+        self.settlements_norsca = []
+        self.settlements_border_princes = []
+        self.settlements_estalia = []
         self.settlements_karaz_ankor = []
         self.settlements_wood_elves = []
         self.points_of_interest = []
@@ -294,6 +297,9 @@ class SVGMapProcessor:
         self.csv_data_bretonnia = {}  # {name: row_data}
         self.csv_data_kislev = {}  # {name: row_data}
         self.csv_data_tilea = {}  # {name: row_data}
+        self.csv_data_norsca = {}  # {name: row_data}
+        self.csv_data_border_princes = {}  # {name: row_data}
+        self.csv_data_estalia = {}  # {name: row_data}
         self.csv_data_karaz_ankor = {}  # {name: row_data}
         self.csv_data_wood_elves = {}  # {name: row_data}
         self.csv_data_provinces = {}  # {name: row_data}
@@ -977,6 +983,97 @@ class SVGMapProcessor:
         )
 
         logger.info(f"  Found {len(self.settlements_wood_elves)} valid Wood Elf settlements")
+
+    def process_human_settlements(self, region_name: str):
+        """Process human settlements for any region generically.
+        
+        Handles regions: Empire, Bretonnia, Westerland, Kislev, Tilea, Norsca, Border Princes, Estalia.
+        Empire is special: it may contain provinces as child groups.
+        Other regions are processed as single units.
+        
+        Args:
+            region_name: The region name (e.g., "Empire", "Norsca", "Border Princes")
+        """
+        logger.info(f"Processing {region_name} settlements...")
+
+        # Get the settlements list and CSV data dict for this region
+        # Handle region name variations (e.g., "Border Princes" -> settlements_border_princes)
+        attr_key = region_name.lower().replace(" ", "_")
+        settlements_attr = f"settlements_{attr_key}"
+        
+        if not hasattr(self, settlements_attr):
+            logger.error(f"Unknown region: {region_name}")
+            return
+
+        settlements_list = getattr(self, settlements_attr)
+
+        # Find Settlements layer
+        settlements_layer = None
+        for g in self.root.findall(f".//{{{NS['svg']}}}g"):
+            if g.get(f"{{{NS['inkscape']}}}label") == "Settlements":
+                settlements_layer = g
+                break
+
+        if settlements_layer is None:
+            logger.error("Settlements layer not found!")
+            return
+
+        # Find region faction layer
+        region_faction = None
+        for child in settlements_layer:
+            if child.get(f"{{{NS['inkscape']}}}label") == region_name:
+                region_faction = child
+                break
+
+        if region_faction is None:
+            logger.error(f"{region_name} faction not found!")
+            return
+
+        # Build the transform chain: Settlements layer -> Region faction
+        settlements_matrix = self._get_group_transform(
+            settlements_layer, "Settlements", IDENTITY_MATRIX
+        )
+        region_matrix = self._get_group_transform(
+            region_faction, f"Settlements/{region_name}", settlements_matrix
+        )
+
+        # Special handling for Empire: iterate through provinces
+        if region_name == "Empire":
+            provinces_seen = set()
+            for province_group in region_faction:
+                province_name = province_group.get(f"{{{NS['inkscape']}}}label")
+                if not province_name:
+                    continue
+
+                provinces_seen.add(province_name)
+                logger.info(f"  Processing province: {province_name}")
+
+                settlements_in_province = {}
+                prov_path = f"Settlements/Empire/{province_name}"
+
+                # Absorb province-level transform and recurse into its children
+                province_matrix = self._get_group_transform(
+                    province_group, "Settlements/Empire", region_matrix
+                )
+                self._process_settlement_elements(
+                    province_group, province_name,
+                    settlements_in_province, settlements_list,
+                    province_matrix, prov_path
+                )
+
+            logger.info(
+                f"  Found {len(settlements_list)} valid settlements "
+                f"across {len(provinces_seen)} provinces"
+            )
+        else:
+            # For non-Empire regions: process as a single unit without provinces
+            settlements_in_faction = {}
+            self._process_settlement_elements(
+                region_faction, region_name,
+                settlements_in_faction, settlements_list,
+                region_matrix, f"Settlements/{region_name}"
+            )
+            logger.info(f"  Found {len(settlements_list)} valid {region_name} settlements")
 
     def _process_wood_elf_elements(
         self, parent_elem, settlements_dict: dict,
@@ -1766,8 +1863,13 @@ class SVGMapProcessor:
             "Other": "Other",
             "City Districts": "City Districts",
             "Forts and Castles": "Forts and Castles",
-            "Monastaries and Temples": "Monasteries and Temples",
-            "Taverns and Inns": "Taverns and Inns"
+            "Monasteries and Temples": "Monasteries and Temples",
+            "Taverns and Inns": "Taverns and Inns",
+            "Geographic Landmarks": "Geographic Landmarks",
+            "High Elf Colonies": "High Elf Colonies",
+            "Gnome Burrows": "Gnome Burrows",
+            "Chaos Shrines": "Chaos Shrines",
+            "Greenskin Landmarks": "Greenskin Landmarks",
         }
 
         for poi_group in poi_layer:

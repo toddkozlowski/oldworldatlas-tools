@@ -264,8 +264,8 @@ GAZETTEER_SCHEMAS: dict[str, GazetteerSchema] = {
                 "Medium Sea",
                 "Small Sea",
                 "Lake",
-                "Large Wetland",
-                "Small Wetland",
+                "Large Marsh",
+                "Small Marsh",
                 "Large River",
                 "Medium River",
                 "Small River",
@@ -282,16 +282,34 @@ GAZETTEER_SCHEMAS: dict[str, GazetteerSchema] = {
         required_non_empty=["name", "type"],
         allowed_values={
             "type": {
-                "City District",
+                "City Districts",
                 "Taverns and Inns",
                 "Forts and Castles",
                 "Monasteries and Temples",
-                "Chaos Shrine",
+                "Chaos Shrines",
                 "Other",
+                "Geographic Landmarks",
+                "High Elf Colonies",
+                "Gnome Burrows",
+                "Greenskin Landmarks",
             }
         },
         gid="695954623"
     ),
+}
+
+
+# (Human settlements (processed with generic handler)
+# Metadata: (csv_filename, default_province_name, type_property)
+HUMAN_SETTLEMENTS = {
+    "Empire": ("empire.csv", None, None),
+    "Bretonnia": ("bretonnia.csv", "Bretonnia", None),
+    "Westerland": ("westerland.csv", "Westerland", None),
+    "Kislev": ("kislev.csv", "Kislev", None),
+    "Tilea": ("tilea.csv", "Tilea", None),
+    "Norsca": ("norsca.csv", "Norsca", None),
+    "Border Princes": ("border_princes.csv", "Border Princes", None),
+    "Estalia": ("estalia.csv", "Estalia", None),
 }
 
 
@@ -703,23 +721,44 @@ def csv_name_field(filename: str) -> str:
     return "Settlement"
 
 
-def enrich_csv_with_wiki(path: Path) -> tuple[int, int]:
-    """Fill missing wiki fields for rows that have no wiki URL/title."""
+def gazetteer_display_name(filename: str) -> str:
+    """Return a human-readable faction/collection label from filename."""
+    stem = Path(filename).stem
+    return stem.replace("_", " ").title()
+
+
+def enrich_csv_with_wiki(path: Path) -> tuple[int, int, int]:
+    """Fill missing wiki fields and emit live progress for this CSV.
+
+    Returns:
+        (checked_missing_count, existing_metadata_count, newly_added_count)
+    """
     fieldnames, rows = read_csv_rows(path)
     if not rows:
-        return (0, 0)
+        return (0, 0, 0)
 
     key_field = csv_name_field(path.name)
     if key_field not in fieldnames:
-        return (0, 0)
+        return (0, 0, 0)
+
+    faction_label = gazetteer_display_name(path.name)
+    candidate_rows = [row for row in rows if (row.get(key_field) or "").strip()]
+    total_candidates = len(candidate_rows)
+
+    logger.info("Checking for %s wiki articles...", faction_label)
+    if total_candidates == 0:
+        logger.info("Checking [0 / 0], [0] with existing wiki metadata, [0] newly added.")
+        return (0, 0, 0)
 
     updated = 0
     checked = 0
+    existing = 0
 
-    for row in rows:
+    for idx, row in enumerate(candidate_rows, 1):
         wiki_url = (row.get("wiki_url") or "").strip()
         wiki_title = (row.get("wiki_title") or "").strip()
         if wiki_url or wiki_title:
+            existing += 1
             continue
 
         name = (row.get(key_field) or "").strip()
@@ -736,11 +775,26 @@ def enrich_csv_with_wiki(path: Path) -> tuple[int, int]:
         row["wiki_description"] = metadata.get("wiki_description", "")
         row["wiki_image"] = metadata.get("wiki_image", "")
         updated += 1
+        logger.info(
+            "Checking [%d / %d], [%d] with existing wiki metadata, [%d] newly added.",
+            idx,
+            total_candidates,
+            existing,
+            updated,
+        )
+
+    logger.info(
+        "Checking [%d / %d], [%d] with existing wiki metadata, [%d] newly added.",
+        total_candidates,
+        total_candidates,
+        existing,
+        updated,
+    )
 
     if updated > 0:
         write_csv_rows(path, fieldnames, rows)
 
-    return (checked, updated)
+    return (checked, existing, updated)
 
 
 def step_fetch_wiki_metadata(state: WorkflowState) -> None:
@@ -766,6 +820,7 @@ def step_fetch_wiki_metadata(state: WorkflowState) -> None:
         return
 
     total_checked = 0
+    total_existing = 0
     total_updated = 0
 
     for filename in GAZETTEER_SCHEMAS:
@@ -776,13 +831,24 @@ def step_fetch_wiki_metadata(state: WorkflowState) -> None:
             continue
 
         backup_with_retention(path, CSV_BACKUP_DIR, max_versions=3)
-        checked, updated = enrich_csv_with_wiki(path)
+        checked, existing, updated = enrich_csv_with_wiki(path)
         total_checked += checked
+        total_existing += existing
         total_updated += updated
-        if checked:
-            logger.info("Wiki metadata: %s checked=%d updated=%d", filename, checked, updated)
+        logger.info(
+            "Wiki metadata: %s checked_missing=%d existing=%d updated=%d",
+            filename,
+            checked,
+            existing,
+            updated,
+        )
 
-    logger.info("Wiki metadata summary: checked=%d updated=%d", total_checked, total_updated)
+    logger.info(
+        "Wiki metadata summary: checked_missing=%d existing=%d updated=%d",
+        total_checked,
+        total_existing,
+        total_updated,
+    )
 
 
 def csv_settlement_rows(filename: str) -> list[dict[str, str]]:
@@ -1173,12 +1239,11 @@ def step_process_svg_and_generate_outputs(state: WorkflowState) -> None:
     processor = legacy.SVGMapProcessor()
     state.processor = processor
 
-    # Keep behavior from legacy script to avoid functional regression.
-    processor.process_settlements_empire()
-    processor.process_settlements_westerland()
-    processor.process_settlements_bretonnia()
-    processor.process_settlements_kislev()
-    processor.process_settlements_tilea()
+    # Process human settlements generically
+    for region_name in HUMAN_SETTLEMENTS.keys():
+        processor.process_human_settlements(region_name)
+
+    # Process special cases (non-human settlements)
     processor.process_settlements_karaz_ankor()
     processor.process_settlements_wood_elves()
     processor.populate_settlement_data()
@@ -1190,19 +1255,27 @@ def step_process_svg_and_generate_outputs(state: WorkflowState) -> None:
     processor.process_water_labels()
 
     outputs: dict[str, list[dict[str, Any]]] = {}
-    outputs["settlements_empire.geojson"] = build_settlement_features("empire.csv", processor.settlements_empire, state)
-    outputs["settlements_westerland.geojson"] = build_settlement_features(
-        "westerland.csv", processor.settlements_westerland, state, default_province="Westerland"
-    )
-    outputs["settlements_bretonnia.geojson"] = build_settlement_features(
-        "bretonnia.csv", processor.settlements_bretonnia, state, default_province="Bretonnia"
-    )
-    outputs["settlements_kislev.geojson"] = build_settlement_features(
-        "kislev.csv", processor.settlements_kislev, state, default_province="Kislev"
-    )
-    outputs["settlements_tilea.geojson"] = build_settlement_features(
-        "tilea.csv", processor.settlements_tilea, state, default_province="Tilea"
-    )
+
+    # Generate outputs for all human settlements generically
+    for region_name, (csv_filename, default_province, type_property) in HUMAN_SETTLEMENTS.items():
+        # Get the settlements list from processor
+        attr_key = region_name.lower().replace(" ", "_")
+        settlements_attr = f"settlements_{attr_key}"
+        settlements_list = getattr(processor, settlements_attr, [])
+        
+        # Generate output filename
+        output_filename = f"settlements_{csv_filename.replace('.csv', '')}.geojson"
+        
+        # Build features with appropriate parameters
+        kwargs: dict[str, Any] = {"state": state}
+        if default_province is not None:
+            kwargs["default_province"] = default_province
+        if type_property is not None:
+            kwargs["type_property"] = type_property
+        
+        outputs[output_filename] = build_settlement_features(csv_filename, settlements_list, **kwargs)
+
+    # Process special cases (karaz_ankor, wood_elves)
     outputs["settlements_karaz_ankor.geojson"] = build_settlement_features(
         "karaz_ankor.csv",
         processor.settlements_karaz_ankor,
@@ -1218,10 +1291,10 @@ def step_process_svg_and_generate_outputs(state: WorkflowState) -> None:
         type_property="settlement_type",
     )
 
-    # Supported schemas that may be added later even if not currently extracted.
-    for missing_name in ["estalia", "norsca", "border_princes", "skavendom"]:
+    # Ensure placeholder entries exist for unsupported settlements
+    for missing_name in ["skavendom"]:
         path = csv_path(f"{missing_name}.csv")
-        if path.exists():
+        if path.exists() and f"settlements_{missing_name}.geojson" not in outputs:
             outputs[f"settlements_{missing_name}.geojson"] = []
 
     outputs["points_of_interest.geojson"] = build_points_of_interest_features(state)
@@ -1385,7 +1458,7 @@ def build_steps() -> list[WorkflowStep]:
             key="process_generate",
             description="Process SVG and generate standardized GeoJSON output",
             handler=step_process_svg_and_generate_outputs,
-            optional=False,
+            optional=True,
         ),
         WorkflowStep(
             key="deploy",

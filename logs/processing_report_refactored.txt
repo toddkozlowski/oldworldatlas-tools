@@ -1,0 +1,126 @@
+Old World Atlas Refactored Workflow Report
+================================================================================
+Timestamp: 2026-04-11T18:23:08.087672
+
+CSV VALIDATION ISSUES
+--------------------------------------------------------------------------------
+No validation issues detected.
+
+CSV ENTRIES WITHOUT SVG MATCH
+--------------------------------------------------------------------------------
+border_princes.csv: 18 unmatched
+  - Achaes
+  - Aldium
+  - Alfori
+  - Alvazzo
+  - Bechtersmoln
+  - Brezano
+  - Catinari
+  - Elsterholz
+  - Greymere
+  - Lissa
+  - Maltane
+  - Mirasino
+  - Organza Nova
+  - Scarosio
+  - Schipdorf
+  - Tinea
+  - Ulfraya
+  - Vlent
+bretonnia.csv: 3 unmatched
+  - Aringue
+  - Moutier
+  - Mufflons
+empire.csv: 9 unmatched
+  - Börnicke
+  - Hopsten
+  - Leichlinburg
+  - Manannsheim
+  - Metelen
+  - Roezfels
+  - Sokh
+  - Sottrum
+  - Sudengard
+geographic_feature_labels.csv: 3 unmatched
+  - Bloodfjord
+  - Nordlig Sea
+  - The Ortschlamm
+karaz_ankor.csv: 8 unmatched
+  - Kadar Helgad
+  - Karag Dron
+  - Karag Kurak
+  - Karak Dum
+  - Karak Vrag
+  - Kraka Ungrim
+  - Kraz Und
+  - Kurgaz's Forge
+kislev.csv: 6 unmatched
+  - Castle Alexandronov
+  - Great Rasputia
+  - Krovash
+  - Resyvnhaf
+  - Uvetsyn
+  - Zamoski
+norsca.csv: 12 unmatched
+  - Aesling's Conclave
+  - Altar of Spawns
+  - Baga Yar
+  - Chenhild's Monoliths
+  - Cockatrice Lair
+  - Doomkeep
+  - Foul Fortress
+  - Horvenghaast
+  - Icedrake Fjord
+  - Morkestaar
+  - Sarl Encampment
+  - Temple of Heimkel
+points_of_interest.csv: 2 unmatched
+  - Ruins of Kor Immarmor
+  - The Karlsbaum Monastery
+provinces.csv: 9 unmatched
+  - KAMENNAYA ZIMA(Troll Country)
+  - POLYANYA OBLAST(Southern Oblast)
+  - PRIMORYE OBLAST(Western Oblast)
+  - SEVERYNA OBLAST(Northern Oblast)
+  - UNGOLSK OBLAST(Eastern Oblast)
+  - WARD OF FROST
+  - WARD OF RAIN
+  - WARD OF STORM
+  - WARD OF THE SUN
+tilea.csv: 1 unmatched
+  - Cortalis
+wood_elves.csv: 7 unmatched
+  - Cáder Donann
+  - Deep Forests of Durthu
+  - Greenskin Monolith of Ançhifyl
+  - Meadow Glades
+  - Mirror Pools of Ithorien
+  - Pillar of the Azure Man
+  - Ruins of Castle Fulk
+
+DUPLICATE SETTLEMENT NAMES WITHIN SAME PROVINCE
+--------------------------------------------------------------------------------
+bretonnia.csv
+  - Bretonnia:Chenin => 2
+tilea.csv
+  - Tilea:Cammaro => 2
+wood_elves.csv
+  - Wood Elves:Glade of the Lost => 2
+
+OUTPUT SUMMARY
+--------------------------------------------------------------------------------
+settlements_empire.geojson: 3573 features
+settlements_bretonnia.geojson: 1503 features
+settlements_westerland.geojson: 118 features
+settlements_kislev.geojson: 448 features
+settlements_tilea.geojson: 662 features
+settlements_norsca.geojson: 547 features
+settlements_border_princes.geojson: 30 features
+settlements_estalia.geojson: 2 features
+settlements_karaz_ankor.geojson: 236 features
+settlements_wood_elves.geojson: 75 features
+settlements_skavendom.geojson: 0 features
+points_of_interest.geojson: 763 features
+province_labels.geojson: 80 features
+geographic_feature_labels.geojson: 98 features
+Total features generated: 8135

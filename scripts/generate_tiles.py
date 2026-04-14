@@ -1,17 +1,14 @@
 """generate_tiles.py — Generate OpenLayers-compatible TMS PNG tiles from the Old World Atlas SVG.
 
-Frame-based approach (gdal2tiles-compatible):
-    The SVG contains a rectangle object named "Frame (Old World)" whose corners
-    define the exact region to be tiled.  Its SVG bounding box is read at
-    startup and ALL tile export areas are derived by linearly subdividing that
-    frame — guaranteeing perfect alignment across every zoom level.
-
-Geographic extent (defined by the Frame object):
-    West:  -19 degrees longitude
-    East:   18 degrees longitude
-    South:  32 degrees latitude
-    North:  69 degrees latitude
-    Span:   37 x 37 degrees (square grid)
+Coordinate-input approach:
+    The tile region is supplied explicitly as origin + size in *display* units
+    (the same units shown in Inkscape's UI, configured by this project to map
+    to geospatial coordinates):
+        origin: (x, y)
+        width:  w
+        height: h
+    The region is always rectangular and all tile export areas are derived by
+    linearly subdividing those supplied bounds.
 
 Tile convention (TMS, matching OpenLayers TileGrid with y=0 at south):
     On disk: <output_root>/<tileset_name>/<z>/<x>/<y>.png
@@ -30,7 +27,25 @@ Layer visibility:
 Usage:
     python generate_tiles.py [--tileset NAME] [--min-zoom Z] [--max-zoom Z]
                              [--block-tiles N] [--inkscape PATH]
-                             [--background COLOR] [--dry-run] [--verbose]
+                             [--background COLOR] [--origin X Y]
+                             [--width W] [--height H] [--dry-run] [--verbose]
+
+    Example:
+        python generate_tiles.py -o -25 32 -w 50 -h 37.5
+
+If no region arguments are provided, the script explicitly prompts for:
+    - origin x
+    - origin y
+    - width
+    - height
+
+Display-coordinate convention used by this script:
+    - origin (x, y) is the SOUTH-WEST (bottom-left) corner of the region
+    - x increases east/right
+    - y increases north/up
+
+These display coordinates are converted to absolute SVG coordinates using the
+same calibration used by process_map_svg.py before any export-area math.
 
     --background   CSS colour for tile background (e.g. white, #ffffff).
                    Defaults to transparent.
@@ -78,15 +93,18 @@ OUTPUT_ROOT = Path(
 )
 
 # ---------------------------------------------------------------------------
-# Geographic extent -- MUST match the "Frame (Old World)" object's geo meaning
+# Default region extent in SVG user units
 # ---------------------------------------------------------------------------
 
-GEO_X_MIN: float = -19.0   # westernmost longitude (degrees)
-GEO_X_MAX: float =  18.0   # easternmost longitude
-GEO_Y_MIN: float =  32.0   # southernmost latitude
-GEO_Y_MAX: float =  69.0   # northernmost latitude
-GEO_X_SPAN: float = GEO_X_MAX - GEO_X_MIN   # 37.0 degrees
-GEO_Y_SPAN: float = GEO_Y_MAX - GEO_Y_MIN   # 37.0 degrees
+DEFAULT_ORIGIN_X: float = -19.0
+DEFAULT_ORIGIN_Y: float = 32.0
+DEFAULT_REGION_WIDTH: float = 37.0
+DEFAULT_REGION_HEIGHT: float = 37.0
+
+# Display/SVG conversion constants (must match scripts/process_map_svg.py).
+INKSCAPE_VB_X: float = 428.530
+INKSCAPE_SCALE: float = 0.017504
+INKSCAPE_C_Y: float = 3347.85
 
 # ---------------------------------------------------------------------------
 # Zoom levels and tile geometry
@@ -99,13 +117,6 @@ TILE_SIZE: int = 256  # pixels per tile (square)
 # Tiles per block edge for chunk rendering.  32 tiles x 256 px = 8192 px.
 # Reduce to 16 if Inkscape runs out of memory at high zoom levels.
 DEFAULT_BLOCK_TILES: int = 32
-
-# ---------------------------------------------------------------------------
-# Frame configuration
-# ---------------------------------------------------------------------------
-
-# The inkscape:label of the rectangle that defines the tile region.
-FRAME_LABEL: str = "Frame (Old World)"
 
 # ---------------------------------------------------------------------------
 # Layer visibility
@@ -227,85 +238,81 @@ def _apply(
 
 
 # ---------------------------------------------------------------------------
-# Frame detection
+# Region handling
 # ---------------------------------------------------------------------------
 
 
-def find_frame_bounds(svg_path: Path) -> Tuple[float, float, float, float]:
+def prompt_float(prompt: str) -> float:
+    """Prompt until a valid float is entered."""
+    while True:
+        raw = input(prompt).strip()
+        try:
+            return float(raw)
+        except ValueError:
+            print("Please enter a valid number.")
+
+
+def resolve_region_inputs(args: argparse.Namespace) -> Tuple[float, float, float, float]:
+    """Resolve region origin/size from CLI args; prompt explicitly when needed."""
+    if args.origin is None and args.width is None and args.height is None:
+        print("No region arguments supplied. Please enter the tile export region.")
+        print("Coordinates are display units: origin is bottom-left; Y increases upward.")
+        origin_x = prompt_float("Origin X: ")
+        origin_y = prompt_float("Origin Y: ")
+        width = prompt_float("Width: ")
+        height = prompt_float("Height: ")
+    else:
+        origin_x = args.origin[0] if args.origin is not None else prompt_float("Origin X: ")
+        origin_y = args.origin[1] if args.origin is not None else prompt_float("Origin Y: ")
+        width = args.width if args.width is not None else prompt_float("Width: ")
+        height = args.height if args.height is not None else prompt_float("Height: ")
+
+    if width <= 0.0 or height <= 0.0:
+        raise ValueError("Width and height must both be > 0.")
+
+    return origin_x, origin_y, width, height
+
+
+def resolve_max_zoom(args: argparse.Namespace) -> int:
+    """Resolve max zoom from CLI or prompt with default 8 if omitted."""
+    if args.max_zoom is not None:
+        return args.max_zoom
+
+    raw = input(f"Maximum zoom level [{MAX_ZOOM}]: ").strip()
+    if not raw:
+        return MAX_ZOOM
+    try:
+        return int(raw)
+    except ValueError as exc:
+        raise ValueError("Maximum zoom must be an integer.") from exc
+
+
+def display_region_to_svg_bounds(
+    origin_x: float,
+    origin_y: float,
+    width: float,
+    height: float,
+) -> Tuple[float, float, float, float]:
+    """Convert display-unit region (origin SW, Y up) to SVG bounds (x0,y0,x1,y1).
+
+    Returns bounds in absolute SVG coordinates where:
+      x0 = west,  x1 = east
+      y0 = north, y1 = south
     """
-    Locate the 'Frame (Old World)' rectangle in the SVG and return its
-    axis-aligned bounding box in SVG user coordinates: (x0, y0, x1, y1).
+    west = origin_x
+    east = origin_x + width
+    south = origin_y
+    north = origin_y + height
 
-    x0/y0 = north-west corner (smaller SVG x and y values).
-    x1/y1 = south-east corner (larger SVG x and y values).
+    svg_west = (west / INKSCAPE_SCALE) + INKSCAPE_VB_X
+    svg_east = (east / INKSCAPE_SCALE) + INKSCAPE_VB_X
+    svg_north = INKSCAPE_C_Y - (north / INKSCAPE_SCALE)
+    svg_south = INKSCAPE_C_Y - (south / INKSCAPE_SCALE)
 
-    SVG y increases downward, so y0 is the NORTH edge and y1 is the SOUTH edge.
-
-    The search walks the entire document tree accumulating transforms; handles
-    translate and matrix forms used by Inkscape.
-
-    Raises RuntimeError if the frame cannot be found or is not a <rect>.
-    """
-    tree = ET.parse(str(svg_path))
-    root = tree.getroot()
-
-    identity: Tuple[float, float, float, float, float, float] = (
-        1.0, 0.0, 0.0, 1.0, 0.0, 0.0
-    )
-
-    def _walk(elem: ET.Element, parent_tf: Tuple) -> Optional[Tuple]:
-        """DFS; returns (element, cumulative_transform) when frame is found."""
-        tf = _compose(parent_tf, _parse_svg_transform(elem.get("transform", "")))
-        label = elem.get(INKSCAPE_LABEL, "")
-        eid   = elem.get("id", "")
-        if label == FRAME_LABEL or eid == FRAME_LABEL:
-            return (elem, tf)
-        for child in elem:
-            result = _walk(child, tf)
-            if result is not None:
-                return result
-        return None
-
-    found = _walk(root, identity)
-    if found is None:
-        raise RuntimeError(
-            f"'{FRAME_LABEL}' not found in {svg_path}.\n"
-            "  Open the SVG in Inkscape, select the bounding rectangle, and\n"
-            f"  set Object Properties -> Label to exactly: {FRAME_LABEL}"
-        )
-
-    elem, tf = found
-    if elem.tag not in (SVG_RECT, f"rect"):
-        raise RuntimeError(
-            f"'{FRAME_LABEL}' has element tag '{elem.tag}' -- expected a <rect>.\n"
-            "  Draw the frame with Inkscape's Rectangle tool."
-        )
-
-    rx = float(elem.get("x", 0.0))
-    ry = float(elem.get("y", 0.0))
-    rw = float(elem.get("width", 0.0))
-    rh = float(elem.get("height", 0.0))
-
-    corners = [
-        _apply(tf, rx,      ry),
-        _apply(tf, rx + rw, ry),
-        _apply(tf, rx,      ry + rh),
-        _apply(tf, rx + rw, ry + rh),
-    ]
-
-    x0 = min(c[0] for c in corners)
-    y0 = min(c[1] for c in corners)   # north edge (smallest SVG y)
-    x1 = max(c[0] for c in corners)
-    y1 = max(c[1] for c in corners)   # south edge (largest SVG y)
-
-    logger.info(
-        "Frame '%s' SVG user-unit bounds: x0=%.3f y0=%.3f x1=%.3f y1=%.3f  (%.1f x %.1f uu)",
-        FRAME_LABEL, x0, y0, x1, y1, x1 - x0, y1 - y0,
-    )
-    logger.info(
-        "  Geographically: lon [%.1f, %.1f], lat [%.1f, %.1f]",
-        GEO_X_MIN, GEO_X_MAX, GEO_Y_MIN, GEO_Y_MAX,
-    )
+    x0 = min(svg_west, svg_east)
+    x1 = max(svg_west, svg_east)
+    y0 = min(svg_north, svg_south)
+    y1 = max(svg_north, svg_south)
     return x0, y0, x1, y1
 
 
@@ -402,16 +409,18 @@ def svg_frame_to_inkscape(
 
 def block_export_area(
     frame: Tuple[float, float, float, float],
-    z: int,
+    tiles_x: int,
+    tiles_y: int,
     col_start: int,
     tms_row_bottom: int,
-    block_tiles: int,
+    block_cols: int,
+    block_rows: int,
 ) -> Tuple[float, float, float, float]:
     """
     Return the Inkscape --export-area (x0:y0:x1:y1) for a rectangular block
     of tiles by linearly subdividing the frame bounding box.
 
-    This is the gdal2tiles approach: the frame is divided into 2^z x 2^z
+    This is the gdal2tiles approach: the frame is divided into tiles_x x tiles_y
     equal-sized cells.  Because every zoom level subdivides the SAME frame
     boundaries, tiles at adjacent zoom levels align perfectly.
 
@@ -423,10 +432,12 @@ def block_export_area(
     frame          : (x0, y0, x1, y1) in Inkscape CSS-pixel coordinates,
                      as returned by svg_frame_to_inkscape().
                      y0 < y1:  y0 is the NORTH/top edge, y1 is the SOUTH/bottom.
-    z              : zoom level
+    tiles_x        : number of tile columns at this zoom
+    tiles_y        : number of tile rows at this zoom
     col_start      : westernmost tile column (0 = left/west edge of frame)
     tms_row_bottom : southernmost TMS row in the block (0 = south edge of frame)
-    block_tiles    : number of tiles per block edge
+    block_cols     : number of tile columns in this block
+    block_rows     : number of tile rows in this block
 
     Returns
     -------
@@ -434,20 +445,19 @@ def block_export_area(
     --export-area.  y0 < y1 (north edge first).
     """
     fx0, fy0, fx1, fy1 = frame
-    n = 2 ** z
 
-    tile_w = (fx1 - fx0) / n
-    tile_h = (fy1 - fy0) / n
+    tile_w = (fx1 - fx0) / tiles_x
+    tile_h = (fy1 - fy0) / tiles_y
 
     x0 = fx0 + col_start * tile_w
-    x1 = fx0 + (col_start + block_tiles) * tile_w
+    x1 = fx0 + (col_start + block_cols) * tile_w
 
     # TMS row 0 = south = bottom of the frame (fy1).
-    # TMS row n-1 = north = top of the frame (fy0).
+    # TMS row tiles_y-1 = north = top of the frame (fy0).
     # North edge of this block (top of rendered image, smaller y):
-    y0 = fy0 + (n - (tms_row_bottom + block_tiles)) * tile_h
+    y0 = fy0 + (tiles_y - (tms_row_bottom + block_rows)) * tile_h
     # South edge of this block (bottom of rendered image, larger y):
-    y1 = fy0 + (n - tms_row_bottom) * tile_h
+    y1 = fy0 + (tiles_y - tms_row_bottom) * tile_h
 
     return x0, y0, x1, y1
 
@@ -457,15 +467,29 @@ def block_export_area(
 # ---------------------------------------------------------------------------
 
 
-def viewer_config_string(min_zoom: int, max_zoom: int, tileset: str) -> str:
+def viewer_config_string(
+    min_zoom: int,
+    max_zoom: int,
+    tileset: str,
+    extent: Tuple[float, float, float, float],
+) -> str:
     """
     Return an OpenLayers TileGrid configuration snippet for map-manager.js
     that exactly matches the tile grid produced by this script.
     """
-    resolutions = [
-        GEO_X_SPAN / (TILE_SIZE * (2 ** z))
-        for z in range(min_zoom, max_zoom + 1)
-    ]
+    x_min, y_min, x_max, y_max = extent
+    x_span = x_max - x_min
+    y_span = y_max - y_min
+
+    def _dims(z: int) -> Tuple[int, int]:
+        tx = 2 ** z
+        ty = max(1, int(round(tx * (y_span / x_span))))
+        return tx, ty
+
+    min_tx, min_ty = _dims(min_zoom)
+    max_tx, max_ty = _dims(max_zoom)
+
+    resolutions = [x_span / (TILE_SIZE * (2 ** z)) for z in range(min_zoom, max_zoom + 1)]
     res_strs = ",\n            ".join(
         f"{r:.10f}  // z={z}"
         for z, r in zip(range(min_zoom, max_zoom + 1), resolutions)
@@ -473,15 +497,15 @@ def viewer_config_string(min_zoom: int, max_zoom: int, tileset: str) -> str:
     return (
         "\n=== VIEWER CONFIG (paste into map-manager.js createTileLayer) ===\n"
         "\n"
-        f"// Tile extent matches Frame (Old World) geographic bounds\n"
-        f"const tileExtent = [{GEO_X_MIN}, {GEO_Y_MIN}, {GEO_X_MAX}, {GEO_Y_MAX}];\n"
+        "// Tile extent in your supplied region units (Inkscape document units)\n"
+        f"const tileExtent = [{x_min}, {y_min}, {x_max}, {y_max}];\n"
         "\n"
         "new ol.layer.Tile({\n"
         f"    title: 'Map Tiles ({tileset})',\n"
         "    source: new ol.source.TileImage({\n"
         "        tileGrid: new ol.tilegrid.TileGrid({\n"
         "            extent:      tileExtent,\n"
-        f"            origin:      [{GEO_X_MIN}, {GEO_Y_MIN}],  // SW corner\n"
+        f"            origin:      [{x_min}, {y_min}],  // SW corner\n"
         "            resolutions: [\n"
         f"            {res_strs}\n"
         "            ],\n"
@@ -496,9 +520,11 @@ def viewer_config_string(min_zoom: int, max_zoom: int, tileset: str) -> str:
         "    })\n"
         "})\n"
         "\n"
-        f"// z={min_zoom} = lowest res ({2**min_zoom}x{2**min_zoom} tiles), "
-        f"z={max_zoom} = highest res ({2**max_zoom}x{2**max_zoom} tiles).\n"
-        f"// Tile extent: lon [{GEO_X_MIN}, {GEO_X_MAX}], lat [{GEO_Y_MIN}, {GEO_Y_MAX}]\n"
+        f"// z={min_zoom} = lowest res ({min_tx}x{min_ty} tiles), "
+        f"z={max_zoom} = highest res ({max_tx}x{max_ty} tiles).\n"
+        f"// Tile extent: x [{x_min}, {x_max}], y [{y_min}, {y_max}]\n"
+        f"// Region span: {x_span} x {y_span} units\n"
+        "// Non-square regions are supported; keep this extent and resolutions synchronized.\n"
         "================================================================="
     )
 
@@ -578,13 +604,13 @@ def set_layer_visibility(root: ET.Element, visible_labels: frozenset) -> None:
 
 def hide_frame_element(root: ET.Element) -> None:
     """
-    Hide the 'Frame (Old World)' rectangle so it does not appear in tiles.
+    Hide the historical frame rectangle so it does not appear in tiles.
     Searches the entire element tree and sets display:none on the element.
     """
     def _walk(elem: ET.Element) -> bool:
         label = elem.get(INKSCAPE_LABEL, "")
         eid   = elem.get("id", "")
-        if label == FRAME_LABEL or eid == FRAME_LABEL:
+        if label == "Frame (Old World)" or eid == "Frame (Old World)":
             elem.set("style", _set_css_display(elem.get("style", ""), "none"))
             logger.debug("Frame element hidden (id=%s, label=%s)", eid, label)
             return True
@@ -595,9 +621,8 @@ def hide_frame_element(root: ET.Element) -> None:
 
     if not _walk(root):
         logger.warning(
-            "Could not find '%s' to hide in the temporary SVG; "
+            "Could not find historical frame rectangle to hide in temporary SVG; "
             "it may appear in rendered tiles.",
-            FRAME_LABEL,
         )
 
 
@@ -753,6 +778,7 @@ def split_block(
 def generate_zoom_level(
     z:           int,
     frame:       Tuple[float, float, float, float],
+    region_extent: Tuple[float, float, float, float],
     inkscape:    Path,
     svg_path:    Path,
     out_dir:     Path,
@@ -765,68 +791,88 @@ def generate_zoom_level(
 
     Parameters
     ----------
-    frame : SVG bounding box of the 'Frame (Old World)' rectangle,
-            as returned by find_frame_bounds().
+    frame : SVG bounding box of the export region in Inkscape px.
 
     Returns the total number of tiles written (0 in dry-run mode).
     """
-    tiles_per_side  = 2 ** z
-    actual_block    = min(block_tiles, tiles_per_side)
-    blocks_per_side = tiles_per_side // actual_block
-    px_block        = actual_block * TILE_SIZE
+    region_x_min, region_y_min, region_x_max, region_y_max = region_extent
+    region_span_x = region_x_max - region_x_min
+    region_span_y = region_y_max - region_y_min
+
+    # Define zoom by X density (2^z columns), then derive Y rows from aspect ratio.
+    tiles_x = 2 ** z
+    tiles_y = max(1, int(round(tiles_x * (region_span_y / region_span_x))))
+
+    block_cols_base = min(block_tiles, tiles_x)
+    block_rows_base = min(block_tiles, tiles_y)
+    block_cols_count = math.ceil(tiles_x / block_cols_base)
+    block_rows_count = math.ceil(tiles_y / block_rows_base)
 
     total_tiles  = 0
-    total_blocks = blocks_per_side * blocks_per_side
+    total_blocks = block_cols_count * block_rows_count
     block_num    = 0
 
     logger.info(
-        "Zoom %d: %dx%d tiles  |  block=%d tiles (%dpx)  |  %dx%d blocks = %d Inkscape calls",
-        z, tiles_per_side, tiles_per_side,
-        actual_block, px_block,
-        blocks_per_side, blocks_per_side,
+        "Zoom %d: %dx%d tiles  |  max block=%dx%d tiles  |  %dx%d blocks = %d Inkscape calls",
+        z, tiles_x, tiles_y,
+        block_cols_base, block_rows_base,
+        block_cols_count, block_rows_count,
         total_blocks,
     )
 
-    tile_deg_x = GEO_X_SPAN / tiles_per_side
-    tile_deg_y = GEO_Y_SPAN / tiles_per_side
+    tile_units_x = region_span_x / tiles_x
+    tile_units_y = region_span_y / tiles_y
 
     with tempfile.TemporaryDirectory(prefix="owa_blocks_") as tmpdir:
-        for block_row in range(blocks_per_side):
+        for block_row in range(block_rows_count):
             # block_row=0 is the northernmost block row
-            for block_col in range(blocks_per_side):
+            for block_col in range(block_cols_count):
                 block_num += 1
 
-                col_start = block_col * actual_block
+                col_start = block_col * block_cols_base
+                cols_this_block = min(block_cols_base, tiles_x - col_start)
 
                 # block_row=0 -> northernmost -> highest TMS rows
-                tms_row_top    = tiles_per_side - 1 - block_row * actual_block
-                tms_row_bottom = tms_row_top - actual_block + 1
+                tms_row_top = tiles_y - 1 - block_row * block_rows_base
+                rows_this_block = min(block_rows_base, tms_row_top + 1)
+                tms_row_bottom = tms_row_top - rows_this_block + 1
 
-                area = block_export_area(frame, z, col_start, tms_row_bottom, actual_block)
+                area = block_export_area(
+                    frame,
+                    tiles_x,
+                    tiles_y,
+                    col_start,
+                    tms_row_bottom,
+                    cols_this_block,
+                    rows_this_block,
+                )
+
+                px_block_w = cols_this_block * TILE_SIZE
+                px_block_h = rows_this_block * TILE_SIZE
 
                 # Human-readable geographic bounds for logging
-                lon_lo = GEO_X_MIN + col_start * tile_deg_x
-                lon_hi = GEO_X_MIN + (col_start + actual_block) * tile_deg_x
-                lat_lo = GEO_Y_MIN + tms_row_bottom * tile_deg_y
-                lat_hi = GEO_Y_MIN + (tms_row_bottom + actual_block) * tile_deg_y
+                x_lo = region_x_min + col_start * tile_units_x
+                x_hi = region_x_min + (col_start + cols_this_block) * tile_units_x
+                y_lo = region_y_min + tms_row_bottom * tile_units_y
+                y_hi = region_y_min + (tms_row_bottom + rows_this_block) * tile_units_y
 
                 logger.info(
                     "  [%d/%d] z=%d block(row=%d,col=%d) tms_y=%d..%d "
-                    "geo=(%.2f..%.2f E, %.2f..%.2f N) "
-                    "svg=(%.1f:%.1f:%.1f:%.1f) %dpx",
+                    "region=(%.2f..%.2f X, %.2f..%.2f Y) "
+                    "svg=(%.1f:%.1f:%.1f:%.1f) %dx%d px",
                     block_num, total_blocks,
                     z, block_row, block_col,
                     tms_row_bottom, tms_row_top,
-                    lon_lo, lon_hi, lat_lo, lat_hi,
+                    x_lo, x_hi, y_lo, y_hi,
                     area[0], area[1], area[2], area[3],
-                    px_block,
+                    px_block_w, px_block_h,
                 )
 
                 if dry_run:
                     logger.info(
                         "  [DRY RUN] tiles %d/%d/%d..%d  through  %d/%d/%d..%d",
                         z, col_start, tms_row_bottom, tms_row_top,
-                        z, col_start + actual_block - 1, tms_row_bottom, tms_row_top,
+                        z, col_start + cols_this_block - 1, tms_row_bottom, tms_row_top,
                     )
                     continue
 
@@ -834,14 +880,14 @@ def generate_zoom_level(
 
                 if not render_block(
                     inkscape, svg_path, area,
-                    px_block, px_block,
+                    px_block_w, px_block_h,
                     block_png, background,
                 ):
                     logger.error("  Block failed -- skipping.")
                     continue
 
                 n_written = split_block(
-                    block_png, actual_block, actual_block,
+                    block_png, cols_this_block, rows_this_block,
                     out_dir, z, col_start, tms_row_bottom,
                 )
                 total_tiles += n_written
@@ -863,18 +909,41 @@ def parse_args() -> argparse.Namespace:
             "Output: <output_root>/<tileset>/<z>/<x>/<y>.png"
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
+        add_help=False,
     )
     p.add_argument(
-        "--tileset", default="test_tiles",
-        help="Tileset directory name under the repository root (default: test_tiles)",
+        "--help", action="help",
+        help="Show this help message and exit.",
+    )
+    p.add_argument(
+        "-o", "--origin", nargs=2, type=float, metavar=("X", "Y"),
+        help=(
+            "Tile-region origin in display units (x y), e.g. -o -25 32. "
+            "If omitted together with width/height, you will be prompted."
+        ),
+    )
+    p.add_argument(
+        "-w", "--width", type=float,
+        help="Tile-region width in display units. Prompted if omitted.",
+    )
+    p.add_argument(
+        "-h", "--height", type=float,
+        help="Tile-region height in display units. Prompted if omitted.",
+    )
+    p.add_argument(
+        "--tileset", default="map_tiles",
+        help="Tileset directory name under the repository root (default: map_tiles)",
     )
     p.add_argument(
         "--min-zoom", type=int, default=MIN_ZOOM,
         help=f"First zoom level to generate (default: {MIN_ZOOM})",
     )
     p.add_argument(
-        "--max-zoom", type=int, default=MAX_ZOOM,
-        help=f"Last zoom level to generate (default: {MAX_ZOOM})",
+        "--max-zoom", type=int,
+        help=(
+            f"Last zoom level to generate. If omitted, prompted at runtime "
+            f"(default if blank: {MAX_ZOOM})."
+        ),
     )
     p.add_argument(
         "--block-tiles", type=int, default=DEFAULT_BLOCK_TILES,
@@ -923,9 +992,32 @@ def main() -> None:
         logger.error("Source SVG not found: %s", SVG_PATH)
         sys.exit(1)
 
+    try:
+        args.max_zoom = resolve_max_zoom(args)
+    except ValueError as exc:
+        logger.error("%s", exc)
+        sys.exit(1)
+
     if args.min_zoom < 1 or args.max_zoom > 8 or args.min_zoom > args.max_zoom:
         logger.error("Zoom levels must satisfy 1 <= min-zoom <= max-zoom <= 8.")
         sys.exit(1)
+
+    try:
+        region_origin_x, region_origin_y, region_w, region_h = resolve_region_inputs(args)
+    except ValueError as exc:
+        logger.error("%s", exc)
+        sys.exit(1)
+
+    region_extent = (
+        region_origin_x,
+        region_origin_y,
+        region_origin_x + region_w,
+        region_origin_y + region_h,
+    )
+    logger.info(
+        "Region (display units): origin=(%.3f, %.3f) size=(%.3f x %.3f)",
+        region_origin_x, region_origin_y, region_w, region_h,
+    )
 
     inkscape = find_inkscape(args.inkscape)
     logger.info("Inkscape: %s", inkscape)
@@ -935,13 +1027,14 @@ def main() -> None:
         out_dir.mkdir(parents=True, exist_ok=True)
     logger.info("Output directory: %s", out_dir)
 
-    # -- Read frame bounds from the SVG ------------------------------------
-    logger.info("Reading '%s' bounds from SVG...", FRAME_LABEL)
-    try:
-        frame_svg = find_frame_bounds(SVG_PATH)
-    except RuntimeError as exc:
-        logger.error("%s", exc)
-        sys.exit(1)
+    # -- Build frame bounds from explicit region inputs ---------------------
+    frame_svg = display_region_to_svg_bounds(
+        region_origin_x, region_origin_y, region_w, region_h
+    )
+    logger.info(
+        "Region mapped to SVG bounds: x0=%.3f y0=%.3f x1=%.3f y1=%.3f",
+        *frame_svg,
+    )
 
     # Convert SVG user-unit frame bounds to Inkscape physical-pixel coordinates.
     # Inkscape's --export-area parameter expects CSS px (96 dpi) referenced to
@@ -953,23 +1046,40 @@ def main() -> None:
         sys.exit(1)
     frame = svg_frame_to_inkscape(frame_svg, sx, sy, ox, oy)
     logger.info(
-        "Frame in Inkscape px: x0=%.2f y0=%.2f x1=%.2f y1=%.2f  (%.1f x %.1f px)",
+        "Region in Inkscape px: x0=%.2f y0=%.2f x1=%.2f y1=%.2f  (%.1f x %.1f px)",
         *frame, frame[2] - frame[0], frame[3] - frame[1],
     )
 
+    if not math.isclose(region_w, region_h):
+        logger.info(
+            "Non-square region detected (width %.3f != height %.3f). "
+            "The export/splitting pipeline supports this.",
+            region_w, region_h,
+        )
+
     # -- Print viewer config -----------------------------------------------
-    print(viewer_config_string(args.min_zoom, args.max_zoom, args.tileset))
+    print(viewer_config_string(args.min_zoom, args.max_zoom, args.tileset, region_extent))
 
     # -- Sanity check: z=1 full extent should equal the frame exactly ------
-    area_z1 = block_export_area(frame, 1, 0, 0, 2)
+    region_x_min, region_y_min, region_x_max, region_y_max = region_extent
+    region_span_x = region_x_max - region_x_min
+    region_span_y = region_y_max - region_y_min
+    tiles_x_z1 = 2
+    tiles_y_z1 = max(1, int(round(tiles_x_z1 * (region_span_y / region_span_x))))
+    area_z1 = block_export_area(
+        frame,
+        tiles_x_z1,
+        tiles_y_z1,
+        0,
+        0,
+        tiles_x_z1,
+        tiles_y_z1,
+    )
     logger.info(
         "Sanity check z=1 full-extent area (Inkscape px): x0=%.2f y0=%.2f x1=%.2f y1=%.2f",
         *area_z1,
     )
-    logger.info(
-        "  Frame bounds (Inkscape px):                    x0=%.2f y0=%.2f x1=%.2f y1=%.2f",
-        *frame,
-    )
+    logger.info("  Region bounds (Inkscape px):                   x0=%.2f y0=%.2f x1=%.2f y1=%.2f", *frame)
 
     # -- Create temporary SVG ----------------------------------------------
     logger.info("Preparing temporary SVG (layer visibility + frame hidden)...")
@@ -986,6 +1096,7 @@ def main() -> None:
             n = generate_zoom_level(
                 z           = z,
                 frame       = frame,
+                region_extent = region_extent,
                 inkscape    = inkscape,
                 svg_path    = tmp_svg,
                 out_dir     = out_dir,
