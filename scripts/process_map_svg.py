@@ -71,6 +71,11 @@ NS = {
     'inkscape': 'http://www.inkscape.org/namespaces/inkscape'
 }
 
+# Regions whose Settlements/<region> group contains sub-region child groups
+# (Empire's Elector Provinces, Bretonnia's Dukedoms) rather than settlement
+# text elements directly.
+REGIONS_WITH_SUB_PROVINCES = {"Empire", "Bretonnia"}
+
 
 @dataclass
 class Settlement:
@@ -153,6 +158,17 @@ class WaterLabel:
     """Represents a water body label."""
     name: str
     waterbody_type: str
+    svg_x: float
+    svg_y: float
+    geo_lon: float = 0.0
+    geo_lat: float = 0.0
+
+
+@dataclass
+class GeographicFeatureLabel:
+    """Represents a non-water geographic feature label (hills, lowlands, forests, etc.)."""
+    name: str
+    feature_type: str
     svg_x: float
     svg_y: float
     geo_lon: float = 0.0
@@ -280,12 +296,17 @@ class SVGMapProcessor:
         self.settlements_norsca = []
         self.settlements_border_princes = []
         self.settlements_estalia = []
+        self.settlements_albion = []
+        self.settlements_araby = []
+        self.settlements_dawi_zharr = []
         self.settlements_karaz_ankor = []
         self.settlements_wood_elves = []
+        self.settlements_under_empire = []
         self.points_of_interest = []
         self.roads = []
         self.province_labels = []
         self.water_labels = []
+        self.geographic_feature_labels = []
 
         self.invalid_settlements = []
         self.duplicate_settlements = defaultdict(list)
@@ -986,19 +1007,21 @@ class SVGMapProcessor:
 
     def process_human_settlements(self, region_name: str):
         """Process human settlements for any region generically.
-        
+
         Handles regions: Empire, Bretonnia, Westerland, Kislev, Tilea, Norsca, Border Princes, Estalia.
-        Empire is special: it may contain provinces as child groups.
-        Other regions are processed as single units.
-        
+        Empire and Bretonnia are special: they contain sub-regions (Empire's Elector
+        Provinces, Bretonnia's Dukedoms) as child groups. Other regions are
+        processed as single units.
+
         Args:
             region_name: The region name (e.g., "Empire", "Norsca", "Border Princes")
         """
         logger.info(f"Processing {region_name} settlements...")
 
         # Get the settlements list and CSV data dict for this region
-        # Handle region name variations (e.g., "Border Princes" -> settlements_border_princes)
-        attr_key = region_name.lower().replace(" ", "_")
+        # Handle region name variations (e.g., "Border Princes" -> settlements_border_princes,
+        # "Dawi-Zharr" -> settlements_dawi_zharr)
+        attr_key = region_name.lower().replace(" ", "_").replace("-", "_")
         settlements_attr = f"settlements_{attr_key}"
         
         if not hasattr(self, settlements_attr):
@@ -1037,8 +1060,9 @@ class SVGMapProcessor:
             region_faction, f"Settlements/{region_name}", settlements_matrix
         )
 
-        # Special handling for Empire: iterate through provinces
-        if region_name == "Empire":
+        # Special handling for regions with sub-regions (Empire's Elector Provinces,
+        # Bretonnia's Dukedoms): iterate through the sub-region child groups.
+        if region_name in REGIONS_WITH_SUB_PROVINCES:
             provinces_seen = set()
             for province_group in region_faction:
                 province_name = province_group.get(f"{{{NS['inkscape']}}}label")
@@ -1046,14 +1070,14 @@ class SVGMapProcessor:
                     continue
 
                 provinces_seen.add(province_name)
-                logger.info(f"  Processing province: {province_name}")
+                logger.info(f"  Processing sub-region: {province_name}")
 
                 settlements_in_province = {}
-                prov_path = f"Settlements/Empire/{province_name}"
+                prov_path = f"Settlements/{region_name}/{province_name}"
 
                 # Absorb province-level transform and recurse into its children
                 province_matrix = self._get_group_transform(
-                    province_group, "Settlements/Empire", region_matrix
+                    province_group, f"Settlements/{region_name}", region_matrix
                 )
                 self._process_settlement_elements(
                     province_group, province_name,
@@ -1063,7 +1087,7 @@ class SVGMapProcessor:
 
             logger.info(
                 f"  Found {len(settlements_list)} valid settlements "
-                f"across {len(provinces_seen)} provinces"
+                f"across {len(provinces_seen)} sub-regions"
             )
         else:
             # For non-Empire regions: process as a single unit without provinces
@@ -1794,16 +1818,22 @@ class SVGMapProcessor:
         parent_matrix: TransformMatrix = IDENTITY_MATRIX,
         layer_path: str = "Points of Interest",
     ):
-        """Recursively process POI text elements, flattening all group transforms."""
+        """Recursively process POI text elements, flattening all group transforms.
+
+        A nested sub-group with its own inkscape:label (e.g. "Peaks" or
+        "Waterfalls" under "Geographic Landmarks") is treated as a more
+        specific POI sub-type, overriding the parent group's type for text
+        found within it. Text directly under the parent still uses the
+        parent's type.
+        """
         for elem in parent_elem:
             if elem.tag == f"{{{NS['svg']}}}g":
-                label = (
-                    elem.get(f"{{{NS['inkscape']}}}label")
-                    or elem.get("id", "")
-                )
+                group_label = elem.get(f"{{{NS['inkscape']}}}label")
+                label = group_label or elem.get("id", "")
                 child_path = f"{layer_path}/{label}" if label else layer_path
                 child_matrix = self._get_group_transform(elem, layer_path, parent_matrix)
-                self._process_poi_elements(elem, poi_type, poi_list, child_matrix, child_path)
+                child_poi_type = group_label or poi_type
+                self._process_poi_elements(elem, child_poi_type, poi_list, child_matrix, child_path)
             elif elem.tag == f"{{{NS['svg']}}}text":
                 name = self._get_text_element_label(elem)
                 if name:
@@ -1861,11 +1891,14 @@ class SVGMapProcessor:
 
         poi_types = {
             "Other": "Other",
+            "Ruins": "Ruins",
             "City Districts": "City Districts",
             "Forts and Castles": "Forts and Castles",
             "Monasteries and Temples": "Monasteries and Temples",
             "Taverns and Inns": "Taverns and Inns",
             "Geographic Landmarks": "Geographic Landmarks",
+            "Peaks": "Peaks",
+            "Waterfalls": "Waterfalls",
             "High Elf Colonies": "High Elf Colonies",
             "Gnome Burrows": "Gnome Burrows",
             "Chaos Shrines": "Chaos Shrines",
@@ -2245,22 +2278,28 @@ class SVGMapProcessor:
         """Process all water body labels."""
         logger.info("Processing Water Labels...")
 
-        # Find the Water Labels layer
+        # Find the water sub-layer. Currently labelled "Water Bodies"; accept
+        # the older "Water Labels" name too for robustness.
         water_layer = None
-        for g in self.root.findall(f".//{{{NS['svg']}}}g"):
-            if g.get(f"{{{NS['inkscape']}}}label") == "Water Labels":
-                water_layer = g
+        water_layer_label = None
+        for candidate_label in ("Water Bodies", "Water Labels"):
+            for g in self.root.findall(f".//{{{NS['svg']}}}g"):
+                if g.get(f"{{{NS['inkscape']}}}label") == candidate_label:
+                    water_layer = g
+                    water_layer_label = candidate_label
+                    break
+            if water_layer is not None:
                 break
 
         if water_layer is None:
-            logger.error("Water Labels layer not found!")
+            logger.error("Water Bodies (or Water Labels) layer not found!")
             return
 
-        # Build the initial transform from the Water Labels layer itself.
-        # This is critical: the Water Labels layer has its own translate that must
+        # Build the initial transform from the water layer itself.
+        # This is critical: the water layer has its own translate that must
         # be composed with every sub-group's transform before extracting coordinates.
         water_layer_matrix = self._get_group_transform(
-            water_layer, "Water Labels", IDENTITY_MATRIX
+            water_layer, water_layer_label, IDENTITY_MATRIX
         )
 
         # Map layer names to waterbody types
@@ -2285,15 +2324,15 @@ class SVGMapProcessor:
                 logger.info(f"  Processing marshes...")
                 # The marshes group itself may have a transform
                 marshes_matrix = self._get_group_transform(
-                    water_group, "Water Labels", water_layer_matrix
+                    water_group, water_layer_label, water_layer_matrix
                 )
                 for marsh_group in water_group:
                     marsh_layer_name = marsh_group.get(f"{{{NS['inkscape']}}}label")
                     if marsh_layer_name and marsh_layer_name in waterbody_type_map:
                         waterbody_type = waterbody_type_map[marsh_layer_name]
-                        marsh_path = f"Water Labels/marshes/{marsh_layer_name}"
+                        marsh_path = f"{water_layer_label}/marshes/{marsh_layer_name}"
                         marsh_matrix = self._get_group_transform(
-                            marsh_group, "Water Labels/marshes", marshes_matrix
+                            marsh_group, f"{water_layer_label}/marshes", marshes_matrix
                         )
                         initial_count = len(self.water_labels)
                         self._process_water_label_elements(
@@ -2307,9 +2346,9 @@ class SVGMapProcessor:
                 waterbody_type = waterbody_type_map[layer_name]
                 logger.info(f"  Processing {waterbody_type}...")
 
-                group_path = f"Water Labels/{layer_name}"
+                group_path = f"{water_layer_label}/{layer_name}"
                 group_matrix = self._get_group_transform(
-                    water_group, "Water Labels", water_layer_matrix
+                    water_group, water_layer_label, water_layer_matrix
                 )
                 initial_count = len(self.water_labels)
                 self._process_water_label_elements(
@@ -2362,6 +2401,106 @@ class SVGMapProcessor:
                         label = WaterLabel(
                             name=name,
                             waterbody_type=waterbody_type,
+                            svg_x=svg_x,
+                            svg_y=svg_y,
+                            geo_lon=geo_lon,
+                            geo_lat=geo_lat
+                        )
+                        label_list.append(label)
+                    except (ValueError, TypeError):
+                        pass
+
+    def process_geographic_feature_labels(self):
+        """Process the non-water sub-layers of 'Geographic Feature Labels'
+        (Lowlands, Minor Lowlands, Hills, Minor Hills, Mountain Passes,
+        Forest Labels, etc.), tagging each label with its layer name as type.
+
+        The water sub-layer (labelled 'Water Bodies' or, currently, 'Water
+        Labels') is skipped here since it is handled separately by
+        process_water_labels(), which preserves its ocean/sea/marsh/lake
+        sub-categorization.
+        """
+        logger.info("Processing Geographic Feature Labels...")
+
+        # Find the Geographic Feature Labels layer
+        gfl_layer = None
+        for g in self.root.findall(f".//{{{NS['svg']}}}g"):
+            if g.get(f"{{{NS['inkscape']}}}label") == "Geographic Feature Labels":
+                gfl_layer = g
+                break
+
+        if gfl_layer is None:
+            logger.error("Geographic Feature Labels layer not found!")
+            return
+
+        gfl_layer_matrix = self._get_group_transform(
+            gfl_layer, "Geographic Feature Labels", IDENTITY_MATRIX
+        )
+
+        water_sub_layer_names = {"Water Bodies", "Water Labels"}
+
+        for feature_group in gfl_layer:
+            feature_type = feature_group.get(f"{{{NS['inkscape']}}}label")
+            if not feature_type or feature_type in water_sub_layer_names:
+                continue
+
+            logger.info(f"  Processing {feature_type}...")
+            group_path = f"Geographic Feature Labels/{feature_type}"
+            group_matrix = self._get_group_transform(
+                feature_group, "Geographic Feature Labels", gfl_layer_matrix
+            )
+
+            initial_count = len(self.geographic_feature_labels)
+            self._process_geographic_feature_elements(
+                feature_group, feature_type, self.geographic_feature_labels,
+                group_matrix, group_path
+            )
+            count = len(self.geographic_feature_labels) - initial_count
+            logger.info(f"    Found {count} labels")
+
+    def _process_geographic_feature_elements(
+        self, parent_elem, feature_type: str, label_list: list,
+        parent_matrix: TransformMatrix = IDENTITY_MATRIX,
+        layer_path: str = "Geographic Feature Labels",
+    ):
+        """Recursively process geographic feature label elements, flattening all group transforms."""
+        for elem in parent_elem:
+            if elem.tag == f"{{{NS['svg']}}}g":
+                label = (
+                    elem.get(f"{{{NS['inkscape']}}}label")
+                    or elem.get("id", "")
+                )
+                child_path = f"{layer_path}/{label}" if label else layer_path
+                child_matrix = self._get_group_transform(elem, layer_path, parent_matrix)
+                self._process_geographic_feature_elements(
+                    elem, feature_type, label_list, child_matrix, child_path
+                )
+            elif elem.tag == f"{{{NS['svg']}}}text":
+                name = self._get_text_element_label(elem)
+                if name:
+                    try:
+                        svg_x = float(elem.get("x", 0))
+                        svg_y = float(elem.get("y", 0))
+
+                        # Detect and absorb any element-level transform
+                        elem_transform_str = elem.get("transform", "")
+                        if elem_transform_str:
+                            elem_path = f"{layer_path}/text:'{name}'"
+                            self.layers_with_transforms.append({
+                                "layer_path": elem_path,
+                                "transform": elem_transform_str,
+                                "context": f"Geographic feature label text element '{name}' (type={feature_type})",
+                            })
+                            elem_matrix = self._parse_transform_to_matrix(elem_transform_str)
+                            svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, elem_matrix)
+
+                        # Apply accumulated ancestor transform
+                        svg_x, svg_y = self._apply_transform_matrix(svg_x, svg_y, parent_matrix)
+
+                        geo_lon, geo_lat = self.converter.svg_to_geo(svg_x, svg_y)
+                        label = GeographicFeatureLabel(
+                            name=name,
+                            feature_type=feature_type,
                             svg_x=svg_x,
                             svg_y=svg_y,
                             geo_lon=geo_lon,

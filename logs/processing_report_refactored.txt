@@ -1,6 +1,6 @@
 Old World Atlas Refactored Workflow Report
 ================================================================================
-Timestamp: 2026-06-27T21:09:39.841946
+Timestamp: 2026-07-17T22:22:10.921111
 
 CSV VALIDATION ISSUES
 --------------------------------------------------------------------------------
@@ -8,9 +8,36 @@ No validation issues detected.
 
 CSV ENTRIES WITHOUT SVG MATCH
 --------------------------------------------------------------------------------
-border_princes.csv: 18 unmatched
-  - Achaes
-  - Aldium
+araby.csv: 28 unmatched
+  - Aiir
+  - Amhabal
+  - Arjijil
+  - Bel-Aliad
+  - Bur-Shitrak
+  - Copher
+  - Dakisir
+  - Djambiya
+  - El-Kalabad
+  - El-Khabbath
+  - Fyrus
+  - Gobi-Alain
+  - Jabal Sinjar
+  - Ka-Sabar
+  - Kadira
+  - Kamt
+  - Kust
+  - Lashiek
+  - Mahabbah
+  - Meknes
+  - Ras Karim
+  - Sadiz
+  - Sanaa
+  - Songhai
+  - Sud
+  - Sudrat
+  - Teshert
+  - Zarekten
+border_princes.csv: 15 unmatched
   - Alfori
   - Alvazzo
   - Bechtersmoln
@@ -25,53 +52,27 @@ border_princes.csv: 18 unmatched
   - Scarosio
   - Schipdorf
   - Tinea
-  - Ulfraya
   - Vlent
-bretonnia.csv: 1 unmatched
-  - Moutier
-empire.csv: 3 unmatched
-  - Dunkelburg
-  - Metelen
-  - Suderberg
-estalia.csv: 3 unmatched
-  - Las Burgas
-  - Muros
-  - Nuja
-karaz_ankor.csv: 7 unmatched
-  - Grimbringrungaz
-  - Kadar Helgad
-  - Karag Agilwutraz (Mount Silverspear)
-  - Karag Dron
-  - Karag Dronar
-  - Karag Kurak
-  - Kraz Und
-kislev.csv: 5 unmatched
-  - Castle Alexandronov
-  - Great Rasputia
+kislev.csv: 3 unmatched
   - Krovash
   - Resyvnhaf
   - Uvetsyn
-norsca.csv: 11 unmatched
+norsca.csv: 4 unmatched
   - Aesling's Conclave
-  - Altar of Spawns
-  - Baga Yar
-  - Chenhild's Monoliths
-  - Cockatrice Lair
   - Doomkeep
-  - Foul Fortress
-  - Icedrake Fjord
   - Morkestaar
   - Sarl Encampment
-  - Temple of Heimkel
-points_of_interest.csv: 19 unmatched
+points_of_interest.csv: 21 unmatched
   - Burg Totenkopf
+  - Caslte Drachenfels
+  - Castle Drakenhof
+  - Castle Wittgenstein
   - Clipeo della Furia Abbey
   - Fest Bracher
   - Fort Blackfire
   - Melkiorsturm
   - Roezfels
   - Ruins of Kor Immarmor
-  - Schloss Drachenfels
   - Schloss Reiksguard
   - Schloss Sudengard
   - Summerfall Fort
@@ -83,16 +84,28 @@ points_of_interest.csv: 19 unmatched
   - The Northland Piper
   - The Pelican's Perch
   - Thurgenburg
-provinces.csv: 9 unmatched
-  - KAMENNAYA ZIMA(Troll Country)
-  - POLYANYA OBLAST(Southern Oblast)
-  - PRIMORYE OBLAST(Western Oblast)
-  - SEVERYNA OBLAST(Northern Oblast)
-  - UNGOLSK OBLAST(Eastern Oblast)
+provinces.csv: 4 unmatched
   - WARD OF FROST
   - WARD OF RAIN
   - WARD OF STORM
   - WARD OF THE SUN
+skavendom.csv: 16 unmatched
+  - Bitter Stink (Under-Marienburg)
+  - Cragmere
+  - Ekrund
+  - Gnaw Pit
+  - Karak Azgal
+  - Karak Ungor
+  - Karak-Drazh
+  - Under-Bilbali
+  - Under-Bordeleaux
+  - Under-Brionne
+  - Under-Gisoreux
+  - Under-Nuln
+  - Under-Parravon
+  - Under-Quenelles
+  - Under-Remas
+  - Under-Talabheim
 tilea.csv: 1 unmatched
   - Cortalis
 wood_elves.csv: 7 unmatched
@@ -107,22 +120,9 @@ wood_elves.csv: 7 unmatched
 DUPLICATE SETTLEMENT NAMES WITHIN SAME PROVINCE
 --------------------------------------------------------------------------------
 bretonnia.csv
-  - Bretonnia:Antignac => 2
-  - Bretonnia:Arbonne => 2
-  - Bretonnia:Bergerac => 2
-  - Bretonnia:Blancastel => 2
-  - Bretonnia:Capouys => 2
-  - Bretonnia:Firmebourg => 2
-  - Bretonnia:Jehanville => 2
-  - Bretonnia:La Mirande => 2
-  - Bretonnia:Meilles => 2
-  - Bretonnia:Montenay => 2
-  - Bretonnia:Ouchas => 2
-  - Bretonnia:Plessac => 2
-  - Bretonnia:Pontoz => 2
-  - Bretonnia:Puiseaux => 2
-  - Bretonnia:Renesse => 2
-  - Bretonnia:Saint-Roland => 2
+  - Carcassonne:Arbonne => 2
+  - Couronne:Firmebourg => 2
+  - Quenelles:Pontoz => 2
 empire.csv
   - Middenland:Engden => 2
   - Middenland:Kaserburg => 2
@@ -184,18 +184,21 @@ tilea.csv
 
 OUTPUT SUMMARY
 --------------------------------------------------------------------------------
-settlements_empire.geojson: 3609 features
-settlements_bretonnia.geojson: 1502 features
+settlements_empire.geojson: 3612 features
+settlements_bretonnia.geojson: 1516 features
 settlements_westerland.geojson: 119 features
-settlements_kislev.geojson: 449 features
+settlements_kislev.geojson: 448 features
 settlements_tilea.geojson: 662 features
 settlements_norsca.geojson: 556 features
-settlements_border_princes.geojson: 31 features
+settlements_border_princes.geojson: 34 features
 settlements_estalia.geojson: 305 features
-settlements_karaz_ankor.geojson: 273 features
+settlements_albion.geojson: 22 features
+settlements_araby.geojson: 2 features
+settlements_dawi_zharr.geojson: 1 features
+settlements_karaz_ankor.geojson: 275 features
 settlements_wood_elves.geojson: 74 features
-settlements_skavendom.geojson: 0 features
-points_of_interest.geojson: 937 features
-province_labels.geojson: 100 features
-geographic_feature_labels.geojson: 148 features
-Total features generated: 8765
+settlements_skavendom.geojson: 21 features
+points_of_interest.geojson: 948 features
+province_labels.geojson: 102 features
+geographic_feature_labels.geojson: 423 features
+Total features generated: 9120

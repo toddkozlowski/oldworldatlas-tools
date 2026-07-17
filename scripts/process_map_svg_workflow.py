@@ -225,6 +225,24 @@ GAZETTEER_SCHEMAS: dict[str, GazetteerSchema] = {
         required_non_empty=["Settlement"],
         gid="249472016",
     ),
+    "albion.csv": GazetteerSchema(
+        filename="albion.csv",
+        required_columns=STANDARD_SETTLEMENT_COLUMNS,
+        required_non_empty=["Settlement"],
+        gid="146264007",
+    ),
+    "araby.csv": GazetteerSchema(
+        filename="araby.csv",
+        required_columns=STANDARD_SETTLEMENT_COLUMNS,
+        required_non_empty=["Settlement"],
+        gid="1136344132",
+    ),
+    "dawi_zharr.csv": GazetteerSchema(
+        filename="dawi_zharr.csv",
+        required_columns=STANDARD_SETTLEMENT_COLUMNS,
+        required_non_empty=["Settlement"],
+        gid="2030458055",
+    ),
     "karaz_ankor.csv": GazetteerSchema(
         filename="karaz_ankor.csv",
         required_columns=["Settlement", "Type", *STANDARD_SETTLEMENT_COLUMNS[1:]],
@@ -272,6 +290,13 @@ GAZETTEER_SCHEMAS: dict[str, GazetteerSchema] = {
                 "Large Forest",
                 "Small Forest",
                 "Other",
+                "Lowlands",
+                "Minor Lowlands",
+                "Hills",
+                "Minor Hills",
+                "Mountain Passes",
+                "Mountain Ranges",
+                "Forest Labels",
             }
         },
         gid="1527667508",
@@ -288,7 +313,10 @@ GAZETTEER_SCHEMAS: dict[str, GazetteerSchema] = {
                 "Monasteries and Temples",
                 "Chaos Shrines",
                 "Other",
+                "Ruins",
                 "Geographic Landmarks",
+                "Peaks",
+                "Waterfalls",
                 "High Elf Colonies",
                 "Gnome Burrows",
                 "Greenskin Landmarks",
@@ -310,6 +338,9 @@ HUMAN_SETTLEMENTS = {
     "Norsca": ("norsca.csv", "Norsca", None),
     "Border Princes": ("border_princes.csv", "Border Princes", None),
     "Estalia": ("estalia.csv", "Estalia", None),
+    "Albion": ("albion.csv", "Albion", None),
+    "Araby": ("araby.csv", "Araby", None),
+    "Dawi-Zharr": ("dawi_zharr.csv", "Dawi-Zharr", None),
 }
 
 NON_EMPIRE_REGION_TO_CSV: dict[str, str] = {
@@ -320,8 +351,12 @@ NON_EMPIRE_REGION_TO_CSV: dict[str, str] = {
     "Norsca": "norsca.csv",
     "Border Princes": "border_princes.csv",
     "Estalia": "estalia.csv",
+    "Albion": "albion.csv",
+    "Araby": "araby.csv",
+    "Dawi-Zharr": "dawi_zharr.csv",
     "Karaz Ankor": "karaz_ankor.csv",
     "Wood Elves": "wood_elves.csv",
+    "Under-Empire": "skavendom.csv",
 }
 
 
@@ -373,6 +408,20 @@ def parse_notes(value: str) -> list[str]:
     if ";" in cleaned:
         return [part.strip() for part in cleaned.split(";") if part.strip()]
     return [cleaned]
+
+
+def parse_clans(value: str) -> list[str]:
+    """Parse a comma-separated clan list, treating 'None' as empty."""
+    if not value:
+        return []
+    cleaned = value.strip().strip('"')
+    if not cleaned:
+        return []
+    return [
+        part.strip()
+        for part in cleaned.split(",")
+        if part.strip() and part.strip().lower() != "none"
+    ]
 
 
 def safe_int(value: Any, default: int = 0) -> int:
@@ -637,7 +686,7 @@ def step_relabel_svg(state: WorkflowState) -> None:
         ("Settlements", None),
         ("Points of Interest", None),
         ("Region Labels", title_case_label),
-        ("Water Labels", title_case_label),
+        ("Geographic Feature Labels", title_case_label),
     ]
     updated_count = [0]
 
@@ -928,15 +977,14 @@ def build_settlement_features(
         name = (row.get("Settlement") or "").strip()
         if not name:
             continue
-        province = (
+        csv_province = (
             row.get("Province_2515")
             or row.get("Province_2512")
             or row.get("Province_2276")
-            or default_province
             or ""
         ).strip()
 
-        lookup_key = (normalize_name(name), normalize_name(province))
+        lookup_key = (normalize_name(name), normalize_name(csv_province or default_province))
         candidates = extracted_index.get(lookup_key, [])
 
         # Fallback for non-province nations
@@ -972,7 +1020,7 @@ def build_settlement_features(
 
         properties: dict[str, Any] = {
             "name": name,
-            "province": province or default_province,
+            "province": csv_province or getattr(match, "province", "") or default_province,
             "estate": (row.get("Estate") or "").strip(),
             "population": population,
             "tags": tags,
@@ -1175,10 +1223,17 @@ def build_province_features(state: WorkflowState) -> list[dict[str, Any]]:
     return features
 
 
+def _geo_feature_type(item: Any) -> str:
+    """Return the type label for an extracted water label or geographic feature label."""
+    return getattr(item, "waterbody_type", None) or getattr(item, "feature_type", None) or ""
+
+
 def build_geographic_feature_features(state: WorkflowState) -> list[dict[str, Any]]:
-    """Merge geographic feature CSV records with extracted water label coordinates."""
+    """Merge geographic feature CSV records with extracted water/hill/forest/etc. label coordinates."""
     assert state.processor is not None
-    extracted = state.processor.water_labels
+    extracted: list[Any] = list(state.processor.water_labels) + list(
+        getattr(state.processor, "geographic_feature_labels", [])
+    )
     index = build_index_by_name(extracted)
 
     path = csv_path("geographic_feature_labels.csv")
@@ -1206,7 +1261,7 @@ def build_geographic_feature_features(state: WorkflowState) -> list[dict[str, An
                 "geometry": {"type": "Point", "coordinates": [item.geo_lon, item.geo_lat]},
                 "properties": {
                     "name": name,
-                    "type": (row.get("type") or item.waterbody_type).strip(),
+                    "type": (row.get("type") or _geo_feature_type(item)).strip(),
                     "description": None,
                     "wiki": wiki_payload_from_row(row),
                 },
@@ -1224,7 +1279,7 @@ def build_geographic_feature_features(state: WorkflowState) -> list[dict[str, An
                 "geometry": {"type": "Point", "coordinates": [item.geo_lon, item.geo_lat]},
                 "properties": {
                     "name": item.name,
-                    "type": item.waterbody_type,
+                    "type": _geo_feature_type(item),
                     "description": None,
                     "wiki": {"title": None, "url": None, "description": None, "image": None},
                 },
@@ -1233,6 +1288,89 @@ def build_geographic_feature_features(state: WorkflowState) -> list[dict[str, An
 
     if missing:
         state.csv_not_in_svg["geographic_feature_labels.csv"] = sorted(set(missing))
+    return features
+
+
+def build_skavendom_features(state: WorkflowState) -> list[dict[str, Any]]:
+    """Merge Skavendom (Under-Empire) settlement CSV records with extracted coordinates."""
+    assert state.processor is not None
+    extracted = getattr(state.processor, "settlements_under_empire", [])
+    index = build_index_by_name(extracted)
+
+    path = csv_path("skavendom.csv")
+    rows: list[dict[str, str]] = []
+    if path.exists():
+        _, rows = read_csv_rows(path)
+
+    features: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    missing: list[str] = []
+
+    for row in rows:
+        name = (row.get("Settlement") or "").strip()
+        if not name:
+            continue
+        key = normalize_name(name)
+        item = index.get(key)
+        if not item:
+            missing.append(name)
+            continue
+
+        population = safe_int(row.get("Population"), default=0)
+        if population <= 0:
+            population = random_population()
+
+        tags = parse_tags(row.get("Tags", ""))
+        trade = (row.get("Trade") or "").strip()
+        if trade:
+            tags.append(f"trade:{trade}")
+
+        features.append(
+            {
+                "type": "Feature",
+                "geometry": {"type": "Point", "coordinates": [item.geo_lon, item.geo_lat]},
+                "properties": {
+                    "name": name,
+                    "province": item.province,
+                    "settlement_type": (row.get("Type") or "").strip(),
+                    "population": population,
+                    "major_clans": parse_clans(row.get("Major Clan(s)", "")),
+                    "minor_clans": parse_clans(row.get("Minor Clan(s)", "")),
+                    "tags": tags,
+                    "notes": parse_notes(row.get("Notes", "")),
+                    "size_category": calculate_size_category(population),
+                    "wiki": wiki_payload_from_row(row),
+                },
+            }
+        )
+        seen.add(key)
+
+    for item in extracted:
+        key = normalize_name(item.name)
+        if key in seen:
+            continue
+        pop = random_population()
+        features.append(
+            {
+                "type": "Feature",
+                "geometry": {"type": "Point", "coordinates": [item.geo_lon, item.geo_lat]},
+                "properties": {
+                    "name": item.name,
+                    "province": item.province,
+                    "settlement_type": "",
+                    "population": pop,
+                    "major_clans": [],
+                    "minor_clans": [],
+                    "tags": [],
+                    "notes": [],
+                    "size_category": calculate_size_category(pop),
+                    "wiki": {"title": None, "url": None, "description": None, "image": None},
+                },
+            }
+        )
+
+    if missing:
+        state.csv_not_in_svg["skavendom.csv"] = sorted(set(missing))
     return features
 
 
@@ -1253,11 +1391,22 @@ def collect_svg_duplicate_name_counts(processor: legacy.SVGMapProcessor) -> dict
     output: dict[str, dict[str, int]] = {}
     duplicate_settlements = getattr(processor, "duplicate_settlements", {})
 
+    # Bretonnia's Dukedoms (like Empire's Elector Provinces) appear as their own
+    # sub-region names rather than "Bretonnia" in duplicate_settlements, so they
+    # need an explicit mapping back to bretonnia.csv.
+    bretonnia_sub_regions = {
+        getattr(item, "province", "")
+        for item in getattr(processor, "settlements_bretonnia", [])
+    }
+
     for province, duplicates in duplicate_settlements.items():
         if not duplicates:
             continue
 
-        source_csv = NON_EMPIRE_REGION_TO_CSV.get(province, "empire.csv")
+        if province in bretonnia_sub_regions:
+            source_csv = "bretonnia.csv"
+        else:
+            source_csv = NON_EMPIRE_REGION_TO_CSV.get(province, "empire.csv")
         duplicate_rows_by_name: dict[str, int] = {}
 
         for entry in duplicates:
@@ -1291,6 +1440,7 @@ def step_process_svg_and_generate_outputs(state: WorkflowState) -> None:
     # Process special cases (non-human settlements)
     processor.process_settlements_karaz_ankor()
     processor.process_settlements_wood_elves()
+    processor.process_human_settlements("Under-Empire")  # Skaven Under-Empire settlements
     processor.populate_settlement_data()
     processor.populate_karaz_ankor_data()
     processor.populate_wood_elves_data()
@@ -1298,6 +1448,7 @@ def step_process_svg_and_generate_outputs(state: WorkflowState) -> None:
     processor.process_province_labels()
     processor.populate_province_data()
     processor.process_water_labels()
+    processor.process_geographic_feature_labels()
 
     state.duplicate_names_by_province = collect_svg_duplicate_name_counts(processor)
 
@@ -1305,8 +1456,8 @@ def step_process_svg_and_generate_outputs(state: WorkflowState) -> None:
 
     # Generate outputs for all human settlements generically
     for region_name, (csv_filename, default_province, type_property) in HUMAN_SETTLEMENTS.items():
-        # Get the settlements list from processor
-        attr_key = region_name.lower().replace(" ", "_")
+        # Get the settlements list from processor (e.g. "Dawi-Zharr" -> settlements_dawi_zharr)
+        attr_key = region_name.lower().replace(" ", "_").replace("-", "_")
         settlements_attr = f"settlements_{attr_key}"
         settlements_list = getattr(processor, settlements_attr, [])
         
@@ -1338,11 +1489,7 @@ def step_process_svg_and_generate_outputs(state: WorkflowState) -> None:
         type_property="settlement_type",
     )
 
-    # Ensure placeholder entries exist for unsupported settlements
-    for missing_name in ["skavendom"]:
-        path = csv_path(f"{missing_name}.csv")
-        if path.exists() and f"settlements_{missing_name}.geojson" not in outputs:
-            outputs[f"settlements_{missing_name}.geojson"] = []
+    outputs["settlements_skavendom.geojson"] = build_skavendom_features(state)
 
     outputs["points_of_interest.geojson"] = build_points_of_interest_features(state)
     outputs["province_labels.geojson"] = build_province_features(state)
