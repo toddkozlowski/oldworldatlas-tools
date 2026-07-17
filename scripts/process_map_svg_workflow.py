@@ -312,6 +312,18 @@ HUMAN_SETTLEMENTS = {
     "Estalia": ("estalia.csv", "Estalia", None),
 }
 
+NON_EMPIRE_REGION_TO_CSV: dict[str, str] = {
+    "Westerland": "westerland.csv",
+    "Bretonnia": "bretonnia.csv",
+    "Kislev": "kislev.csv",
+    "Tilea": "tilea.csv",
+    "Norsca": "norsca.csv",
+    "Border Princes": "border_princes.csv",
+    "Estalia": "estalia.csv",
+    "Karaz Ankor": "karaz_ankor.csv",
+    "Wood Elves": "wood_elves.csv",
+}
+
 
 def now_stamp() -> str:
     """Return a filesystem-safe ISO-like timestamp."""
@@ -559,7 +571,17 @@ def text_content(text_elem: ET.Element) -> Optional[str]:
     return " ".join(parts) if parts else None
 
 
-def relabel_text_nodes(parent: ET.Element, updated: list[int]) -> None:
+def title_case_label(value: str) -> str:
+    """Normalize spacing and convert a label to title case."""
+    normalized = re.sub(r"\s+", " ", value).strip()
+    return normalized.title()
+
+
+def relabel_text_nodes(
+    parent: ET.Element,
+    updated: list[int],
+    label_transform: Optional[Callable[[str], str]] = None,
+) -> None:
     """Recursively relabel text nodes with their displayed text."""
     g_tag = f"{{{NS['svg']}}}g"
     text_tag = f"{{{NS['svg']}}}text"
@@ -567,18 +589,20 @@ def relabel_text_nodes(parent: ET.Element, updated: list[int]) -> None:
 
     for child in parent:
         if child.tag == g_tag:
-            relabel_text_nodes(child, updated)
+            relabel_text_nodes(child, updated, label_transform)
         elif child.tag == text_tag:
             label = text_content(child)
             if not label:
                 continue
+            if label_transform is not None:
+                label = label_transform(label)
             if child.get(label_attr) != label:
                 child.set(label_attr, label)
                 updated[0] += 1
 
 
 def step_relabel_svg(state: WorkflowState) -> None:
-    """Optional label sync for Settlements and Points of Interest text nodes."""
+    """Optional label sync for text-node layers used by the workflow."""
     cfg = state.config
     should_run = cfg.relabel_svg
     if should_run is None and cfg.interactive:
@@ -609,15 +633,20 @@ def step_relabel_svg(state: WorkflowState) -> None:
     tree = ET.parse(str(svg_path))
     root = tree.getroot()
 
-    targets = ["Settlements", "Points of Interest"]
+    targets: list[tuple[str, Optional[Callable[[str], str]]]] = [
+        ("Settlements", None),
+        ("Points of Interest", None),
+        ("Region Labels", title_case_label),
+        ("Water Labels", title_case_label),
+    ]
     updated_count = [0]
 
-    for target in targets:
+    for target, transform in targets:
         layer = find_layer_by_label(root, target)
         if layer is None:
             state.validation_issues.append(f"Relabel step: missing SVG layer '{target}'")
             continue
-        relabel_text_nodes(layer, updated_count)
+        relabel_text_nodes(layer, updated_count, transform)
 
     if updated_count[0] == 0:
         logger.info("Relabel step made no SVG changes")
@@ -895,7 +924,6 @@ def build_settlement_features(
     used_keys: set[tuple[str, str]] = set()
     missing_from_svg: list[str] = []
 
-    province_duplicates: dict[str, dict[str, int]] = {}
     for row in rows:
         name = (row.get("Settlement") or "").strip()
         if not name:
@@ -907,10 +935,6 @@ def build_settlement_features(
             or default_province
             or ""
         ).strip()
-
-        province_key = province or default_province or ""
-        province_duplicates.setdefault(province_key, {})
-        province_duplicates[province_key][name] = province_duplicates[province_key].get(name, 0) + 1
 
         lookup_key = (normalize_name(name), normalize_name(province))
         candidates = extracted_index.get(lookup_key, [])
@@ -1006,18 +1030,6 @@ def build_settlement_features(
 
     if missing_from_svg:
         state.csv_not_in_svg[filename] = sorted(set(missing_from_svg))
-
-    duplicate_summary = {
-        province: {name: count for name, count in names.items() if count > 1}
-        for province, names in province_duplicates.items()
-    }
-    duplicate_summary = {k: v for k, v in duplicate_summary.items() if v}
-    if duplicate_summary:
-        state.duplicate_names_by_province[filename] = {
-            f"{province}:{name}": count
-            for province, names in duplicate_summary.items()
-            for name, count in names.items()
-        }
 
     return features
 
@@ -1231,6 +1243,39 @@ def write_geojson(path: Path, features: list[dict[str, Any]]) -> None:
         json.dump(payload, handle, indent=2, ensure_ascii=False)
 
 
+def collect_svg_duplicate_name_counts(processor: legacy.SVGMapProcessor) -> dict[str, dict[str, int]]:
+    """Aggregate legacy SVG duplicate tracking into workflow report format.
+
+    Legacy tracking stores one record for each repeated occurrence after the
+    first, so this helper converts grouped duplicate rows into total
+    occurrence counts.
+    """
+    output: dict[str, dict[str, int]] = {}
+    duplicate_settlements = getattr(processor, "duplicate_settlements", {})
+
+    for province, duplicates in duplicate_settlements.items():
+        if not duplicates:
+            continue
+
+        source_csv = NON_EMPIRE_REGION_TO_CSV.get(province, "empire.csv")
+        duplicate_rows_by_name: dict[str, int] = {}
+
+        for entry in duplicates:
+            name = str(entry.get("name", "")).strip()
+            if not name:
+                continue
+            duplicate_rows_by_name[name] = duplicate_rows_by_name.get(name, 0) + 1
+
+        if not duplicate_rows_by_name:
+            continue
+
+        bucket = output.setdefault(source_csv, {})
+        for name, duplicate_rows in duplicate_rows_by_name.items():
+            bucket[f"{province}:{name}"] = duplicate_rows + 1
+
+    return output
+
+
 def step_process_svg_and_generate_outputs(state: WorkflowState) -> None:
     """Run extraction and write standardized output GeoJSON files."""
     if not state.config.svg_path.exists():
@@ -1253,6 +1298,8 @@ def step_process_svg_and_generate_outputs(state: WorkflowState) -> None:
     processor.process_province_labels()
     processor.populate_province_data()
     processor.process_water_labels()
+
+    state.duplicate_names_by_province = collect_svg_duplicate_name_counts(processor)
 
     outputs: dict[str, list[dict[str, Any]]] = {}
 

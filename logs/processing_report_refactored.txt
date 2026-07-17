@@ -1,6 +1,6 @@
 Old World Atlas Refactored Workflow Report
 ================================================================================
-Timestamp: 2026-04-11T18:23:08.087672
+Timestamp: 2026-06-27T21:09:39.841946
 
 CSV VALIDATION ISSUES
 --------------------------------------------------------------------------------
@@ -27,41 +27,31 @@ border_princes.csv: 18 unmatched
   - Tinea
   - Ulfraya
   - Vlent
-bretonnia.csv: 3 unmatched
-  - Aringue
+bretonnia.csv: 1 unmatched
   - Moutier
-  - Mufflons
-empire.csv: 9 unmatched
-  - Börnicke
-  - Hopsten
-  - Leichlinburg
-  - Manannsheim
+empire.csv: 3 unmatched
+  - Dunkelburg
   - Metelen
-  - Roezfels
-  - Sokh
-  - Sottrum
-  - Sudengard
-geographic_feature_labels.csv: 3 unmatched
-  - Bloodfjord
-  - Nordlig Sea
-  - The Ortschlamm
-karaz_ankor.csv: 8 unmatched
+  - Suderberg
+estalia.csv: 3 unmatched
+  - Las Burgas
+  - Muros
+  - Nuja
+karaz_ankor.csv: 7 unmatched
+  - Grimbringrungaz
   - Kadar Helgad
+  - Karag Agilwutraz (Mount Silverspear)
   - Karag Dron
+  - Karag Dronar
   - Karag Kurak
-  - Karak Dum
-  - Karak Vrag
-  - Kraka Ungrim
   - Kraz Und
-  - Kurgaz's Forge
-kislev.csv: 6 unmatched
+kislev.csv: 5 unmatched
   - Castle Alexandronov
   - Great Rasputia
   - Krovash
   - Resyvnhaf
   - Uvetsyn
-  - Zamoski
-norsca.csv: 12 unmatched
+norsca.csv: 11 unmatched
   - Aesling's Conclave
   - Altar of Spawns
   - Baga Yar
@@ -69,14 +59,30 @@ norsca.csv: 12 unmatched
   - Cockatrice Lair
   - Doomkeep
   - Foul Fortress
-  - Horvenghaast
   - Icedrake Fjord
   - Morkestaar
   - Sarl Encampment
   - Temple of Heimkel
-points_of_interest.csv: 2 unmatched
+points_of_interest.csv: 19 unmatched
+  - Burg Totenkopf
+  - Clipeo della Furia Abbey
+  - Fest Bracher
+  - Fort Blackfire
+  - Melkiorsturm
+  - Roezfels
   - Ruins of Kor Immarmor
+  - Schloss Drachenfels
+  - Schloss Reiksguard
+  - Schloss Sudengard
+  - Summerfall Fort
+  - Temple of Sigmar Victorius
+  - The Jealous Bride
   - The Karlsbaum Monastery
+  - The Lonliest Rock
+  - The Missing Sheep
+  - The Northland Piper
+  - The Pelican's Perch
+  - Thurgenburg
 provinces.csv: 9 unmatched
   - KAMENNAYA ZIMA(Troll Country)
   - POLYANYA OBLAST(Southern Oblast)
@@ -101,26 +107,95 @@ wood_elves.csv: 7 unmatched
 DUPLICATE SETTLEMENT NAMES WITHIN SAME PROVINCE
 --------------------------------------------------------------------------------
 bretonnia.csv
-  - Bretonnia:Chenin => 2
+  - Bretonnia:Antignac => 2
+  - Bretonnia:Arbonne => 2
+  - Bretonnia:Bergerac => 2
+  - Bretonnia:Blancastel => 2
+  - Bretonnia:Capouys => 2
+  - Bretonnia:Firmebourg => 2
+  - Bretonnia:Jehanville => 2
+  - Bretonnia:La Mirande => 2
+  - Bretonnia:Meilles => 2
+  - Bretonnia:Montenay => 2
+  - Bretonnia:Ouchas => 2
+  - Bretonnia:Plessac => 2
+  - Bretonnia:Pontoz => 2
+  - Bretonnia:Puiseaux => 2
+  - Bretonnia:Renesse => 2
+  - Bretonnia:Saint-Roland => 2
+empire.csv
+  - Middenland:Engden => 2
+  - Middenland:Kaserburg => 2
+  - Reikland:Dorchen => 2
+  - Reikland:Kröning => 2
+  - Reikland:Veloren => 2
+  - Stirland:Lochen => 2
+  - Stirland:Pötting => 2
+  - Stirland:Sonnigwiese => 2
+  - Stirland:Tadten => 2
+  - Talabecland:Stratenheim => 2
+  - Wissenland:Rabenden => 2
+estalia.csv
+  - Estalia:Pertegaces => 2
+  - Estalia:Zahara => 2
+karaz_ankor.csv
+  - Karaz Ankor:Grung Dramk => 2
+  - Karaz Ankor:Kazad Elgazund => 2
+kislev.csv
+  - Kislev:Belogorsk => 2
+  - Kislev:Berehove => 2
+  - Kislev:Bilohirya => 2
+  - Kislev:Bilovody => 2
+  - Kislev:Bilozirka => 2
+  - Kislev:Chervonosad => 2
+  - Kislev:Horodenka => 2
+  - Kislev:Kamyanka => 2
+  - Kislev:Mala Rika => 2
+  - Kislev:Medova => 2
+  - Kislev:Pryberezne => 2
+  - Kislev:Slobidka => 2
+  - Kislev:Stepanivka => 2
+  - Kislev:Turov => 2
+  - Kislev:Veselivka => 2
+  - Kislev:Vovkiv => 2
+  - Kislev:Zelenivka => 2
+  - Kislev:Zoryany => 2
+norsca.csv
+  - Norsca:Alsarp => 3
+  - Norsca:Arvinn => 2
+  - Norsca:Boholmen => 2
+  - Norsca:Docksta => 2
+  - Norsca:Elsfjord => 2
+  - Norsca:Ertenvåg => 2
+  - Norsca:Gimån => 2
+  - Norsca:Hamnvik => 2
+  - Norsca:Hrakorn => 2
+  - Norsca:Hulingen => 2
+  - Norsca:Huså => 2
+  - Norsca:Höllviken => 2
+  - Norsca:Jaren => 2
+  - Norsca:Keldevind => 2
+  - Norsca:Sävern => 2
 tilea.csv
-  - Tilea:Cammaro => 2
-wood_elves.csv
-  - Wood Elves:Glade of the Lost => 2
+  - Tilea:Mironia => 2
+  - Tilea:Montecalvo => 2
+  - Tilea:Pico => 2
+  - Tilea:Valle => 2
 
 OUTPUT SUMMARY
 --------------------------------------------------------------------------------
-settlements_empire.geojson: 3573 features
-settlements_bretonnia.geojson: 1503 features
-settlements_westerland.geojson: 118 features
-settlements_kislev.geojson: 448 features
+settlements_empire.geojson: 3609 features
+settlements_bretonnia.geojson: 1502 features
+settlements_westerland.geojson: 119 features
+settlements_kislev.geojson: 449 features
 settlements_tilea.geojson: 662 features
-settlements_norsca.geojson: 547 features
-settlements_border_princes.geojson: 30 features
-settlements_estalia.geojson: 2 features
-settlements_karaz_ankor.geojson: 236 features
-settlements_wood_elves.geojson: 75 features
+settlements_norsca.geojson: 556 features
+settlements_border_princes.geojson: 31 features
+settlements_estalia.geojson: 305 features
+settlements_karaz_ankor.geojson: 273 features
+settlements_wood_elves.geojson: 74 features
 settlements_skavendom.geojson: 0 features
-points_of_interest.geojson: 763 features
-province_labels.geojson: 80 features
-geographic_feature_labels.geojson: 98 features
-Total features generated: 8135
+points_of_interest.geojson: 937 features
+province_labels.geojson: 100 features
+geographic_feature_labels.geojson: 148 features
+Total features generated: 8765
